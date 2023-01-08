@@ -1,11 +1,27 @@
 import React, { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { IoLocationSharp } from "react-icons/io5";
+import DistrictsModal from "../Districts_modal";
 
 const Navbar = () => {
   const [nav, setNav] = useState("nav");
+  const [modal, setModal] = useState(true);
+  const [location, setLocation] = useState("");
   const handleNav = () => {
     setNav(!nav);
   };
+  // const locationButton = () => {
+  //   setModal(true);
+  // };
+  const onClose = (location) => {
+    setModal(false);
+    setLocation(location);
+  };
+  const modalOpen = () => {
+    setModal(true);
+  };
+  console.log("modal", modal);
+  // console.log(onClose);
 
   return (
     <div className="h-20 px-8  bg-gray-900 top-0 sticky z-20 bg-transparent">
@@ -14,14 +30,25 @@ const Navbar = () => {
           <img src="/logo-navbar.png" alt="logo" className="object-fill" />
         </div>
 
+        {modal && <DistrictsModal onClose={onClose} />}
+
         <ul className="hidden md:flex gap-12">
+          <li className="font-bold ">
+            <button
+              className="border-emerald-400 border-4 rounded-3xl  text-2xl  text-gray-100 px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500  flex flex-row items-center gap-1"
+              onClick={modalOpen}
+            >
+              <IoLocationSharp />
+              {location ? location : "Location"}
+            </button>
+          </li>
           <li className="font-bold">
-            <button className="border-amber-400 border-4 rounded-3xl  text-2xl  text-gray-100 px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500">
+            <button className="border-emerald-400 border-4 rounded-3xl  text-2xl  text-gray-100 px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500">
               Login
             </button>
           </li>
           <li className=" font-bold">
-            <button className="bg-amber-400 border-4 rounded-3xl  text-2xl  px-7 py-2 hover:bg-yellow-200  hover:border-yellow-200  hover:bg-gray-300 transition-all ease-in-out duration-500 ">
+            <button className="bg-emerald-400 border-4 rounded-3xl  text-2xl  px-7 py-2 hover:bg-yellow-200  hover:border-yellow-200  hover:bg-gray-300 transition-all ease-in-out duration-500 ">
               Sign up
             </button>
           </li>
