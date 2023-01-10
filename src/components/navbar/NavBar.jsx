@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { IoLocationSharp } from "react-icons/io5";
-import DistrictsModal from "../Districts_modal";
+import DistrictsModal from "../UI/Districts_modal";
 
 const Navbar = () => {
   const [nav, setNav] = useState("nav");

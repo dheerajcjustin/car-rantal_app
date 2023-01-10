@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import District_card from "./UI/District_card";
+import District_card from "./District_card";
 
 const Backdrop = ({ onClose }) => {
   const closeButtonHandler = () => {

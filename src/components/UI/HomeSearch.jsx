@@ -1,7 +1,9 @@
-import React from "react";
-import { dateToday } from "../utils/dateFormat";
+import React, { useState } from "react";
+import { dateToday } from "../../utils/dateFormat";
+
 const HomeSearch = () => {
   const today = dateToday();
+
   return (
     <>
       <div className="max-w-[450px] w-full mx-auto bg-gray-900  p-8 px-10 rounded-lg absolute top-48  sm:left-20 opacity-95 hover:opacity-100 ease-in-out transition-all ">
@@ -14,11 +16,10 @@ const HomeSearch = () => {
             <div className="inline-block">
               <label htmlFor="pickupDate">
                 <input
-                  width="50px"
                   type="text"
                   placeholder="Date"
-                  className=" bg-gray-900 w-36 border-teal-100 border-[1px] text-center rounded-md text-xl"
-                  id="pickupDate"
+                  className="bg-gray-900 w-36 border-teal-100 border-[1px] text-center rounded-md text-xl"
+                  id="dropOutDate"
                   min={today}
                   onFocus={(e) => {
                     e.target.type = "date";
