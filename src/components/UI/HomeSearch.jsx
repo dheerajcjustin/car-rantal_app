@@ -1,12 +1,37 @@
 import React, { useState } from "react";
-import { dateToday } from "../../utils/dateFormat";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import { dateFormat } from "../../utils/dateFormat";
 
 const HomeSearch = () => {
-  const today = dateToday();
+  const navigate = useNavigate();
+
+  const pickupMin = dateFormat();
+  let dropOffMin = pickupMin;
+  const [searchOptions, setSearchOptions] = useState({
+    pickupDate: "",
+    pickupTime: "",
+    dropOffDate: "",
+    dropOffTime: "",
+  });
+
+  const searchOPtionChangeHandler = (e) => {
+    setSearchOptions((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const searchSubmit = (e) => {
+    console.log("submited", searchOptions);
+    const date = new Date(searchOptions.pickupDate);
+    console.log(date);
+    navigate("/search");
+  };
 
   return (
     <>
-      <div className="max-w-[450px] w-full mx-auto bg-gray-900  p-8 px-10 rounded-lg absolute top-48  sm:left-20 opacity-95 hover:opacity-100 ease-in-out transition-all ">
+      <div className="max-w-[450px] w-full mx-auto bg-[#10191F]   p-8 px-10 rounded-lg absolute top-48  sm:left-20 opacity-95  ease-in-out transition-all ">
         <h2 className="text-4xl text-white text-center font-bold mb-7">
           search
         </h2>
@@ -16,17 +41,20 @@ const HomeSearch = () => {
             <div className="inline-block">
               <label htmlFor="pickupDate">
                 <input
+                  onChange={searchOPtionChangeHandler}
                   type="text"
                   placeholder="Date"
                   className="bg-gray-900 w-36 border-teal-100 border-[1px] text-center rounded-md text-xl"
                   id="dropOutDate"
-                  min={today}
+                  value={searchOptions.pickupDate}
+                  min={pickupMin}
                   onFocus={(e) => {
                     e.target.type = "date";
                   }}
                   onBlur={(e) => {
                     e.target.type = "text";
                   }}
+                  name="pickupDate"
                 />
               </label>
             </div>
@@ -35,11 +63,13 @@ const HomeSearch = () => {
             <label htmlFor="pickupTime" className="">
               <div>
                 <select
+                  onChange={searchOPtionChangeHandler}
+                  value={searchOptions.pickupTime}
                   name="pickupTime"
                   id="pickupTime"
                   className="bg-gray-900 border-teal-100 border-[1px]  w-36 text-center rounded-md text-xl  py-1"
                 >
-                  <option value="" disabled defaultValue>
+                  <option value="" defaultValue hidden>
                     Time
                   </option>
                   <option value="morning">Morning </option>
@@ -55,29 +85,33 @@ const HomeSearch = () => {
           <div className=" text-gray-100 bg-gray-900">
             <label htmlFor="dropOutDate">
               <input
+                name="dropOffDate"
+                onChange={searchOPtionChangeHandler}
                 type="text"
                 placeholder="Date"
                 className="bg-gray-900 w-36 border-teal-100 border-[1px] text-center rounded-md text-xl"
                 id="dropOutDate"
-                min={today}
+                min={pickupMin}
                 onFocus={(e) => {
                   e.target.type = "date";
                 }}
                 onBlur={(e) => {
                   e.target.type = "text";
                 }}
+                value={searchOptions.dropOffDate}
               />
             </label>
           </div>
           <div className=" text-gray-100 ">
-            <label htmlFor="dropOutTime">
+            <label htmlFor="dropOffTime">
               <div>
                 <select
-                  name="dropOutTime"
-                  id="dropOutTime"
+                  onChange={searchOPtionChangeHandler}
+                  name="dropOffTime"
+                  id="dropOffTime"
                   className="bg-gray-900 border-teal-100 border-[1px]  w-36 text-center rounded-md text-xl   py-1"
                 >
-                  <option value="" disabled defaultValue>
+                  <option value="" defaultValue hidden>
                     Time
                   </option>
                   <option value="morning">Morning </option>
@@ -90,7 +124,10 @@ const HomeSearch = () => {
         </div>
 
         <div>
-          <button className="min-w-[330px] my-5 bg-emerald-500 py-3  rounded-lg shadow-lg shadow-emerald-500/50   text-xl font-semibold">
+          <button
+            className="min-w-[330px] my-5 bg-gray-200 py-3  rounded-lg shadow-lg shadow-gray-500/50   text-xl font-semibold"
+            onClick={searchSubmit}
+          >
             search
           </button>
         </div>

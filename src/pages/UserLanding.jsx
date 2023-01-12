@@ -6,10 +6,9 @@ import Navbar from "../components/navbar/NavBar";
 
 const UserLanding = () => {
   return (
-    <div>
+    <div className=" bg-[url('/banner.jpg')] bg-cover bg-center">
       <Navbar />
       {/* <Modal /> */}
-
       <Banner />
       <HomeSearch />
     </div>

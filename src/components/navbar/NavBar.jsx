@@ -5,7 +5,7 @@ import DistrictsModal from "../UI/Districts_modal";
 
 const Navbar = () => {
   const [nav, setNav] = useState("nav");
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
   const [location, setLocation] = useState("");
   const handleNav = () => {
     setNav(!nav);
@@ -35,7 +35,7 @@ const Navbar = () => {
         <ul className="hidden md:flex gap-12">
           <li className="font-bold ">
             <button
-              className="border-emerald-400 border-4 rounded-3xl  text-2xl  text-gray-100 px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500  flex flex-row items-center gap-1"
+              className="border-[#10191F] border-4 rounded-3xl  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500  flex flex-row items-center gap-1"
               onClick={modalOpen}
             >
               <IoLocationSharp />
@@ -43,12 +43,12 @@ const Navbar = () => {
             </button>
           </li>
           <li className="font-bold">
-            <button className="border-emerald-400 border-4 rounded-3xl  text-2xl  text-gray-100 px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500">
+            <button className="border-[#10191F]  border-4 rounded-3xl  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500">
               Login
             </button>
           </li>
           <li className=" font-bold">
-            <button className="bg-emerald-400 border-4 rounded-3xl  text-2xl  px-7 py-2 hover:bg-yellow-200  hover:border-yellow-200  hover:bg-gray-300 transition-all ease-in-out duration-500 ">
+            <button className="bg-[#10191F]  border-4 rounded-3xl  text-gray-100 text-2xl  px-7 py-2 hover:bg-yellow-200  hover:border-yellow-200  hover:bg-gray-300 transition-all ease-in-out duration-500 ">
               Sign up
             </button>
           </li>
