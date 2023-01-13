@@ -13,8 +13,8 @@ const SearchPage = () => {
       <div className="grid md:grid-cols-4 grid-cols-3 gap-5">
         <FilterDesktop />
 
-        <div className="w-full mt-10 col-span-3">
-          <div className=" grid md:grid-cols-2 lg:grid-cols-3 gap-5 ">
+        <div className="w-full mt-10 col-span-3 ">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 ">
             <SearchCard />
             <SearchCard />
             <SearchCard />
