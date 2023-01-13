@@ -116,26 +116,30 @@ const Filter = () => {
             </label>
           </div>
         </div>
-        <div className="w-full flex flex-col lg:flex-row gap-3 ">
-          {availableLocation.map((location) => (
-            <>
-              <div className="">
-                <input
-                  type="checkbox"
-                  id={location._id}
-                  name={location._id}
-                  className="w-12 h-12 peer"
-                />
-                <label
-                  htmlFor={location._id}
-                  className="bg-slate-300  peer-checked:bg-blue-500 peer-checked:text-blue-500 text--400"
-                >
-                  {location.location}
-                </label>
+        <h2 className="text-2xl text-gray-50 pt-5 pb-2">Available Locations</h2>
+
+        {availableLocation.map((location) => (
+          <div className="w-[90%] flex flex-col my-4  ">
+            <div className=" relative">
+              {/* <label
+                htmlFor={location._id}
+                className="   w-full  peer-checked:bg-blue-500 peer-checked:text-blue-500 text--400 "
+              >
+                {location.location}
+              </label> */}
+
+              <input
+                type="checkbox"
+                id={location._id}
+                name={location._id}
+                className="w-full h-12 peer absolute opacity-0"
+              />
+              <div className=" text-[#FDD23F]  p-2 w-full  h-12 ring-2 ring-[#FDD23F] peer-checked:bg-[#FDD23F]  peer-checked:text-[#10191F]  text--400 text-center ">
+                <span className="text-xl ">{location.location}</span>
               </div>
-            </>
-          ))}
-        </div>
+            </div>
+          </div>
+        ))}
       </div>
     </>
   );

@@ -14,7 +14,7 @@ const SearchCard = () => {
             className="w-[400px] h-auto mb-8 rounded-xl"
           />
         </div>
-        <div className="flex flex-row justify-around p-5 bg-white rounded-3xl text-xl ">
+        <div className="flex flex-row justify-around p-5 bg-white rounded-t-3xl text-xl ">
           <div className="text-center">
             <h6>morning</h6>
             <h6>12/10/2022</h6>
@@ -26,6 +26,16 @@ const SearchCard = () => {
           <div className="text-center#10191F">
             <h6>morning</h6>
             <h6>12/10/2022</h6>
+          </div>
+        </div>
+        <div className="flex flex-row justify-around p-5 bg-white rounded-b-3xl text-xl ">
+          <div className="text-center">
+            <h6> ₹ 167 </h6>
+            <h6>(128km included)</h6>
+          </div>
+
+          <div className="text-center#10191F">
+            <button>book </button>
           </div>
         </div>
       </div>

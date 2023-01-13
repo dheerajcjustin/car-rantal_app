@@ -55,7 +55,7 @@ const FilterMobile = () => {
         <div
           className={
             !filterMobile
-              ? "fixed left-0 bottom-0 w-[100%] border-r border-r-gray-900 bg-gray-700  w-[50%] p-5 ease-in-out duration-500 "
+              ? "fixed left-0 bottom-0 w-[60%] border-r border-r-gray-900 bg-gray-700  w-[50%] p-5 ease-in-out duration-500 "
               : "fixed left-[-100%]"
           }
         >
