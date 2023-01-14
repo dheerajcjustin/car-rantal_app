@@ -1,6 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const SearchCard = () => {
+  const navigate = useNavigate();
+  const bookButtonHandler = () => {
+    navigate("/checkout");
+  };
   return (
     <>
       <div className=" max-w-lg rounded-3xl bg-[#10191F] pt-3 shadow-lg shadow-gray-500/50     ">
@@ -35,7 +40,12 @@ const SearchCard = () => {
           </div>
 
           <div className="text-center#10191F">
-            <button>book </button>
+            <button
+              className="bg-yellow-400 px-5 py-2 rounded-lg"
+              onClick={bookButtonHandler}
+            >
+              book{" "}
+            </button>
           </div>
         </div>
       </div>

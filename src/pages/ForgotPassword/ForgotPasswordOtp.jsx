@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import LoginCompound from "../components/login/Login";
+import Otp from "../../components/login/Otp";
 
-const Login = () => {
+const ForgotPasswordOtp = () => {
   return (
     <div className="w-full h-[1007px] grid lg:grid-cols-3 md:grid-cols-5 bg-white">
-      <LoginCompound />
+      <Otp />
 
       <div className="hidden md:flex items-center flex-col md:col-span-3 lg:col-span-2">
         <img src="login.gif" alt="LOGIN" className="w-[100%]" />
@@ -16,4 +16,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPasswordOtp;

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
+import { FiEye, FiEyeOff } from "react-icons/fi";
+import axios from "../../config/axios";
+
 const Signup = ({ setOtpPage, setUserDate }) => {
   const navigate = useNavigate();
   const loginHandle = () => {
@@ -9,9 +12,11 @@ const Signup = ({ setOtpPage, setUserDate }) => {
   const [userData, setUserData] = useState({
     name: "",
     email: "",
-    phone: "",
+    mobile: "",
     password: "",
   });
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [passwordType, setPasswordType] = useState("password");
   const [validation, setValidation] = useState({
     name: {
       status: true,
@@ -86,7 +91,7 @@ const Signup = ({ setOtpPage, setUserDate }) => {
   };
   const PhoneCheck = () => {
     const expr = /^(91)?[0-9]{10}$/;
-    if (!userData.phone.match(expr)) {
+    if (!userData.mobile.match(expr)) {
       setValidation((prevState) => ({
         ...prevState,
         phone: {
@@ -130,25 +135,49 @@ const Signup = ({ setOtpPage, setUserDate }) => {
       return true;
     }
   };
-  const signupButtonHandle = () => {
-    // console.log(userData);
-    // nameCheck();
-    // emailCheck();
-    // passwordCheck();
-    // PhoneCheck();
-    // console.log(
-    //   "dfddfd",
-    //   nameCheck && emailCheck && passwordCheck && PhoneCheck
-    // );
-
+  const signupButtonHandle = async () => {
     if (nameCheck() && emailCheck() && passwordCheck() && PhoneCheck()) {
-      console.log("it is working");
-      setUserDate(userData);
-      setOtpPage(true);
+      try {
+        const response = await axios.post("/auth/signupEmail", userData);
+        console.log("it is working");
+        console.log(response.status);
+        console.log(response.data);
+        setUserDate(userData);
+        setOtpPage(true);
+      } catch (error) {
+        console.log(error.response);
+        if (error.response.status === 409) {
+          setValidation((prevState) => ({
+            ...prevState,
+            password: {
+              value: false,
+              message: "email or mobile already registers",
+            },
+          }));
+        } else {
+          setValidation((prevState) => ({
+            ...prevState,
+            password: {
+              value: false,
+              message: "Net work error",
+            },
+          }));
+        }
+      }
+    }
+  };
+
+  const passwordTypeChange = () => {
+    if (!passwordVisible) {
+      setPasswordVisible(true);
+      setPasswordType("text");
+    } else {
+      setPasswordVisible(false);
+      setPasswordType("password");
     }
   };
   return (
-    <div className="md:col-span-2 lg:col-span-1 flex flex-col items-center justify-center bg-[#FDD23F]">
+    <div className="md:col-span-2 lg:col-span-1 flex flex-col items-center justify-center bg-[#FDD23F] ">
       <h1 className="font-Viaoda text-7xl mb-10">Sign up</h1>
       <input
         onChange={valueSetting}
@@ -166,9 +195,9 @@ const Signup = ({ setOtpPage, setUserDate }) => {
         onChange={valueSetting}
         onBlur={PhoneCheck}
         type="text"
-        name="phone"
+        name="mobile"
         value={userData.phone}
-        placeholder="Phone"
+        placeholder="mobile"
         className="w-[90%] h-20 mt-10 text-3xl border-2 border-black rounded-3xl text-center"
       />
       {!validation.phone.status && (
@@ -186,18 +215,32 @@ const Signup = ({ setOtpPage, setUserDate }) => {
       {!validation.email.status && (
         <p className=" text-red-600">{validation.email.message}</p>
       )}
-      <input
-        onChange={valueSetting}
-        onBlur={passwordCheck}
-        type="password"
-        name="password"
-        value={userData.password}
-        placeholder="Password"
-        className="w-[90%] h-20 mt-10 text-3xl border-2 border-black rounded-3xl text-center"
-      />
-      {!validation.password.status && (
-        <p className=" text-red-600">{validation.password.message}</p>
-      )}
+      <div className="w-[90%] h-20 mt-10">
+        <input
+          onChange={valueSetting}
+          onBlur={passwordCheck}
+          type={passwordType}
+          name="password"
+          value={userData.password}
+          placeholder="Password"
+          className=" w-full h-20 text-3xl border-2 border-black rounded-3xl text-center"
+        />
+
+        {!validation.password.status && (
+          <p className=" text-red-600 w-full text-center">
+            {validation.password.message}
+          </p>
+        )}
+        <p className="relative">
+          <i className="absolute right-4 bottom-6" onClick={passwordTypeChange}>
+            {passwordVisible ? (
+              <FiEye size={38} opacity={0.6} />
+            ) : (
+              <FiEyeOff size={38} opacity={0.6} />
+            )}
+          </i>
+        </p>
+      </div>
       <button
         onClick={signupButtonHandle}
         className="w-[60%] h-20 mt-10 text-3xl font-semibold border-2 border-black rounded-3xl text-center hover:scale-105 hover:bg-black hover:text-white"
