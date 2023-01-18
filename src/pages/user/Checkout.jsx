@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../components/navbar/NavBar";
-import Summary from "../components/checkout/Summary";
-import CheckoutCard from "../components/checkout/CheckoutCard";
+import Navbar from "../../components/navbar/NavBar";
+import Summary from "../../components/checkout/Summary";
+import CheckoutCard from "../../components/checkout/CheckoutCard";
 
 const vehicle = {
   name: "Benz G class",

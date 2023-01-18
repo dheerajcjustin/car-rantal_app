@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "../../config/axios";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
-const ChangePassword = ({ setForgotPassword, responseData }) => {
+const ChangePasswordComponent = () => {
+  const { userId, token } = useParams();
+  console.log(userId, token);
+
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [passwordType, setPasswordType] = useState("password");
   useEffect(() => {
     setErrMsg("");
   }, [password]);
@@ -17,11 +24,17 @@ const ChangePassword = ({ setForgotPassword, responseData }) => {
       return;
     }
     try {
-      const response = await axios.post("/auth/changePassword", responseData);
+      const response = await axios.post("/auth/changePassword", {
+        userId,
+        passwordToken: token,
+        password,
+      });
       console.log(response);
+      navigate("/login");
     } catch (error) {
+      console.log(error);
       if (error.response.status === 400) {
-        setErrMsg("Invalid otp number");
+        setErrMsg("session expires ");
         return;
       }
       if (error.response.status === 500) {
@@ -30,23 +43,40 @@ const ChangePassword = ({ setForgotPassword, responseData }) => {
       }
     }
   };
-
+  const passwordTypeChange = () => {
+    if (!passwordVisible) {
+      setPasswordVisible(true);
+      setPasswordType("text");
+    } else {
+      setPasswordVisible(false);
+      setPasswordType("password");
+    }
+  };
   const cancelHandler = () => {
-    setForgotPassword(false);
+    navigate("/login");
   };
   return (
     <div className="md:col-span-2 lg:col-span-1 flex flex-col items-center justify-center bg-[#FDD23F]">
-      <h1 className="font-Viaoda text-5xl mb-10">Change Password</h1>
-      <input
-        onChange={(e) => {
-          setPassword(e.target.value);
-        }}
-        value={password}
-        type="password"
-        name="password"
-        placeholder="Password"
-        className="w-[90%] h-20 mt-10 text-3xl border-2 border-black rounded-3xl text-center"
-      />
+      <h1 className="font-Viaoda text-5xl mb-10">New Password</h1>
+      <div className="w-[90%] relative">
+        <input
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+          value={password}
+          type={passwordType}
+          name="password"
+          placeholder="Password"
+          className="w-full h-20 mt-10 text-3xl border-2 border-black rounded-3xl text-center"
+        />
+        <i className="absolute right-4 bottom-6" onClick={passwordTypeChange}>
+          {passwordVisible ? (
+            <FiEye size={38} opacity={0.6} />
+          ) : (
+            <FiEyeOff size={38} opacity={0.6} />
+          )}
+        </i>
+      </div>
 
       {<p className="text-red-500">{errMsg}</p>}
 
@@ -62,14 +92,7 @@ const ChangePassword = ({ setForgotPassword, responseData }) => {
       >
         Change Password
       </button>
-
-      {/* <button className="w-[60%] transition-all duration-100 h-20 mt-10 flex flex-row items-center pl-3 text-2xl font-medium border-2 border-black rounded-3xl text-center  hover:bg-black hover:text-white">
-    <span className="w-[20%] h-20 flex items-center justify-center">
-      <FcGoogle />
-    </span>
-    Login with google
-  </button> */}
     </div>
   );
 };
-export default ChangePassword;
+export default ChangePasswordComponent;

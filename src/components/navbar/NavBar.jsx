@@ -26,7 +26,6 @@ const Navbar = () => {
   const modalOpen = () => {
     setModal(true);
   };
-  console.log("modal", modal);
   // console.log(onClose);
   const LoginButtonHandler = () => {
     navigate("/login");

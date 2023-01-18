@@ -19,14 +19,14 @@ const ForgotPassword = () => {
       return;
     }
     try {
-      // const response = await axios.post("/auth/forgotPassword", {
-      //   mobile: mobile,
-      // });
-      // console.log(response.data);
+      const response = await axios.post("/auth/forgotPassword", {
+        mobile: mobile,
+      });
+      console.log(response.data);
       navigate(`/ForgotPasswordOtp/${mobile}`);
     } catch (error) {
       if (error.response.status === 400) {
-        setErrMsg("Invalid mobile number");
+        setErrMsg("No user with this mobile number");
         return;
       }
       if (error.response.status === 500) {

@@ -33,7 +33,9 @@ const Login = () => {
         mobile: response.data.user.mobile,
         userId: response.data.user._id,
       };
-      dispatch(setCredentials({ user, accessToken }));
+      dispatch(
+        setCredentials({ user, accessToken, userType: response.data.userType })
+      );
       navigate("/search");
     } catch (err) {
       console.log(err);
@@ -45,7 +47,7 @@ const Login = () => {
   };
 
   return (
-    <div className="md:col-span-2 lg:col-span-1 flex flex-col items-center justify-center bg-[#FDD23F]">
+    <div className="md:col-span-2 lg:col-span-1 flex flex-col min-h-screen items-center justify-center bg-[#FDD23F]">
       <h1 className="font-Viaoda text-7xl mb-10">Login</h1>
       <input
         onChange={(e) => {

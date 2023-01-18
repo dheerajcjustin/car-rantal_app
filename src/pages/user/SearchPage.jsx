@@ -1,8 +1,8 @@
 import React from "react";
-import Navbar from "../components/navbar/NavBar";
-import FilterDesktop from "../components/search/FilterDesktop";
-import FilterMobile from "../components/search/FilterMobile";
-import SearchCard from "../components/search/SearchCard";
+import Navbar from "../../components/navbar/NavBar";
+import FilterDesktop from "../../components/search/FilterDesktop";
+import FilterMobile from "../../components/search/FilterMobile";
+import SearchCard from "../../components/search/SearchCard";
 
 const SearchPage = () => {
   return (
