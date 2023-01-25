@@ -9,9 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.4.9",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@reduxjs/toolkit": "^1.9.1",
     "axios": "^1.2.2",
+    "framer-motion": "^8.5.2",
     "react": "^18.2.0",
+    "react-countdown": "^2.3.5",
+    "react-data-table-component": "^7.5.3",
     "react-date-picker": "^9.1.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
@@ -19,7 +25,10 @@
     "react-icons": "^4.7.1",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.1",
-    "react18-input-otp": "^1.1.2"
+    "react18-input-otp": "^1.1.2",
+    "redux-persist": "^6.0.0",
+    "styled-components": "^5.3.6",
+    "swr": "^2.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",

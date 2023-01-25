@@ -1,4 +1,4 @@
-import ForgotPasswordComponent from "../../../components/login/ForgotPassword";
+import ForgotPasswordComponent from "../../../components/user/login/ForgotPassword";
 const ForgotPassword = () => {
   return (
     <div className="w-full h-[1007px] grid lg:grid-cols-3 md:grid-cols-5 bg-white">

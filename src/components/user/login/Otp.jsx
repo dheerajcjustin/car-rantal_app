@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "../../config/axios";
+import axios from "../../../config/axios";
 import OtpInput from "react18-input-otp";
 
 const Otp = () => {
@@ -21,6 +21,7 @@ const Otp = () => {
     } else {
       const data = { mobile: mobile, otp: otp };
       try {
+        ("inside the password change auth");
         const response = await axios.post("/auth/ChangePasswordOtp", data);
         console.log("it is working with otp", response);
 

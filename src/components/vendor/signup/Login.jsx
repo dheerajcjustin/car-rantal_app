@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../../helpers/auth/authSlice";
-import axios from "../../config/axios";
+import { setCredentials } from "../../../helpers/auth/authSlice";
+import axios from "../../../config/axios";
 
 const Login = () => {
   const [mobile, setMobile] = useState("");
@@ -39,11 +39,15 @@ const Login = () => {
       navigate("/vendor");
     } catch (err) {
       console.log(err);
-      setErrMsg("invalid userName or password");
+      if (err?.response?.status == 400) {
+        setErrMsg("invalid userName or password");
+      } else {
+        setErrMsg("server is down");
+      }
     }
   };
   const forgotPasswordHandler = () => {
-    navigate("/ForgotPassword");
+    navigate("/vendor/ForgotPassword");
   };
 
   return (

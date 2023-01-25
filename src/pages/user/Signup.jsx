@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
-import Otp from "../../components/signup/Otp";
-import SignupComponent from "../../components/signup/Signup";
+import Otp from "../../components/user/signup/Otp";
+import SignupComponent from "../../components/user/signup/Signup";
 
 const Signup = () => {
   const [otpPage, setOtpPage] = useState(false);

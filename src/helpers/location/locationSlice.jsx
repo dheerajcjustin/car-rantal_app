@@ -3,14 +3,25 @@ import axios from "../../config/axios";
 
 export const getLocation = createAsyncThunk("home/getLocation", async () => {
   const response = await axios.get();
-  return response.data;
+  console.log("hoeme is location thanku", response.data.locations);
+
+  return response.data.locations;
 });
 const locationSlice = createSlice({
   name: "location",
   initialState: {
     locationData: [],
     loading: false,
+    currentLocation: { locationId: "", title: "" },
   },
+  reducers: {
+    setCurrentLocation: (state, action) => {
+      const { locationId, title } = action.payload;
+      console.log("location id i nreduc", locationId);
+      state.currentLocation = { locationId, title };
+    },
+  },
+
   extraReducers: {
     [getLocation.pending]: (state, action) => {
       state.loading = true;
@@ -24,11 +35,14 @@ const locationSlice = createSlice({
       state.loading = false;
     },
   },
+  // },
 });
 
 export default locationSlice.reducer;
+export const { setCurrentLocation } = locationSlice.actions;
 
 export const selectLocation = (state) => {
   console.log(state);
   return state.location.locationData;
 };
+export const selectCurrentLocation = (state) => state.location.currentLocation;

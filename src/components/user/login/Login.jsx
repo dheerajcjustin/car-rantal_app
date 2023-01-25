@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../../helpers/auth/authSlice";
-import axios from "../../config/axios";
+import { setCredentials } from "../../../helpers/auth/authSlice";
+import axios from "../../../config/axios";
 
 const Login = () => {
   const [mobile, setMobile] = useState("");

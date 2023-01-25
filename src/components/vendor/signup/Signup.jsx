@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import axios from "../../config/axios";
+import axios from "../../../config/axios";
 
 const Signup = ({ setOtpPage, setUserDate }) => {
   const navigate = useNavigate();
   const loginHandle = () => {
-    navigate("/login");
+    navigate("/vendor/login");
   };
   const [userData, setUserData] = useState({
     name: "",
-    email: "",
+
     mobile: "",
     password: "",
   });
@@ -22,10 +22,7 @@ const Signup = ({ setOtpPage, setUserDate }) => {
       status: true,
       message: "",
     },
-    email: {
-      status: true,
-      message: "",
-    },
+
     phone: {
       status: true,
       message: "",
@@ -64,31 +61,7 @@ const Signup = ({ setOtpPage, setUserDate }) => {
       return true;
     }
   };
-  const emailCheck = () => {
-    const validRegex =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    if (!userData.email.match(validRegex)) {
-      setValidation((prevState) => ({
-        ...prevState,
-        email: {
-          value: false,
-          message: "is this really your email ?",
-        },
-      }));
-      // console.log("email false");
 
-      return false;
-    } else {
-      setValidation((prevState) => ({
-        ...prevState,
-        email: {
-          value: true,
-          message: "",
-        },
-      }));
-      return true;
-    }
-  };
   const PhoneCheck = () => {
     const expr = /^(91)?[0-9]{10}$/;
     if (!userData.mobile.match(expr)) {
@@ -136,17 +109,18 @@ const Signup = ({ setOtpPage, setUserDate }) => {
     }
   };
   const signupButtonHandle = async () => {
-    if (nameCheck() && emailCheck() && passwordCheck() && PhoneCheck()) {
+    if (nameCheck() && passwordCheck() && PhoneCheck()) {
       try {
-        const response = await axios.post("/auth/signupEmail", userData);
+        const response = await axios.post("/vendor/signup", userData);
         console.log("it is working");
         console.log(response.status);
         console.log(response.data);
         setUserDate(userData);
         setOtpPage(true);
       } catch (error) {
-        console.log(error.response);
-        if (error.response.status === 409) {
+        console.log(error);
+
+        if (error?.response?.status === 409) {
           setValidation((prevState) => ({
             ...prevState,
             password: {
@@ -203,18 +177,7 @@ const Signup = ({ setOtpPage, setUserDate }) => {
       {!validation.phone.status && (
         <p className=" text-red-600">{validation.phone.message}</p>
       )}
-      <input
-        onChange={valueSetting}
-        onBlur={emailCheck}
-        type="text"
-        name="email"
-        value={userData.email}
-        placeholder="Email"
-        className="w-[90%] h-20 mt-10 text-3xl border-2 border-black rounded-3xl text-center"
-      />
-      {!validation.email.status && (
-        <p className=" text-red-600">{validation.email.message}</p>
-      )}
+
       <div className="w-[90%] h-20 mt-10">
         <input
           onChange={valueSetting}

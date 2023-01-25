@@ -1,22 +1,22 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getLocation } from "../../../helpers/location/locationSlice";
 
-const SearchCard = () => {
+const SearchCard = ({ title, price, photos }) => {
   const navigate = useNavigate();
   const bookButtonHandler = () => {
     navigate("/checkout");
   };
   return (
     <>
-      <div className=" max-w-lg rounded-3xl bg-[#10191F] pt-3 shadow-lg shadow-gray-500/50     ">
+      <div className="  max-w-lg rounded-3xl bg-[#10191F] pt-3 shadow-lg shadow-gray-500/50     ">
         <div className="flex flex-col  align-middle items-center w-full">
-          <h2 className="text-xl font-semibold my-8 text-slate-50">
-            Benx AMG G6
-          </h2>
+          <h2 className="text-xl font-semibold my-8 text-slate-50">{title}</h2>
           <img
-            src="/download.jpeg"
+            src={photos[0]}
             alt="photo of amg"
-            className="w-[400px] h-auto mb-8 rounded-xl"
+            className="w-[400px] h-[160px] mb-8 rounded-xl object-cover"
           />
         </div>
         <div className="flex flex-row justify-around p-5 bg-white rounded-t-3xl text-xl ">
@@ -35,7 +35,7 @@ const SearchCard = () => {
         </div>
         <div className="flex flex-row justify-around p-5 bg-white rounded-b-3xl text-xl ">
           <div className="text-center">
-            <h6> ₹ 167 </h6>
+            <h6> ₹ {price} </h6>
             <h6>(128km included)</h6>
           </div>
 

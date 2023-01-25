@@ -13,10 +13,15 @@ import ForgotPasswordOtp from "./pages/user/ForgotPassword/ForgotPasswordOtp";
 import ChangePassword from "./pages/user/ForgotPassword/ChangePassword";
 import AdminLanding from "./pages/admin/AdminLandingPage";
 import LocationManagement from "./pages/admin/LocationManagement";
-import VendorManagement from "./pages/admin/VendorManagement";
 import LandingPage from "./pages/vendor/LandingPage";
 import LoginVendor from "./pages/vendor/LoginVendor";
 import VendorAuth from "./helpers/auth/VendorAuth";
+import Bookings from "./pages/vendor/Bookings";
+import VerifyCars from "./pages/admin/VerifyCars";
+import VendorForgotPassword from "./pages/vendor/forgotPassword/VendorForgotPassword";
+import VendorChangePassword from "./pages/vendor/forgotPassword/VendorChangePassword";
+import VendorForgotPasswordOtp from "./pages/vendor/forgotPassword/VendorForgotPasswordOtp";
+import MyCars from "./pages/vendor/MyCars";
 
 export default function App() {
   return (
@@ -28,13 +33,12 @@ export default function App() {
           <Route path="login" element={<Login />} />
           <Route path="forgotPassword" element={<ForgotPassword />} />
           <Route
-            path="ChangePassword/:userId/:token"
-            element={<ChangePassword />}
-          />
-
-          <Route
             path="/ForgotPasswordOtp/:mobile"
             element={<ForgotPasswordOtp />}
+          />
+          <Route
+            path="ChangePassword/:userId/:token"
+            element={<ChangePassword />}
           />
         </Route>
         <Route element={<RequireAuth />}>
@@ -45,12 +49,25 @@ export default function App() {
       <Route path="/admin" element={<Layout />}>
         <Route index element={<AdminLanding />} />
         <Route path="location" element={<LocationManagement />} />
-        <Route path="vendor" element={<VendorManagement />} />
+        <Route path="cars" element={<VerifyCars />} />
       </Route>
       <Route path="/vendor" element={<Layout />}>
         <Route path="login" element={<LoginVendor />} />
+
+        <Route path="forgotPassword" element={<VendorForgotPassword />} />
+        <Route
+          path="ChangePassword/:userId/:token"
+          element={<VendorChangePassword />}
+        />
+        <Route
+          path="forgotPasswordOtp/:mobile"
+          element={<VendorForgotPasswordOtp />}
+        />
+
         <Route element={<VendorAuth />}>
           <Route index element={<LandingPage />} />
+          <Route path="bookings" element={<Bookings />} />
+          <Route path="myCars" element={<MyCars />} />
         </Route>
       </Route>
     </Routes>

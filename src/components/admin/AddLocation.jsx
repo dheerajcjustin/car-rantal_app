@@ -29,7 +29,7 @@ const AddLocation = () => {
       const data = new FormData();
       data.append("file", image);
       data.append("upload_preset", cloudinaryFolder);
-      data.append("cloud_name", "ducziw6jk");
+      data.append("cloud_name", cloudinaryName);
       console.log("The image is going sent ", image);
       console.log("The data is going sent ", data);
 

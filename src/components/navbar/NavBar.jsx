@@ -5,14 +5,16 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import DistrictsModal from "../UI/Districts_modal";
 import { selectCurrentUser } from "../../helpers/auth/authSlice";
+import { selectCurrentLocation } from "../../helpers/location/locationSlice";
 import axios from "../../config/axios";
 
 const Navbar = () => {
+  const { title } = useSelector(selectCurrentLocation);
   const currentUser = useSelector(selectCurrentUser);
   const navigate = useNavigate();
   const [nav, setNav] = useState("nav");
   const [modal, setModal] = useState(false);
-  const [location, setLocation] = useState("");
+  // const [location, setLocation] = useState("");
   const handleNav = () => {
     setNav(!nav);
   };
@@ -21,7 +23,7 @@ const Navbar = () => {
   // };
   const onClose = (location) => {
     setModal(false);
-    setLocation(location);
+    // setLocation(location);
   };
   const modalOpen = () => {
     setModal(true);
@@ -54,7 +56,7 @@ const Navbar = () => {
               onClick={modalOpen}
             >
               <IoLocationSharp />
-              {location ? location : "Location"}
+              {title ? title : "Location"}
             </button>
           </li>
           <li className="font-bold">

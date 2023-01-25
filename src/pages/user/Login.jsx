@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import LoginCompound from "../../components/login/Login";
+import LoginCompound from "../../components/user/login/Login";
 
 const Login = () => {
   return (

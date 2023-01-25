@@ -41,9 +41,21 @@ const VendorNavbar = () => {
           <li className="font-bold">
             <button
               className="border-[#10191F]  border-4 rounded-3xl  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500 "
-              // onClick={LoginButtonHandler}
+              onClick={() => {
+                navigate("/vendor/bookings");
+              }}
             >
-              Profile
+              Bookings
+            </button>
+          </li>
+          <li className="font-bold">
+            <button
+              className="border-[#10191F]  border-4 rounded-3xl  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500 "
+              onClick={() => {
+                navigate("/vendor/myCars");
+              }}
+            >
+              My Cars
             </button>
           </li>
         </ul>
@@ -61,13 +73,17 @@ const VendorNavbar = () => {
             <img src="/logo-navbar.png" alt="logo" className="object-fill" />
           </div>
           <ul className="p-4 uppercase">
-            <li className="p-4 border-b border-gray-600 font-bold">My cars</li>
-            <li className="p-4 border-b border-gray-600 font-bold">
-              Booked cars
+            <li
+              className="p-4 border-b border-gray-600 font-bold"
+              onClick={modalOpen}
+            >
+              Add cars
             </li>
-            <li className="p-4 border-b border-gray-600 font-bold">
-              Verification Pending Cars
-            </li>
+            <li className="p-4 border-b border-gray-600 font-bold">cars</li>
+            <li
+              className="p-4 border-b border-gray-600 font-bold"
+              onClick={() => navigate("/vendor/myCars")}
+            ></li>
           </ul>
         </div>
       </div>

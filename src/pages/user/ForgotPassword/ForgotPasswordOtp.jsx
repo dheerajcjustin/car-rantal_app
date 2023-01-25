@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Otp from "../../../components/login/Otp";
+import Otp from "../../../components/user/login/Otp";
 
 const ForgotPasswordOtp = () => {
   return (

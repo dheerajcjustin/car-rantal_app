@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import instance from "../../config/axios";
+import { selectCurrentLocation } from "../../helpers/location/locationSlice";
 import { dateFormat } from "../../utils/dateFormat";
 
 const HomeSearch = () => {
+  const { locationId } = useSelector(selectCurrentLocation);
   const navigate = useNavigate();
 
   const pickupMin = dateFormat();
@@ -22,11 +26,14 @@ const HomeSearch = () => {
     }));
   };
 
-  const searchSubmit = (e) => {
+  const searchSubmit = async (e) => {
     console.log("submited", searchOptions);
-    const date = new Date(searchOptions.pickupDate);
-    console.log(date);
-    navigate("/search");
+    const pickupDate = new Date(searchOptions.pickupDate);
+    const dropOffDate = new Date(searchOptions.dropOffDate);
+
+    navigate(
+      `/search?pickupDate=${pickupDate}&pickupTime=${searchOptions.pickupTime}&dropOffDate=${dropOffDate}&dropOffTime=${searchOptions.dropOffTime} &locationId=${locationId}`
+    );
   };
 
   return (

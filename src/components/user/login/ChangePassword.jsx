@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "../../config/axios";
+import axios from "../../../config/axios";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const ChangePasswordComponent = () => {

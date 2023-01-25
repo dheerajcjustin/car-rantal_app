@@ -11,11 +11,11 @@ const Sidebar = (props) => {
     navigate("/admin/location");
   };
   const VendorHandler = () => {
-    navigate("/admin/vendor");
+    navigate("/admin/cars");
   };
 
   return (
-    <div className="flex top-0 sticky">
+    <div className="flex top-0 sticky z-10">
       <div
         className={` ${
           open ? "w-72" : "w-20 "
@@ -65,7 +65,7 @@ const Sidebar = (props) => {
             <VscRequestChanges className="text-3xl text-black" />
             <span className={`${!open && "hidden"} origin-left duration-200`}>
               <h1 className="text-black  hover:text-white text-xl">
-                Venter Management
+                Cars Management
               </h1>
             </span>
           </li>

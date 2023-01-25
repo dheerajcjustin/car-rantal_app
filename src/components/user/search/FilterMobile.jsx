@@ -103,4 +103,4 @@ const FilterMobile = () => {
 
 export default FilterMobile;
 
-import DistrictsModal from "../UI/Districts_modal";
+// import DistrictsModal from "../UI/Districts_modal";

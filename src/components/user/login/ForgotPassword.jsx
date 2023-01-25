@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
-import axios from "../../config/axios";
+import axios from "../../../config/axios";
 import Otp from "./Otp";
 const ForgotPassword = () => {
   const navigate = useNavigate();
