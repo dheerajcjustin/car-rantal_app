@@ -18,7 +18,7 @@ const VendorNavbar = () => {
     setAddCarModal(true);
   };
   return (
-    <div className="h-20 px-8  bg-gray-900 top-0 sticky z-20 bg-transparent">
+    <div className="h-20 px-8   bg-gradient-to-r from-[#FEC63E] to-banana   top-0 sticky z-20 ">
       <div className="flex items-center h-20 max-w-[1240px] mx-auto justify-between">
         <div className="w-40">
           <img

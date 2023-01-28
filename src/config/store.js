@@ -6,6 +6,7 @@ import storage from "redux-persist/lib/storage"; // defaults to localStorage for
 
 import { persistStore, persistReducer } from "redux-persist"; // imports from redux-persist
 import locationReducer from "../helpers/location/locationSlice";
+import carReducer from "../helpers/car/carSlice";
 
 const persistConfig = {
   // configuration object for redux-persist
@@ -15,6 +16,7 @@ const persistConfig = {
 const reducer = combineReducers({
   auth: authReducer,
   location: locationReducer,
+  car: carReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer); // create a persisted reducer

@@ -1,41 +1,89 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import instance from "../../config/axios";
 import { selectCurrentLocation } from "../../helpers/location/locationSlice";
-import { dateFormat } from "../../utils/dateFormat";
+import {
+  dateFormat,
+  minPickupDate,
+  pickupTimeList,
+  dropOffTimeList,
+  MinDropOffDate,
+} from "../../utils/dateFormat";
+import DatePicker from "react-multi-date-picker";
+import Icon from "react-multi-date-picker/components/icon";
 
 const HomeSearch = () => {
+  const [pickupDate, setPickupDate] = useState();
+  const [dropOffDate, setDropOffDate] = useState();
+  const [pickupTimes, setPickupTimes] = useState([]);
+  const [pickupTime, setPickupTime] = useState("");
+  const [dropOffTimes, setDropOffTimes] = useState([]);
+  const [dropOffTime, setDropOffTime] = useState("");
+
   const { locationId } = useSelector(selectCurrentLocation);
   const navigate = useNavigate();
 
-  const pickupMin = dateFormat();
-  let dropOffMin = pickupMin;
-  const [searchOptions, setSearchOptions] = useState({
-    pickupDate: "",
-    pickupTime: "",
-    dropOffDate: "",
-    dropOffTime: "",
-  });
+  const [pickupErr, setPickupErr] = useState("");
+  const [pickupTimeErr, setPickupTimeErr] = useState("");
+  const [dropOffDateErr, setDropOffDateErr] = useState("");
+  const [dropOffTimeErr, setDropOffTimeErr] = useState("");
 
-  const searchOPtionChangeHandler = (e) => {
-    setSearchOptions((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
+  const pickupDateValidation = () => {
+    if (!pickupDate) {
+      console.log("");
+      setPickupErr("Select  the date first");
+      return false;
+    }
+    return true;
   };
+  useEffect(() => {
+    setPickupErr("");
+  }, [pickupDate]);
+  const pickupTimeValidation = () => {
+    // pickupDateValidation();
+    if (!pickupTime) {
+      setPickupTimeErr("select pickup Time");
+      return false;
+    }
+    return true;
+  };
+  useEffect(() => {
+    setPickupTimeErr("");
+  }, [pickupTime]);
+  const dropOffTimeValidation = () => {
+    if (!dropOffDate) {
+      setDropOffDateErr("select Drop Date");
+      return false;
+    }
+    return true;
+  };
+  useEffect(() => {
+    setDropOffDateErr("");
+  }, [dropOffDate]);
 
   const searchSubmit = async (e) => {
-    console.log("submited", searchOptions);
-    const pickupDate = new Date(searchOptions.pickupDate);
-    const dropOffDate = new Date(searchOptions.dropOffDate);
+    console.log("afdfdfdfdfddfsadsfdsdfsfdfsdaf    Search");
+    if (
+      pickupDateValidation() &&
+      pickupTimeValidation() &&
+      dropOffTimeValidation()
+    ) {
+      console.log("all three are vaild ");
+      if (!dropOffTime) {
+        setDropOffTimeErr("drop Off Time is must");
+      } else {
+        console.log(")(*&^%$UILKJHGRTYUIKJHG)    Search");
 
-    navigate(
-      `/search?pickupDate=${pickupDate}&pickupTime=${searchOptions.pickupTime}&dropOffDate=${dropOffDate}&dropOffTime=${searchOptions.dropOffTime} &locationId=${locationId}`
-    );
+        navigate(
+          `/search?pickupDate=${pickupDate}&pickupTime=${pickupTime}&dropOffDate=${dropOffDate}&dropOffTime=${dropOffTime} &locationId=${locationId}`
+        );
+      }
+    } else {
+      console.log("values are not valid");
+    }
   };
-
   return (
     <>
       <div className="max-w-[450px] w-full mx-auto bg-[#10191F]   p-8 px-10 rounded-lg absolute top-48  sm:left-20 opacity-95  ease-in-out transition-all ">
@@ -47,21 +95,32 @@ const HomeSearch = () => {
           <div className=" text-gray-100 ">
             <div className="inline-block">
               <label htmlFor="pickupDate">
-                <input
-                  onChange={searchOPtionChangeHandler}
-                  type="text"
-                  placeholder="Date"
-                  className="bg-gray-900 w-36 border-teal-100 border-[1px] text-center rounded-md text-xl"
-                  id="dropOutDate"
-                  value={searchOptions.pickupDate}
-                  min={pickupMin}
-                  onFocus={(e) => {
-                    e.target.type = "date";
+                <DatePicker
+                  minDate={minPickupDate()}
+                  render={(stringDate, openCalendar) => {
+                    return (
+                      <button
+                        className={` ${
+                          pickupErr
+                            ? `border-red-600 border-[2px]`
+                            : `border-teal-100 border-[1px] `
+                        }   bg-gray-900  w-36 text-center rounded-md text-xl  py-1 after:${
+                          pickupErr && pickupErr
+                        }`}
+                        onClick={openCalendar}
+                      >
+                        {stringDate ? stringDate : "Date"}
+                      </button>
+                    );
                   }}
-                  onBlur={(e) => {
-                    e.target.type = "text";
+                  className=" bg-banana text-black"
+                  value={pickupDate}
+                  onChange={(date) => {
+                    setPickupDate(date);
+                    console.log(date);
+                    console.log("pickup time", pickupTimeList(date));
+                    setPickupTimes(pickupTimeList(date));
                   }}
-                  name="pickupDate"
                 />
               </label>
             </div>
@@ -70,18 +129,26 @@ const HomeSearch = () => {
             <label htmlFor="pickupTime" className="">
               <div>
                 <select
-                  onChange={searchOPtionChangeHandler}
-                  value={searchOptions.pickupTime}
+                  onFocus={pickupDateValidation}
+                  // onClick={pickupTimeValidation}
+                  onChange={(e) => setPickupTime(e.target.value)}
+                  value={pickupTime}
                   name="pickupTime"
                   id="pickupTime"
-                  className="bg-gray-900 border-teal-100 border-[1px]  w-36 text-center rounded-md text-xl  py-1"
+                  className={`${
+                    pickupTimeErr
+                      ? `border-red-600 border-[2px]`
+                      : `border-teal-100 border-[1px] `
+                  } bg-gray-900   w-36 text-center rounded-md text-xl  py-1`}
                 >
                   <option value="" defaultValue hidden>
                     Time
                   </option>
-                  <option value="morning">Morning </option>
-                  <option value="noon">Noon </option>
-                  <option value="evening">Evening </option>
+                  {pickupTimes.map((time) => (
+                    <option key={time} value={time}>
+                      {time}
+                    </option>
+                  ))}
                 </select>
               </div>
             </label>
@@ -91,21 +158,38 @@ const HomeSearch = () => {
         <div className="flex  max-w-[500px]  gap-9 ">
           <div className=" text-gray-100 bg-gray-900">
             <label htmlFor="dropOutDate">
-              <input
-                name="dropOffDate"
-                onChange={searchOPtionChangeHandler}
-                type="text"
-                placeholder="Date"
-                className="bg-gray-900 w-36 border-teal-100 border-[1px] text-center rounded-md text-xl"
-                id="dropOutDate"
-                min={pickupMin}
-                onFocus={(e) => {
-                  e.target.type = "date";
+              <DatePicker
+                minDate={MinDropOffDate(pickupDate, pickupTime)}
+                render={(stringDate, openCalendar) => {
+                  return (
+                    <button
+                      className={`   ${
+                        dropOffDateErr
+                          ? `border-red-600 border-[2px]`
+                          : `border-teal-100 border-[1px] `
+                      }  bg-gray-900  w-36 text-center rounded-md text-xl  py-1`}
+                      onClick={() => {
+                        console.log(
+                          "wowo piduptime validation ",
+                          pickupTimeValidation()
+                        );
+                        if (pickupTimeValidation()) {
+                          openCalendar();
+                        }
+                      }}
+                    >
+                      {stringDate ? stringDate : "Date"}
+                    </button>
+                  );
                 }}
-                onBlur={(e) => {
-                  e.target.type = "text";
+                className=" bg-banana text-black"
+                value={dropOffDate}
+                onChange={(date) => {
+                  setDropOffDate(date);
+                  setDropOffTimes(
+                    dropOffTimeList(pickupDate, pickupTime, date)
+                  );
                 }}
-                value={searchOptions.dropOffDate}
               />
             </label>
           </div>
@@ -113,17 +197,27 @@ const HomeSearch = () => {
             <label htmlFor="dropOffTime">
               <div>
                 <select
-                  onChange={searchOPtionChangeHandler}
+                  onFocus={dropOffTimeValidation}
+                  value={dropOffTime}
+                  onChange={(e) => setDropOffTime(e.target.value)}
                   name="dropOffTime"
                   id="dropOffTime"
-                  className="bg-gray-900 border-teal-100 border-[1px]  w-36 text-center rounded-md text-xl   py-1"
+                  dropOffTimeErr
+                  className={` ${
+                    dropOffTimeErr
+                      ? `border-red-600 border-[2px]`
+                      : `border-teal-100 border-[1px] `
+                  }  bg-gray-900   w-36 text-center rounded-md text-xl   py-1`}
                 >
                   <option value="" defaultValue hidden>
                     Time
                   </option>
-                  <option value="morning">Morning </option>
-                  <option value="noon">Noon </option>
-                  <option value="evening">Evening </option>
+
+                  {dropOffTimes.map((time) => (
+                    <option key={time} value={time}>
+                      {time}
+                    </option>
+                  ))}
                 </select>
               </div>
             </label>

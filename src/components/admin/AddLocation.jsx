@@ -2,9 +2,11 @@ import React, { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "../../config/axios";
 import ImageUpload from "../UI/ImageUpload";
+import { useToast } from "@chakra-ui/react";
 
-const AddLocation = () => {
+const AddLocation = ({ onClose, mutate }) => {
   const dispatch = useDispatch();
+  const toast = useToast();
   const cloudinaryFolder = import.meta.env.VITE_CLOUDINARY_LOCATION_FOLDER;
   const cloudinaryName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
   const [image, SetImage] = useState("");
@@ -49,10 +51,29 @@ const AddLocation = () => {
             })
             .then((result) => {
               console.log("result from sending ", result);
+              mutate();
+              onClose();
+              toast({
+                position: "top",
+                title: "Location created.",
+                description: "Successfully Created  Location.",
+                status: "success",
+                duration: 2000,
+                isClosable: true,
+              });
             });
         });
     } catch (error) {
       console.log(error?.response);
+      onClose();
+      toast({
+        position: "top",
+        title: "Location Failled.",
+        description: "Failed to  Created  Location.",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
     }
   };
 

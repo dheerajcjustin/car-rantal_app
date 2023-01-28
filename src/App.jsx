@@ -22,6 +22,7 @@ import VendorForgotPassword from "./pages/vendor/forgotPassword/VendorForgotPass
 import VendorChangePassword from "./pages/vendor/forgotPassword/VendorChangePassword";
 import VendorForgotPasswordOtp from "./pages/vendor/forgotPassword/VendorForgotPasswordOtp";
 import MyCars from "./pages/vendor/MyCars";
+import MyBookings from "./pages/user/Mybookings";
 
 export default function App() {
   return (
@@ -43,7 +44,8 @@ export default function App() {
         </Route>
         <Route element={<RequireAuth />}>
           <Route path="search" element={<SearchPage />} />
-          <Route path="checkout" element={<Checkout />} />
+          <Route path="checkout/:car" element={<Checkout />} />
+          <Route path="bookings" element={<MyBookings />} />
         </Route>
       </Route>
       <Route path="/admin" element={<Layout />}>

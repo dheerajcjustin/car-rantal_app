@@ -1,12 +1,31 @@
 import React, { useState } from "react";
+import authInstance from "../../config/authInstance";
 
 const CarVerificationCard = ({ car }) => {
-  const phots = [
-    "http://res.cloudinary.com/ducziw6jk/image/upload/v1674214033/rental/jotj5dh1ai4ghghugbce.jpg",
-    "http://res.cloudinary.com/ducziw6jk/image/upload/v1674214033/rental/etvldqosqhavr3j1zzes.jpg",
-    "http://res.cloudinary.com/ducziw6jk/image/upload/v1674214033/rental/itudjinkuswvdxptqsfq.jpg",
-    "http://res.cloudinary.com/ducziw6jk/image/upload/v1674214033/rental/azrkomn2qavft3euo1zp.jpg",
-  ];
+  const [loading, setLoading] = useState();
+  const update = async (car, status) => {
+    try {
+      console.log("car Id is ", car);
+      const response = await authInstance.patch(`/admin/car/${car}`, status);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error.response);
+    }
+  };
+
+  const approveButtonHandler = async (car) => {
+    const status = {
+      status: "verified",
+    };
+    update(car, status);
+  };
+  const rejectButtonHandler = async (car) => {
+    console.log("caris in by ", car);
+    const status = {
+      status: "rejected",
+    };
+    update(car, status);
+  };
 
   const [image, setImage] = useState(car.phots[0]);
   return (
@@ -40,20 +59,18 @@ const CarVerificationCard = ({ car }) => {
         </div>
         <div className=" text-center   text-[#FDD23F] rounded-2xl">
           <h6> Rc:{car?.rcNumber}</h6>
-
-          <h6>Manthavady </h6>
         </div>
       </div>
       <div className="flex w-full flex-col justify-between p-5 bg-white rounded-b-3xl sm:text-xl gap-2   ">
         <button
           className=" bg-gray-400 px-5 py-2 rounded-lg"
-          // onClick={bookButtonHandler}
+          onClick={() => rejectButtonHandler(car._id)}
         >
           Reject
         </button>
         <button
           className="bg-yellow-400 px-5 py-2 rounded-lg"
-          // onClick={bookButtonHandler}
+          onClick={() => approveButtonHandler(car._id)}
         >
           Approve
         </button>

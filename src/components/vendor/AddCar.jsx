@@ -20,29 +20,27 @@ const AddCar = ({ onClose }) => {
 
   return (
     <>
-      {ReactDOM.createPortal(
-        <Backdrop onClose={onClose} />,
-        document.getElementById("backdrop-root")
-      )}
-      {ReactDOM.createPortal(
-        <ModalOverlay onClose={onClose} />,
-        document.getElementById("overlay-root")
-      )}
+      <Backdrop onClose={onClose}>
+        <ModalOverlay onClose={onClose} />
+      </Backdrop>
     </>
   );
 };
 
 export default AddCar;
 
-function Backdrop({ onClose }) {
-  const closeButtonHandler = () => {
-    onClose();
+function Backdrop({ onClose, children }) {
+  const closeButtonHandler = (e) => {
+    if (e.target.id === "modalBackDrop") onClose();
   };
   return (
     <div
+      id="modalBackDrop"
       className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-40  bg-slate-500 bg-opacity-75"
       onClick={closeButtonHandler}
-    />
+    >
+      {children}
+    </div>
   );
 }
 function ModalOverlay({ onClose }) {
@@ -61,9 +59,6 @@ function ModalOverlay({ onClose }) {
     fuelType: "petrol",
     rcNumber: "",
     location: "",
-    pickupPoint: "",
-    availableStart: "",
-    availableEnd: "",
   });
   const valueSetting = (e) => {
     setCarData((prevState) => ({

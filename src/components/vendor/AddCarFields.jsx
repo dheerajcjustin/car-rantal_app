@@ -9,7 +9,6 @@ import { dateFormat } from "../../utils/dateFormat";
 const AddCarFields = ({ valueSetting, carData, setImageUpload }) => {
   const pickupMin = dateFormat();
   const dispatch = useDispatch();
-  const [availablePickup, setAvailablePickup] = useState([]);
   const [errMeg, setErrMeg] = useState("");
   const locations = useSelector(selectLocation);
   useEffect(() => {
@@ -22,10 +21,7 @@ const AddCarFields = ({ valueSetting, carData, setImageUpload }) => {
       !carData.modelName ||
       !carData.price ||
       !carData.location ||
-      !carData.pickupPoint ||
-      !carData.rcNumber ||
-      !carData.availableStart ||
-      !carData.availableEnd
+      !carData.rcNumber
     ) {
       setErrMeg("the filed ");
     } else {
@@ -119,11 +115,6 @@ const AddCarFields = ({ valueSetting, carData, setImageUpload }) => {
           name="location"
           onChange={(e) => {
             valueSetting(e);
-            const value = e.target.value;
-            const data = locations.filter((location) => location._id == value);
-            console.log(data[0].pickupPoints);
-
-            setAvailablePickup(data[0]?.pickupPoints);
           }}
           value={carData.location}
           className="w-[90%] h-16 mt-10 text-3xl border-2 border-black rounded-3xl text-center"
@@ -132,19 +123,6 @@ const AddCarFields = ({ valueSetting, carData, setImageUpload }) => {
           {locations.map((location) => (
             <option value={location._id} key={location._id}>
               {location.location}
-            </option>
-          ))}
-        </select>
-        <select
-          name="pickupPoint"
-          onChange={valueSetting}
-          value={carData.pickupPoint}
-          className="w-[90%] h-16 mt-10 text-3xl border-2 border-black rounded-3xl text-center"
-        >
-          <option value="">Select pickupPoint</option>
-          {availablePickup.map((points) => (
-            <option value={points._id} key={points._id}>
-              {points.name}
             </option>
           ))}
         </select>
@@ -158,7 +136,7 @@ const AddCarFields = ({ valueSetting, carData, setImageUpload }) => {
               className=" h-7  w-7 "
               defaultChecked
               type="radio"
-              name="transmission"
+              name="gearType"
               id="manual"
               value="manual"
             />
@@ -168,7 +146,7 @@ const AddCarFields = ({ valueSetting, carData, setImageUpload }) => {
             <input
               className=" h-7 w-7"
               type="radio"
-              name="transmission"
+              name="gearType"
               id="auto"
               value="auto"
             />
@@ -202,43 +180,7 @@ const AddCarFields = ({ valueSetting, carData, setImageUpload }) => {
             />
           </label>
         </div>
-        <label htmlFor="pickupDate">
-          <input
-            onChange={valueSetting}
-            type="text"
-            placeholder="Date"
-            className="w-[90%] h-16 text-3xl border-2 border-black rounded-3xl text-center peer "
-            id="dropOutDate"
-            value={carData.availableStart}
-            min={pickupMin}
-            onFocus={(e) => {
-              e.target.type = "date";
-            }}
-            onBlur={(e) => {
-              e.target.type = "text";
-            }}
-            name="availableStart"
-          />
-        </label>
-        <label htmlFor="pickupDate">
-          <input
-            onChange={valueSetting}
-            type="text"
-            placeholder="Date"
-            className="w-[90%] h-16 text-3xl border-2 border-black rounded-3xl text-center peer "
-            id="dropOutDate"
-            value={carData.availableEnd}
-            min={pickupMin}
-            onFocus={(e) => {
-              e.target.type = "date";
-              e.target.click();
-            }}
-            onBlur={(e) => {
-              e.target.type = "text";
-            }}
-            name="availableEnd"
-          />
-        </label>
+
         {<p>{errMeg}</p>}
         <button
           className="w-[60%] h-20 mt-10 text-3xl font-semibold border-2 border-black rounded-3xl text-center hover:scale-105 hover:bg-black hover:text-white"

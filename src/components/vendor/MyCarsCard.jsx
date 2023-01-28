@@ -4,9 +4,9 @@ const MyCarsCard = ({ phots, title, RC, price, seatNum, location }) => {
   const status = "verified";
   const [image, setImage] = useState(phots[0]);
   return (
-    <div className=" w-full sm:max-w-md rounded-3xl bg-[#10191F] pt-3 shadow-lg shadow-gray-500/50     ">
+    <div className=" w-full sm:max-w-md rounded-3xl bg-[#10191F] pt-3 shadow-lg shadow-gray-500/50      ">
       <div className="flex flex-col  align-middle items-center w-full">
-        <h2 className="text-xl font-semibold  text-slate-50">{title}</h2>
+        <h2 className="text-xl font-semibold text-te">{title}</h2>
         <img
           src={image}
           alt="photo of amg"

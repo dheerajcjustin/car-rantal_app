@@ -42,7 +42,7 @@ const CarsManagement = () => {
       )}
       <TableContainer>
         <Table variant="striped" colorScheme="yellow">
-          <TableCaption>Imperial to metric conversion factors</TableCaption>
+          <TableCaption>The List of cars and Details</TableCaption>
           <Thead>
             <Tr>
               <Th>Model Name</Th>
@@ -53,8 +53,8 @@ const CarsManagement = () => {
           </Thead>
           <Tbody>
             {isLoading &&
-              arr.map((value) => (
-                <Tr>
+              arr.map((value, index) => (
+                <Tr key={value}>
                   <Td>
                     <Skeleton>
                       <div>contents wrapped</div>
@@ -84,6 +84,7 @@ const CarsManagement = () => {
                 <Tr
                   className=" group   duration-1000"
                   onClick={() => rowClickHandler(car)}
+                  key={car._id}
                 >
                   <Td className="group-hover:text-xl  ">{car.name}</Td>
                   <Td className="group-hover:text-xl ">{car?.seatNum}</Td>
@@ -104,9 +105,10 @@ const CarsManagement = () => {
           </Tbody>
           <Tfoot>
             <Tr>
-              <Th>To convert</Th>
-              <Th>into</Th>
-              <Th isNumeric>multiply by</Th>
+              <Th>Model Name</Th>
+              <Th>seatNum</Th>
+              <Th isNumeric> price</Th>
+              <Th>Status</Th>
             </Tr>
           </Tfoot>
         </Table>

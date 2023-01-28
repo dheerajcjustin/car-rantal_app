@@ -11,9 +11,10 @@ import SearchCardSkeleton from "../../components/user/search/SearchCardSkeleton"
 import authInstance from "../../config/authInstance";
 
 const SearchPage = () => {
+  console.log("inside the users search page why it not working i dont");
   const arr = [34, 56, 76, 98];
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  // const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
   const fetcher = (url) => authInstance.get(url).then((res) => res.data);
   // .catch((err) => console.log(err));
@@ -25,22 +26,27 @@ const SearchPage = () => {
   return (
     <div className="bg-[#FDD23F] ">
       <Navbar />
-      <FilterMobile />
+      <FilterMobile time={data?.time} />
 
       <div className="grid md:grid-cols-4 grid-cols-3 gap-5">
-        <FilterDesktop />
+        <FilterDesktop time={data?.time} />
 
         <div className="w-full mt-10 col-span-3 ">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 ">
             {isLoading &&
               arr.map((value) => <SearchCardSkeleton key={value} />)}
-            {data &&
-              data.map((car) => (
+            {data?.cars &&
+              data?.cars.map((car) => (
                 <SearchCard
+                  time={data.time}
+                  car={car}
+                  // gearType={car?.gearType}
+                  // fuelType={car?.fuelType}
+                  // carId={car._id}
                   key={car._id}
-                  title={car.name}
-                  price={car.price}
-                  photos={car.phots}
+                  // title={car.name}
+                  // price={car.price}
+                  // photos={car.phots}
                 />
               ))}
             {error && <p>error while loading</p>}
