@@ -39,7 +39,11 @@ const Login = () => {
       navigate("/search");
     } catch (err) {
       console.log(err);
-      setErrMsg("invalid userName or password");
+      if (err?.response?.status === 400)
+        setErrMsg("invalid userName or password");
+      else
+        setErrMsg("server down");
+
     }
   };
   const forgotPasswordHandler = () => {

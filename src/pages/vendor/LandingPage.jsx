@@ -12,8 +12,11 @@ const LandingPage = () => {
         {/* <Banner />
     <HomeSearch /> */}
       </div>
-      <h2 className="text-3xl bg-[#FFC53E] text-center">My cars</h2>
-      <MyCarsList />
+      <div className="bg-banana h-auto">
+
+        <h2 className="text-3xl bg-[#FFC53E] text-center">My cars</h2>
+        <MyCarsList />
+      </div>
     </>
   );
 };

@@ -19,7 +19,7 @@ const SearchCard = ({ car, time }) => {
             {car?.title}
           </h2>
           <img
-            src={car?.phots[0]}
+            src={car?.photos[0]}
             alt="photo of amg"
             className="w-[400px] h-[160px] mb-8 rounded-xl object-cover"
           />

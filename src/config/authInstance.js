@@ -35,3 +35,4 @@ authInstance.interceptors.response.use(
   }
 );
 export default authInstance;
+export const fetcher = (url) => authInstance.get(url).then((res) => res.data);

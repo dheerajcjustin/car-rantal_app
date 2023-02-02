@@ -11,11 +11,12 @@ import {
   TableCaption,
   TableContainer,
   Skeleton,
-  DrawerHeader,
+  DrawerHeader, useToast
 } from "@chakra-ui/react";
 import authInstance from "../../config/authInstance";
 
-const LocationTable = ({ data, error, isLoading, mutate }) => {
+const LocationTable = ({ data, error, isLoading, mutate, setPickup, setShowLocation }) => {
+  const toast = useToast();
   const deleteButtonHandler = async (id) => {
     try {
       console.log(id);
@@ -41,6 +42,12 @@ const LocationTable = ({ data, error, isLoading, mutate }) => {
       });
     }
   };
+  const pickupButtonHandler = (location) => {
+
+    console.log("id is cliked is ", location);
+    setPickup(location)
+    setShowLocation(false)
+  }
 
   return (
     <div className="m-5 p-5">
@@ -52,21 +59,29 @@ const LocationTable = ({ data, error, isLoading, mutate }) => {
               <Th>Sn</Th>
               <Th>Location</Th>
               <Th> image</Th>
+              <Th>Manage Pickup</Th>
+
               <Th>Delete</Th>
             </Tr>
           </Thead>
           <Tbody>
             {data &&
               data.map((loca, index) => (
-                <Tr key={loca._id}>
+                <Tr key={loca._id}
+
+                >
                   <Td>{index + 1}</Td>
                   <Td>{loca.location}</Td>
                   <Td>
                     <img src={loca.image} alt="" className="w-20 h-20" />
                   </Td>
+                  <Td
+                    onClick={() => pickupButtonHandler(loca)}
+
+                  ><button className="bg-green-400 p-3 rounded-lg" >PickupPoints</button>  </Td>
                   <Td>
                     <button
-                      className="bg-yellow-400 rounded-lg"
+                      className="bg-yellow-400 p-3 rounded-lg"
                       onClick={() => deleteButtonHandler(loca._id)}
                     >
                       Delete

@@ -4,7 +4,7 @@ import { IoLocationSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import DistrictsModal from "../UI/Districts_modal";
-import { selectCurrentUser, logOut } from "../../helpers/auth/authSlice";
+import { selectCurrentUser, logOut, selectCurrentUserType } from "../../helpers/auth/authSlice";
 import { selectCurrentLocation } from "../../helpers/location/locationSlice";
 import axios from "../../config/axios";
 
@@ -12,9 +12,13 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const { title } = useSelector(selectCurrentLocation);
   const currentUser = useSelector(selectCurrentUser);
+  const userType = useSelector(selectCurrentUserType);
   const navigate = useNavigate();
   const [nav, setNav] = useState("nav");
   const [modal, setModal] = useState(false);
+  if (userType !== "user") {
+    dispatch(logOut());
+  }
   // const [location, setLocation] = useState("");
   const handleNav = () => {
     setNav(!nav);
@@ -72,7 +76,7 @@ const Navbar = () => {
               <div className="relative">
                 <div
                   className="border-[#10191F]  border-2  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500 peer none"
-                  // onClick={LoginButtonHandler}
+                // onClick={LoginButtonHandler}
                 >
                   {currentUser.name}
                 </div>

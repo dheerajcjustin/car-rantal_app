@@ -9,26 +9,29 @@ const MyCarsList = () => {
   const { data, error, isLoading } = useSWR(`/vendor/myCars`, fetcher);
   return (
     <div className="p-5 bg-[#FFC53E]">
-      {/* <div className="  m-5  p-5 grid gap-5 xl:grid-cols-4 md:grid-cols-2 lg:grid-cols-3  sm:grid-cols-1  grid-cols-1 rounded-xl  origin-center"> */}
-      <div className="flex w-full justify-center ">
-        {isLoading && <p>Loading....</p>}
-        {/* {data && <p>{data}</p>} */}
 
-        {data &&
-          data.map((car, index) => (
-            <MyCarsCard
-              key={car._id}
-              phots={car.phots}
-              title={car.name}
-              price={car.price}
-              RC={car.rcNumber}
-              seatNum={car.seatNum}
-              status={car.verified}
-              location={car.location}
-            />
-          ))}
-        {error && <p>Error while Loading</p>}
+      {/* <div className="  m-5  p-5 grid gap-5 xl:grid-cols-4 md:grid-cols-2 lg:grid-cols-3  sm:grid-cols-1  grid-cols-1 rounded-xl  origin-center"> */}
+      {isLoading && <p>Loading....</p>}
+      {/* {data && <p>{data}</p>} */}
+
+      <div className="" >
+        <div className="flex flex-wrap justify-between gap-5  md:px-[10%]  ">
+          {data &&
+            data.map((car, index) => (
+              <MyCarsCard
+                key={car._id}
+                photos={car.photos}
+                title={car.name}
+                price={car.price}
+                RC={car.rcNumber}
+                seatNum={car.seatNum}
+                status={car.verified}
+                location={car.location}
+              />
+            ))}
+        </div>
       </div>
+      {error && <p>Error while Loading</p>}
     </div>
   );
 };

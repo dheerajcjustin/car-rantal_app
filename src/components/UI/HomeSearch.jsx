@@ -100,13 +100,11 @@ const HomeSearch = () => {
                   render={(stringDate, openCalendar) => {
                     return (
                       <button
-                        className={` ${
-                          pickupErr
+                        className={` ${pickupErr
                             ? `border-red-600 border-[2px]`
                             : `border-teal-100 border-[1px] `
-                        }   bg-gray-900  w-36 text-center rounded-md text-xl  py-1 after:${
-                          pickupErr && pickupErr
-                        }`}
+                          }   bg-gray-900  w-36 text-center rounded-md text-xl  py-1 after:${pickupErr && pickupErr
+                          }`}
                         onClick={openCalendar}
                       >
                         {stringDate ? stringDate : "Date"}
@@ -135,11 +133,10 @@ const HomeSearch = () => {
                   value={pickupTime}
                   name="pickupTime"
                   id="pickupTime"
-                  className={`${
-                    pickupTimeErr
+                  className={`${pickupTimeErr
                       ? `border-red-600 border-[2px]`
                       : `border-teal-100 border-[1px] `
-                  } bg-gray-900   w-36 text-center rounded-md text-xl  py-1`}
+                    } bg-gray-900   w-36 text-center rounded-md text-xl  py-1`}
                 >
                   <option value="" defaultValue hidden>
                     Time
@@ -163,11 +160,10 @@ const HomeSearch = () => {
                 render={(stringDate, openCalendar) => {
                   return (
                     <button
-                      className={`   ${
-                        dropOffDateErr
+                      className={`   ${dropOffDateErr
                           ? `border-red-600 border-[2px]`
                           : `border-teal-100 border-[1px] `
-                      }  bg-gray-900  w-36 text-center rounded-md text-xl  py-1`}
+                        }  bg-gray-900  w-36 text-center rounded-md text-xl  py-1`}
                       onClick={() => {
                         console.log(
                           "wowo piduptime validation ",
@@ -202,12 +198,10 @@ const HomeSearch = () => {
                   onChange={(e) => setDropOffTime(e.target.value)}
                   name="dropOffTime"
                   id="dropOffTime"
-                  dropOffTimeErr
-                  className={` ${
-                    dropOffTimeErr
+                  className={` ${dropOffTimeErr
                       ? `border-red-600 border-[2px]`
                       : `border-teal-100 border-[1px] `
-                  }  bg-gray-900   w-36 text-center rounded-md text-xl   py-1`}
+                    }  bg-gray-900   w-36 text-center rounded-md text-xl   py-1`}
                 >
                   <option value="" defaultValue hidden>
                     Time

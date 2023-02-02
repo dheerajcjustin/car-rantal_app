@@ -3,7 +3,7 @@ import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { IoLocationSharp } from "react-icons/io5";
 import Filter from "./Filter";
 
-const FilterMobile = () => {
+const FilterMobile = ({ pickups }) => {
   const [filterMobile, setFilterMobile] = useState("filter");
   const [sortMobile, setSortMobile] = useState("sort");
   const filterBackdropHandler = (e) => {

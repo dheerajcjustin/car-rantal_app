@@ -24,10 +24,10 @@ const ImageUpload = ({ image, SetImage, placeholder }) => {
     multiple: false,
   });
   return (
-    <div className=" w-[90%] m-5   h-[200px] flex  border-zinc-300 border-2 rounded-2xl items-center justify-center">
+    <div className=" w-[90%]    h-[200px] flex  rounded-2xl items-center justify-center">
       {image ? (
         <div
-          className={` w-full h-[200px] bg-cover  bg-center bg-no-repeat  `}
+          className={` w-[300px] h-[200px] bg-cover  bg-center bg-no-repeat  `}
           style={{
             backgroundImage: `url(${URL.createObjectURL(image)})`,
           }}
@@ -36,7 +36,7 @@ const ImageUpload = ({ image, SetImage, placeholder }) => {
         </div>
       ) : (
         <div {...getRootProps()} className="  w-full">
-          <div className="w-full h-[200px] flex flex-col bg-[#f6f6f6]  rounded-2xl items-center justify-center">
+          <div className="w-[300px]  h-[200px] flex flex-col bg-[#f6f6f6]  rounded-2xl items-center justify-center">
             <BsImages className="text-[30px]" />
             <h1>{placeholder ? placeholder : "Add Photo"}</h1>
 

@@ -26,10 +26,10 @@ const SearchPage = () => {
   return (
     <div className="bg-[#FDD23F] ">
       <Navbar />
-      <FilterMobile time={data?.time} />
+      <FilterMobile time={data?.time} pickups={data?.pickups} />
 
       <div className="grid md:grid-cols-4 grid-cols-3 gap-5">
-        <FilterDesktop time={data?.time} />
+        <FilterDesktop time={data?.time} pickups={data?.pickups} />
 
         <div className="w-full mt-10 col-span-3 ">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 ">
@@ -44,9 +44,9 @@ const SearchPage = () => {
                   // fuelType={car?.fuelType}
                   // carId={car._id}
                   key={car._id}
-                  // title={car.name}
-                  // price={car.price}
-                  // photos={car.phots}
+                // title={car.name}
+                // price={car.price}
+                // photos={car.phots}
                 />
               ))}
             {error && <p>error while loading</p>}

@@ -1,17 +1,9 @@
 import { dateFormat } from "../../../utils/dateFormat";
 import React, { useState } from "react";
 
-const Filter = () => {
-  const availableLocation = [
-    {
-      _id: "erefdkfd",
-      location: "Bus Stand Manthavady",
-    },
-    {
-      _id: "dfdskfds;",
-      location: "Bus Stand Kalpatta",
-    },
-  ];
+const Filter = ({ availableLocation }) => {
+
+
   const today = dateFormat();
   const [searchOptions, setSearchOptions] = useState({
     pickupDate: "",
@@ -119,7 +111,7 @@ const Filter = () => {
         <h2 className="text-2xl text-gray-50 pt-5 pb-2">Available Locations</h2>
 
         {availableLocation.map((location) => (
-          <div className="w-[90%] flex flex-col my-4  ">
+          <div className="w-[90%] flex flex-col my-4  " key={location._id} >
             <div className=" relative">
               {/* <label
                 htmlFor={location._id}
@@ -135,7 +127,7 @@ const Filter = () => {
                 className="w-full h-12 peer absolute opacity-0"
               />
               <div className=" text-[#FDD23F]  p-2 w-full  h-12 ring-2 ring-[#FDD23F] peer-checked:bg-[#FDD23F]  peer-checked:text-[#10191F]  text--400 text-center ">
-                <span className="text-xl ">{location.location}</span>
+                <span className="text-xl ">{location.name}</span>
               </div>
             </div>
           </div>
