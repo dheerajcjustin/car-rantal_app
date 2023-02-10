@@ -23,6 +23,7 @@ import VendorChangePassword from "./pages/vendor/forgotPassword/VendorChangePass
 import VendorForgotPasswordOtp from "./pages/vendor/forgotPassword/VendorForgotPasswordOtp";
 import MyCars from "./pages/vendor/MyCars";
 import MyBookings from "./pages/user/Mybookings";
+import VendorManagementPage from "./pages/admin/VendorManagementPage";
 
 export default function App() {
   return (
@@ -52,6 +53,8 @@ export default function App() {
         <Route index element={<AdminLanding />} />
         <Route path="location" element={<LocationManagement />} />
         <Route path="cars" element={<VerifyCars />} />
+        <Route path="vendors" element={<VendorManagementPage />} />
+
       </Route>
       <Route path="/vendor" element={<Layout />}>
         <Route path="login" element={<LoginVendor />} />

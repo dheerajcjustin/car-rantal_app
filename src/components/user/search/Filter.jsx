@@ -2,6 +2,7 @@ import { dateFormat } from "../../../utils/dateFormat";
 import React, { useState } from "react";
 
 const Filter = ({ availableLocation }) => {
+  console.log(availableLocation);
 
 
   const today = dateFormat();
@@ -22,9 +23,9 @@ const Filter = ({ availableLocation }) => {
     <>
       <h2 className="text-3xl font-bold  text-gray-50">Filter</h2>
       <div className="w-full">
-        <h3 className="text-xl text-white  my-5">Pick up </h3>
+        {/* <h3 className="text-xl text-white  my-5">Pick up </h3> */}
 
-        <div className=" w-full flex flex-col lg:flex-row gap-3">
+        {/* <div className=" w-full flex flex-col lg:flex-row gap-3">
           <div className=" text-gray-100 w-[50%]  ">
             <label htmlFor="pickupDate">
               <input
@@ -107,11 +108,13 @@ const Filter = ({ availableLocation }) => {
               </div>
             </label>
           </div>
-        </div>
+        </div> */}
         <h2 className="text-2xl text-gray-50 pt-5 pb-2">Available Locations</h2>
 
-        {availableLocation.map((location) => (
+        {availableLocation && availableLocation.map((location, index) => (
+
           <div className="w-[90%] flex flex-col my-4  " key={location._id} >
+            {console.log(" locarion ", index, location)}
             <div className=" relative">
               {/* <label
                 htmlFor={location._id}
@@ -119,14 +122,13 @@ const Filter = ({ availableLocation }) => {
               >
                 {location.location}
               </label> */}
-
               <input
                 type="checkbox"
                 id={location._id}
-                name={location._id}
+                value={location._id}
                 className="w-full h-12 peer absolute opacity-0"
               />
-              <div className=" text-[#FDD23F]  p-2 w-full  h-12 ring-2 ring-[#FDD23F] peer-checked:bg-[#FDD23F]  peer-checked:text-[#10191F]  text--400 text-center ">
+              <div className=" text-[#FDD23F]  p-2 w-full min-h-12 ring-2 ring-[#FDD23F] peer-checked:bg-[#FDD23F]  peer-checked:text-[#10191F]  text--400 text-center ">
                 <span className="text-xl ">{location.name}</span>
               </div>
             </div>

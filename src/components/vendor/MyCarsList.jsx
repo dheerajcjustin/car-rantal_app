@@ -15,7 +15,7 @@ const MyCarsList = () => {
       {/* {data && <p>{data}</p>} */}
 
       <div className="" >
-        <div className="flex flex-wrap justify-between gap-5  md:px-[10%]  ">
+        <div className="flex flex-wrap justify-around gap-5  md:px-[10%]  ">
           {data &&
             data.map((car, index) => (
               <MyCarsCard

@@ -10,6 +10,7 @@ const SearchCard = ({ car, time }) => {
   const bookButtonHandler = () => {
     dispatch(setCarData({ car, time }));
     navigate(`/checkout/${car._id}`);
+
   };
   return (
     <>

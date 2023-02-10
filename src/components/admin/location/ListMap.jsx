@@ -7,6 +7,7 @@ import ReactMapGL, {
 
 
 const ListMap = ({ location }) => {
+    // console.log("locarion is from lodffadfsdfdsafdsafdsoiuytrejkjhgf789876543456789098765432cation dara,", location);
 
     const [popupData, setPopupData] = useState(null);
     return (

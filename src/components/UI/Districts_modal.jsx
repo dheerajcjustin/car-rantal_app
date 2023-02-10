@@ -52,12 +52,7 @@ const DistrictsModal = ({ onClose }) => {
           />
         ))}
 
-        <District_card
-          onClose={onClose}
-          imgUrl={"/img/kozhikode.jpeg"}
-          title="Kozhikode"
-          key="Kozhikode"
-        />
+
       </div>
       {/* </div> */}
     </Modal>

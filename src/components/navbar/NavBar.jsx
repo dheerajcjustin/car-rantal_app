@@ -80,10 +80,10 @@ const Navbar = () => {
                 >
                   {currentUser.name}
                 </div>
-                <div className="px-1 py-2  absolute border-[1px]  border-gray-900  hidden hover:block peer-hover:block w-fit h-fit">
-                  <button className="      text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all  ease-in-out duration-500 w-full">
+                <div className="px-1 py-2  absolute border-[1px] bg-banana border-gray-900  hidden hover:block peer-hover:block w-fit h-fit">
+                  {/* <button className="      text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all  ease-in-out duration-500 w-full">
                     chat
-                  </button>
+                  </button> */}
                   <button
                     className="      text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all  ease-in-out duration-500 w-full"
                     onClick={bookingHandler}

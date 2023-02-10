@@ -6,11 +6,7 @@ import ChangeMobile from "./ChangeMobile";
 import axios from "../../../config/axios";
 import Countdown, { zeroPad } from "react-countdown";
 
-const renderer = ({ hours, minutes, seconds }) => (
-  <span className="text-xl text-right">
-    {zeroPad(minutes)}:{zeroPad(seconds)}
-  </span>
-);
+
 
 const Otp = ({ userData }) => {
   const [resend, setResend] = useState(false);
@@ -62,7 +58,11 @@ const Otp = ({ userData }) => {
   const loginHandle = () => {
     navigate("/login");
   };
-
+  const renderer = ({ hours, minutes, seconds }) => (
+    <span className="text-xl text-right">
+      {zeroPad(minutes)}:{zeroPad(seconds)}
+    </span>
+  );
   return (
     <div className="md:col-span-2 lg:col-span-1 flex flex-col items-center justify-center bg-[#FDD23F]">
       <h1 className="font-Viaoda text-5xl mb-10"> Mobile Verification</h1>
@@ -72,7 +72,7 @@ const Otp = ({ userData }) => {
         value={otp}
         onChange={handleChange}
         separator={<span className="p-2 shadow-2xl"> </span>}
-        inputStyle="text-8xl shadow-2xl bor  rounded-3xl"
+        inputStyle=" text-3xl sm:text-5xl md:text-8xl shadow-2xl bor  rounded-3xl"
         numInputs={4}
         isInputNum={true}
       ></OtpInput>

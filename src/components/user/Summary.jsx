@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Summary = ({ vehicle, bookingTime }) => {
+const Summary = ({ vehicle, bookingTime, setSelectedPickup, selectedPickup }) => {
   return (
     <div className="bg-gray-50 col-span-2 rounded-xl shadow-md">
       <h2 className="text-3xl p-5">SUMMARY </h2>
@@ -8,7 +8,7 @@ const Summary = ({ vehicle, bookingTime }) => {
         <div className="w-full">
           <div className="w-full my-5">
             <img
-              src={vehicle.phots[0]}
+              src={vehicle.photos[0]}
               alt=""
               className="mx-auto w-full p-5 "
             />
@@ -36,6 +36,15 @@ const Summary = ({ vehicle, bookingTime }) => {
           <hr className="w-[90%] " />
           <div className="flex flex-row justify-around p-5">
             {/* {vehicle.location} */}
+            <label htmlFor="pickupPoint"> Select Pickup </label>
+            <select name="pickupPoint" id="pickupPoint" value={selectedPickup} onChange={(e) => { console.log(e.target.value); setSelectedPickup(e.target.value) }}>
+              {/* {console.log("the data inside vihle summary", vehicle.locationData[0].pickupPoints)
+              }             */}
+              {
+                vehicle.locationData[0].pickupPoints.map(pickup => <option key={pickup._id} value={pickup._id}>{pickup.name}.</option>)
+
+              }
+            </select>
           </div>
           <hr className="w-[90%] " />
           <div className="flex flex-row justify-between p-5 w-[90%]">

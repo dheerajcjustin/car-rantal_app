@@ -7,7 +7,7 @@ import authInstance from "../../config/authInstance";
 const VerifyCars = () => {
   return (
     <div className="flex">
-      <Sidebar type="vendor" />
+      <Sidebar type="car" />
       <div className="w-full h-screen">
         <CarsManagement />
       </div>

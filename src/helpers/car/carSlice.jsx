@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const carSlice = createSlice({
   name: "car",
-  initialState: { car: {}, time: {} },
+  initialState: { car: {}, time: {}, },
   reducers: {
     setCarData: (state, action) => {
       // console.log(

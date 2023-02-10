@@ -10,16 +10,19 @@ const Sidebar = (props) => {
   const LocationHandler = () => {
     navigate("/admin/location");
   };
-  const VendorHandler = () => {
+  const carHandler = () => {
     navigate("/admin/cars");
   };
+
+  const vendorHandler = () => {
+    navigate("/admin/vendors")
+  }
 
   return (
     <div className="flex top-0 sticky z-10">
       <div
-        className={` ${
-          open ? "w-72" : "w-20 "
-        } bg-gray-100 h-screen p-5  pt-8 relative duration-300`}
+        className={` ${open ? "w-72" : "w-20 "
+          } bg-gray-100 h-screen p-5  pt-8 relative duration-300`}
       >
         <img
           src="./src/assets/control.png"
@@ -30,14 +33,12 @@ const Sidebar = (props) => {
         <div className="flex gap-x-4 items-center">
           <img
             src="./src/assets/logo.png"
-            className={`cursor-pointer duration-500 ${
-              open && "rotate-[360deg]"
-            }`}
+            className={`cursor-pointer duration-500 ${open && "rotate-[360deg]"
+              }`}
           />
           <h1
-            className={`text-[#FDD23F] origin-left font-medium text-xl duration-200 ${
-              !open && "scale-0"
-            }`}
+            className={`text-[#FDD23F] origin-left font-medium text-xl duration-200 ${!open && "scale-0"
+              }`}
           >
             LOGO
           </h1>
@@ -45,9 +46,8 @@ const Sidebar = (props) => {
         <ul className="pt-6">
           <li
             onClick={LocationHandler}
-            className={`${
-              props.type == "location" && " scale-110 transform-gpu "
-            } flex  rounded-md p-2 bg-[#FDD23F]  text-black cursor-pointer hover:bg-gray-700  items-center gap-x-4 mb-5`}
+            className={`${props.type == "location" && " scale-110 transform-gpu "
+              } flex  rounded-md p-2 bg-[#FDD23F]  text-black cursor-pointer hover:bg-gray-700  items-center gap-x-4 mb-5`}
           >
             <FaLocationArrow className="text-3xl text-" />
             <span className={`${!open && "hidden"} origin-left duration-200`}>
@@ -57,10 +57,9 @@ const Sidebar = (props) => {
             </span>
           </li>
           <li
-            onClick={VendorHandler}
-            className={`${
-              props.type == "vendor" && "scale-110 transform-gpu "
-            } flex  rounded-md p-2 cursor-pointer bg-[#FDD23F]  hover:bg-gray-700  items-center gap-x-4 mb-5`}
+            onClick={carHandler}
+            className={`${props.type == "car" && "scale-110 transform-gpu "
+              } flex  rounded-md p-2 cursor-pointer bg-[#FDD23F]  hover:bg-gray-700  items-center gap-x-4 mb-5`}
           >
             <VscRequestChanges className="text-3xl text-black" />
             <span className={`${!open && "hidden"} origin-left duration-200`}>
@@ -70,14 +69,15 @@ const Sidebar = (props) => {
             </span>
           </li>
           <li
-            className={`${
-              props.type == "event" && "bg-gray-700"
-            } flex  rounded-md p-2 cursor-pointer bg-[#FDD23F]  hover:bg-gray-700  items-center gap-x-4 mb-5`}
+            onClick={vendorHandler}
+
+            className={`${props.type == "vendor" && "transform-gpu scale-110"
+              } flex  rounded-md p-2 cursor-pointer bg-[#FDD23F]  hover:bg-gray-700  items-center gap-x-4 mb-5`}
           >
             <FaChessRook className="text-3xl text-black" />
             <span className={`${!open && "hidden"} origin-left duration-200`}>
               <h1 className="text-black hover:text-white text-xl">
-                Service providers
+                Vendor Management
               </h1>
             </span>
           </li>

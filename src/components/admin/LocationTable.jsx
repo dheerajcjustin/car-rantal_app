@@ -13,7 +13,7 @@ import {
   Skeleton,
   DrawerHeader, useToast
 } from "@chakra-ui/react";
-import authInstance from "../../config/authInstance";
+import authInstance, { fetcher } from "../../config/authInstance";
 
 const LocationTable = ({ data, error, isLoading, mutate, setPickup, setShowLocation }) => {
   const toast = useToast();
