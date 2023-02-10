@@ -5,7 +5,7 @@ import axios from "axios";
 
 // const token = useSelector(selectCurrentToken);
 const instance = axios.create({
-  baseURL: "http://localhost:5000/",
+  baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
     "Access-Control-Allow-Origin": "*",
   },
