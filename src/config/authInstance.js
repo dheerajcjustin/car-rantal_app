@@ -6,7 +6,7 @@ import { store } from "./store";
 
 // const token = useSelector(selectCurrentToken);
 const authInstance = axios.create({
-  baseURL: "http://localhost:5000/",
+  baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
     "Access-Control-Allow-Origin": "*",
   },
