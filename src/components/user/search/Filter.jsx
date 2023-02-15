@@ -1,8 +1,9 @@
 import { dateFormat } from "../../../utils/dateFormat";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const Filter = ({ availableLocation }) => {
-  console.log(availableLocation);
+const Filter = ({ availableLocation, mutate }) => {
+  const [selectedPickups, setSelectedPickups] = useState("");
+
 
 
   const today = dateFormat();
@@ -19,6 +20,11 @@ const Filter = ({ availableLocation }) => {
       [e.target.name]: e.target.value,
     }));
   };
+
+  const filterPickup = (id) => {
+    setSelectedPickups(id)
+
+  }
   return (
     <>
       <h2 className="text-3xl font-bold  text-gray-50">Filter</h2>
@@ -114,8 +120,8 @@ const Filter = ({ availableLocation }) => {
         {availableLocation && availableLocation.map((location, index) => (
 
           <div className="w-[90%] flex flex-col my-4  " key={location._id} >
-            {console.log(" locarion ", index, location)}
-            <div className=" relative">
+            {/* {console.log(" locarion ", index, location)} */}
+            <div className="relative">
               {/* <label
                 htmlFor={location._id}
                 className="   w-full  peer-checked:bg-blue-500 peer-checked:text-blue-500 text--400 "
@@ -123,7 +129,8 @@ const Filter = ({ availableLocation }) => {
                 {location.location}
               </label> */}
               <input
-                type="checkbox"
+                onClick={() => filterPickup(location._id)}
+                type="radio"
                 id={location._id}
                 value={location._id}
                 className="w-full h-12 peer absolute opacity-0"

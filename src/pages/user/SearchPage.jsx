@@ -14,6 +14,7 @@ const SearchPage = () => {
 
   const location = useLocation();
   const [hasMore, setHasMore] = useState(false);
+  const [filter, setFilter] = useState("");
   const getKey = (pageIndex, previousPageData) => {
     // if (previousPageData && pre && !previousPageData.length) return null // reached the end
     // if (previousPageData && !previousPageData.cars) {
