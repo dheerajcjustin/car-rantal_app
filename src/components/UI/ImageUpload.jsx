@@ -35,7 +35,7 @@ const ImageUpload = ({ image, SetImage, placeholder }) => {
           <FaTimes onClick={resetShare} />
         </div>
       ) : (
-        <div {...getRootProps()} className="  w-full">
+        <div {...getRootProps()} className="  w-fit">
           <div className="w-[300px]  h-[200px] flex flex-col bg-[#f6f6f6]  rounded-2xl items-center justify-center">
             <BsImages className="text-[30px]" />
             <h1>{placeholder ? placeholder : "Add Photo"}</h1>

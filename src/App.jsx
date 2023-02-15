@@ -24,6 +24,8 @@ import VendorForgotPasswordOtp from "./pages/vendor/forgotPassword/VendorForgotP
 import MyCars from "./pages/vendor/MyCars";
 import MyBookings from "./pages/user/Mybookings";
 import VendorManagementPage from "./pages/admin/VendorManagementPage";
+import ProfilePage from "./pages/user/ProfilePage";
+import VendorProfile from "./pages/vendor/VendorProfile";
 
 export default function App() {
   return (
@@ -38,12 +40,14 @@ export default function App() {
             path="/ForgotPasswordOtp/:mobile"
             element={<ForgotPasswordOtp />}
           />
+
           <Route
             path="ChangePassword/:userId/:token"
             element={<ChangePassword />}
           />
         </Route>
         <Route element={<RequireAuth />}>
+          <Route path="profile" element={<ProfilePage />} />
           <Route path="search" element={<SearchPage />} />
           <Route path="checkout/:car" element={<Checkout />} />
           <Route path="bookings" element={<MyBookings />} />
@@ -73,6 +77,7 @@ export default function App() {
           <Route index element={<LandingPage />} />
           <Route path="bookings" element={<Bookings />} />
           <Route path="myCars" element={<MyCars />} />
+          <Route path="profile" element={<VendorProfile />} />
         </Route>
       </Route>
     </Routes>

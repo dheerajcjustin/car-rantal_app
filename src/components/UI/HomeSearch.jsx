@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -70,12 +70,9 @@ const HomeSearch = () => {
       pickupTimeValidation() &&
       dropOffTimeValidation()
     ) {
-      console.log("all three are vaild ");
       if (!dropOffTime) {
         setDropOffTimeErr("drop Off Time is must");
       } else {
-        console.log(")(*&^%$UILKJHGRTYUIKJHG)    Search");
-
         navigate(
           `/search?pickupDate=${pickupDate}&pickupTime=${pickupTime}&dropOffDate=${dropOffDate}&dropOffTime=${dropOffTime} &locationId=${locationId}`
         );
@@ -84,6 +81,7 @@ const HomeSearch = () => {
       console.log("values are not valid");
     }
   };
+  const minimumDate = useMemo(() => MinDropOffDate(pickupDate, pickupTime), [pickupDate, pickupTime])
   return (
     <>
       <div className="max-w-[450px] w-full mx-auto bg-[#10191F]   p-8 px-10 rounded-lg absolute top-48  sm:left-20 opacity-95  ease-in-out transition-all ">
@@ -101,8 +99,8 @@ const HomeSearch = () => {
                     return (
                       <button
                         className={` ${pickupErr
-                            ? `border-red-600 border-[2px]`
-                            : `border-teal-100 border-[1px] `
+                          ? `border-red-600 border-[2px]`
+                          : `border-teal-100 border-[1px] `
                           }   bg-gray-900  w-36 text-center rounded-md text-xl  py-1 after:${pickupErr && pickupErr
                           }`}
                         onClick={openCalendar}
@@ -114,9 +112,11 @@ const HomeSearch = () => {
                   className=" bg-banana text-black"
                   value={pickupDate}
                   onChange={(date) => {
+                    setDropOffDate("");
                     setPickupDate(date);
-                    console.log(date);
-                    console.log("pickup time", pickupTimeList(date));
+
+                    // console.log(date);
+                    // console.log("pickup time", pickupTimeList(date));
                     setPickupTimes(pickupTimeList(date));
                   }}
                 />
@@ -129,13 +129,13 @@ const HomeSearch = () => {
                 <select
                   onFocus={pickupDateValidation}
                   // onClick={pickupTimeValidation}
-                  onChange={(e) => setPickupTime(e.target.value)}
+                  onChange={(e) => { setDropOffDate(""); setPickupTime(e.target.value) }}
                   value={pickupTime}
                   name="pickupTime"
                   id="pickupTime"
                   className={`${pickupTimeErr
-                      ? `border-red-600 border-[2px]`
-                      : `border-teal-100 border-[1px] `
+                    ? `border-red-600 border-[2px]`
+                    : `border-teal-100 border-[1px] `
                     } bg-gray-900   w-36 text-center rounded-md text-xl  py-1`}
                 >
                   <option value="" defaultValue hidden>
@@ -156,13 +156,15 @@ const HomeSearch = () => {
           <div className=" text-gray-100 bg-gray-900">
             <label htmlFor="dropOutDate">
               <DatePicker
-                minDate={MinDropOffDate(pickupDate, pickupTime)}
+                currentDate={MinDropOffDate(pickupDate, pickupTime)}
+
+                minDate={minimumDate}
                 render={(stringDate, openCalendar) => {
                   return (
                     <button
                       className={`   ${dropOffDateErr
-                          ? `border-red-600 border-[2px]`
-                          : `border-teal-100 border-[1px] `
+                        ? `border-red-600 border-[2px]`
+                        : `border-teal-100 border-[1px] `
                         }  bg-gray-900  w-36 text-center rounded-md text-xl  py-1`}
                       onClick={() => {
                         console.log(
@@ -199,8 +201,8 @@ const HomeSearch = () => {
                   name="dropOffTime"
                   id="dropOffTime"
                   className={` ${dropOffTimeErr
-                      ? `border-red-600 border-[2px]`
-                      : `border-teal-100 border-[1px] `
+                    ? `border-red-600 border-[2px]`
+                    : `border-teal-100 border-[1px] `
                     }  bg-gray-900   w-36 text-center rounded-md text-xl   py-1`}
                 >
                   <option value="" defaultValue hidden>

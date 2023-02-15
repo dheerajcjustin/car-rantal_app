@@ -53,12 +53,13 @@ const VendorNavbar = () => {
               <button
                 className="border-[#10191F]  border-4 rounded-3xl  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500 "
                 onClick={() => {
-                  navigate("/vendor/myCars");
+                  navigate("/vendor/profile");
                 }}
               >
-                My Cars
+                Profile
               </button>
             </li>
+
           </ul>
           <div className="block md:hidden" onClick={handleNav}>
             {!nav ? <AiOutlineClose size={30} /> : <AiOutlineMenu size={30} />}
@@ -80,11 +81,15 @@ const VendorNavbar = () => {
                   Add cars
                 </button>
               </li>
-              <li className="p-4 border-b border-gray-600 font-bold">cars</li>
+
               <li
                 className="p-4 border-b border-gray-600 font-bold"
                 onClick={() => navigate("/vendor/myCars")}
-              ></li>
+              >My Cars</li>
+              <li
+                className="p-4 border-b border-gray-600 font-bold"
+                onClick={() => navigate("/vendor/profile")}
+              >Profile</li>
             </ul>
           </div>
         </div>

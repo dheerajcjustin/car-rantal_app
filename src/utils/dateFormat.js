@@ -104,7 +104,7 @@ export const dropOffTimeList = (pickupDate, pickupTime, dropOffDate) => {
     dropOffDate.getMonth() === pickupDate.getMonth() &&
     dropOffDate.getFullYear() === pickupDate.getFullYear()
   ) {
-    timeArray.splice(0, timeArray.indexOf(pickupTime));
+    timeArray.splice(0, timeArray.indexOf(pickupTime) + 1);
     return timeArray;
   }
   return timeArray;

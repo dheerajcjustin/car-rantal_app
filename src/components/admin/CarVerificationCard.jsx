@@ -1,15 +1,35 @@
 import React, { useState } from "react";
 import authInstance from "../../config/authInstance";
+// import LoadingOverlay from 'react-loading-overlay';
+import { useToast } from '@chakra-ui/react'
 
-const CarVerificationCard = ({ car }) => {
-  const [loading, setLoading] = useState();
+
+const CarVerificationCard = ({ car, modalClose }) => {
+  const toast = useToast();
+  const [loading, setLoading] = useState(false);
   const update = async (car, status) => {
     try {
       console.log("car Id is ", car);
       const response = await authInstance.patch(`/admin/car/${car}`, status);
-      console.log(response.data);
-    } catch (error) {
-      console.error(error.response);
+      modalClose();
+      toast({
+        title: 'Status change Successes.',
+        description: `Status have  Successfully changed to ${status.status}`,
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      })
+    }
+    catch (error) {
+      modalClose();
+      toast({
+        title: 'Status change Successes.',
+        description: `Status have  Successfully changed to ${status.status}`,
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
+      // console.error(error.response);
     }
   };
 
@@ -27,7 +47,7 @@ const CarVerificationCard = ({ car }) => {
     update(car, status);
   };
 
-  const [image, setImage] = useState(car.phots[0]);
+  const [image, setImage] = useState(car.photos[0]);
   return (
     <div className=" w-full sm:max-w-md rounded-3xl bg-[#10191F] pt-3 shadow-lg shadow-gray-500/50     ">
       <div className="flex flex-col  align-middle items-center w-full">
@@ -39,8 +59,9 @@ const CarVerificationCard = ({ car }) => {
           className=" w-[90%] h-[200px] object-contain	 sm:mb-8 rounded-xl"
         />
         <div className="flex flex-row w-full justify-between sm:px-5">
-          {car.phots.map((photo) => (
+          {car?.photos?.map((photo) => (
             <img
+              key={photo}
               className=" w-[25%]   sm:w-[100px] sm:h-[80px]  object-contain "
               src={photo}
               alt="image of cars"
@@ -51,6 +72,10 @@ const CarVerificationCard = ({ car }) => {
           ))}
         </div>
       </div>
+      <p className="text-center text-banana">
+        Current Status:  {car.verified}
+
+      </p>
       <div className="flex flex-row justify-around p-5 bg-white rounded-t-3xl sm:text-xl ">
         <div className="text-center">
           <h6>Tiadog</h6>

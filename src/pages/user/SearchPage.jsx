@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import Navbar from "../../components/navbar/NavBar";
 import FilterDesktop from "../../components/user/search/FilterDesktop";
 import FilterMobile from "../../components/user/search/FilterMobile";
@@ -13,8 +13,8 @@ const SearchPage = () => {
   const arr = [34, 56, 76, 98];
 
   const location = useLocation();
+  const [hasMore, setHasMore] = useState(false);
   const getKey = (pageIndex, previousPageData) => {
-    console.log("previos dat ", previousPageData);
     // if (previousPageData && pre && !previousPageData.length) return null // reached the end
     // if (previousPageData && !previousPageData.cars) {
     //   console.log("inseide the null state")
@@ -23,33 +23,67 @@ const SearchPage = () => {
     // console.log("insidet else retuen paet")
     return `/search${location.search}&page=${pageIndex + 1}`                    // SWR key
   }
+
   const { data, error, isLoading, isValidating, mutate, size, setSize } = useSWRInfinite(
     getKey, fetcher)
   // const carDates = data ? [].concat(...data) : [];
-  const hasMore = () => {
-    console.log("cheeking valie is sthis data[data.length - 1]?.cars?", data[data.length - 1]?.cars?.length)
+  useEffect(() => {
+    CheckHasMore();
 
-    console.log("cheeking valie is sthis data[data.length - 1]?.cars?", data[data.length - 1]?.cars?.length == 3)
-    console.log("data is ", data)
+  }, [data]);
+  const CheckHasMore = () => {
+
+    setHasMore(data && data[data.length - 1]?.cars?.length == 3)
     return (data && data[data.length - 1]?.cars?.length == 3)
 
   }
   const loadMore = () => {
-    console.log("has more value ", hasMore());
-
-    if (hasMore()) return setSize(prev => prev + 1);
-    console.log("no more data is thre");
+    console.log("hasmore", CheckHasMore());
+    if (!CheckHasMore()) return
+    return setSize(prev => prev + 1);
 
   }
+  const isLoadingMore =
+    isLoading || (size > 0 && data && typeof data[size - 1] === "undefined");
+  const observer = useRef();
+  const lastVendorRef = useCallback(node => {
+    if (isLoading) return;
+    if (observer.current) observer.current.disconnect();
+    observer.current = new IntersectionObserver(entires => {
+      if (entires[0].isIntersecting && hasMore) {
+        console.log("has mor state ", hasMore);
+        setSize(prev => prev + 1);
+        loadMore();
+      }
+
+    })
+    if (node) observer.current.observe(node)
+  }, [hasMore])
 
   return (
     <div className="bg-[#FDD23F] ">
       <Navbar />
-      <FilterMobile time={data?.time} pickups={data?.pickups} />
+      {
+        data &&
+
+        <FilterMobile time={data[0]?.time} pickups={data[0]?.pickups} />
+      }
+      {
+        isLoading &&
+        <FilterMobile />
+      }
 
       <div className="grid md:grid-cols-4 grid-cols-3 gap-5">
-        <FilterDesktop time={data?.time} pickups={data?.pickups} />
 
+        {
+          data &&
+
+          <FilterDesktop time={data[0]?.time} pickups={data[0]?.pickups} />
+        }
+        {
+          isLoading &&
+          <FilterDesktop />
+        }
         <div className="w-full mt-10 col-span-3 ">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-14">
             {isLoading &&
@@ -69,6 +103,7 @@ const SearchPage = () => {
                   <>
 
                     < SearchCard
+
                       time={carData.time}
                       car={car}
                       // gearType={car?.gearType}
@@ -86,10 +121,10 @@ const SearchPage = () => {
 
 
             }
-            {/* {console.log("carDates", carDates)} */}
+            {isLoadingMore && <p>Loading More</p>}
 
             {error && <p>error while loading</p>}
-            <button className="bg-gray-300" onClick={loadMore} >load More</button>
+            <div ref={lastVendorRef}></div>
           </div>
         </div>
       </div>

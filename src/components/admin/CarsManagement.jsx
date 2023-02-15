@@ -37,7 +37,7 @@ const CarsManagement = () => {
     <div className="m-5 p-5">
       {modalShow && (
         <Modal onClose={onClose}>
-          <CarVerificationCard car={car} />
+          <CarVerificationCard car={car} modalClose={onClose} />
         </Modal>
       )}
       <TableContainer>
