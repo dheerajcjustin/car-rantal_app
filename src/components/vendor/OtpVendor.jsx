@@ -5,11 +5,12 @@ import Countdown, { zeroPad } from "react-countdown";
 import OtpInput from "react18-input-otp";
 import authInstance from "../../config/authInstance";
 import { useDispatch } from "react-redux";
-useToast
+import { setUserData } from "../../helpers/auth/authSlice";
 
 
 
 const OtpVendor = ({ mobile, name, modalOpen, vendorId }) => {
+    const dispatch = useDispatch()
     const [resend, setResend] = useState(false);
     const toast = useToast();
 
@@ -27,6 +28,7 @@ const OtpVendor = ({ mobile, name, modalOpen, vendorId }) => {
                 const response = await authInstance.patch("/vendor/profile", data);
                 console.log("it is working with otp", response);
                 if (response.status === 200) {
+                    dispatch(setUserData({ name, mobile }))
                     modalOpen(false);
                     // toast({})
                 }

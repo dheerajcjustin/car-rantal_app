@@ -15,7 +15,6 @@ const VendorProfile = () => {
     const [name, setName] = useState(user.name);
     const [mobile, setMobile] = useState(user.mobile);
     const updateProfileHandler = async () => {
-        console.log("wowowo");
         const res = await authInstance.post("/vendor/sendOtp", { name, mobile });
         console.log(res);
         setOtpModal(true);
@@ -35,7 +34,7 @@ const VendorProfile = () => {
             }
             <div className=" h-screen   ">
                 <div className="mx-auto sm:w-2/3 bg-[#FDD23F] ">
-                    <ImageUpload SetImage={setProfilePic} image={profilePic} placeholder="profile pic" />
+                    {/* <ImageUpload SetImage={setProfilePic} image={profilePic} placeholder="profile pic" /> */}
 
 
 

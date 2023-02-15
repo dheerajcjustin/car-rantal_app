@@ -3,8 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { IoLocationSharp } from "react-icons/io5";
 import AddCar from "../vendor/AddCar/AddCar";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../helpers/auth/authSlice";
 
 const VendorNavbar = () => {
+  const dispatch = useDispatch();
   const [addCarModal, setAddCarModal] = useState(false);
   const navigate = useNavigate();
   const [nav, setNav] = useState("nav");
@@ -16,6 +19,11 @@ const VendorNavbar = () => {
   };
   const modalOpen = () => {
     setAddCarModal(true);
+  };
+
+  const logoutButtonHandler = () => {
+    console.log("loging out");
+    dispatch(logOut());
   };
   return (
     <>
@@ -50,14 +58,29 @@ const VendorNavbar = () => {
               </button>
             </li>
             <li className="font-bold">
-              <button
-                className="border-[#10191F]  border-4 rounded-3xl  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500 "
-                onClick={() => {
-                  navigate("/vendor/profile");
-                }}
-              >
-                Profile
-              </button>
+              <div className="relative">
+                <button
+                  className="border-[#10191F]  border-4 rounded-3xl  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500 peer none"
+                  onClick={() => {
+                    navigate("/vendor/profile");
+                  }}
+                >
+                  Profile
+                </button>
+
+                <div className="px-1 py-2  absolute bg-banana border-gray-900  hidden hover:block peer-hover:block w-fit h-fit">
+
+
+
+                  <button
+                    className="   border-[#10191F]  border-4 rounded-3xl  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500 "
+                    onClick={logoutButtonHandler}
+                  >
+                    logout
+                  </button>
+                </div>
+              </div>
+
             </li>
 
           </ul>
