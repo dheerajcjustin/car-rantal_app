@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import EventList from "./EventList";
 import useSWR from "swr"
 import { fetcher } from "../../../config/authInstance"
-
-const MyUpcomingEvents = ({ userType }) => {
+import UserBookingCardSkelton from "./UserBookingCardSkelton";
+const MyEvents = ({ userType }) => {
   const { data, isLoading, error } = useSWR(`${userType = 'user' ? `/bookings` : `/vendor/bookings`}`, fetcher)
   const [completedList, setCompletedList] = useState([]);
   const [upComingList, setUpComingList] = useState([]);
@@ -11,11 +11,11 @@ const MyUpcomingEvents = ({ userType }) => {
     if (data) {
       setCompletedList(data?.completedEvents)
       setUpComingList(data?.upComingEvents)
-
     }
   }, [data]);
 
   const [showCompleted, setShowCompleted] = useState(false);
+  const arr = [34, 56, 78]
   return (
     <div>
       <h2 className="text-3xl text-center ">Events</h2>
@@ -27,24 +27,15 @@ const MyUpcomingEvents = ({ userType }) => {
           onClick={() => setShowCompleted(true)}
         >Completed Events </h1>
       </div>
-      {
-        isLoading && <p>loading</p>
-
-      }
+      {isLoading && arr.map(elm => <UserBookingCardSkelton key={elm} />)}
       {data && <>
         {
-          showCompleted ? <EventList data={completedList} title="Completed event" /> : <EventList data={upComingList} title="upComing event" />
+          showCompleted ? <EventList data={completedList} isLoading={isLoading} title="Completed event" /> : <EventList data={upComingList} title="upComing event" isLoading={isLoading} />
         }
-
-
       </>
       }
-
-
-
-
     </div>
   );
 };
 
-export default MyUpcomingEvents;
+export default MyEvents;

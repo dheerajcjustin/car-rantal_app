@@ -1,13 +1,16 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
-import { apiSlice } from "./apiSlice";
 import authReducer from "../helpers/auth/authSlice";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 
 import { persistStore, persistReducer } from "redux-persist"; // imports from redux-persist
 import locationReducer from "../helpers/location/locationSlice";
+import vendorAuthReducer from "../helpers/auth/vendorAuthSlice";
 import carReducer from "../helpers/car/carSlice";
-
+import { getDefaultMiddleware } from "@reduxjs/toolkit";
+const customMiddleware = getDefaultMiddleware({
+  serializableCheck: false
+})
 const persistConfig = {
   // configuration object for redux-persist
   key: "root",
@@ -15,6 +18,7 @@ const persistConfig = {
 };
 const reducer = combineReducers({
   auth: authReducer,
+  vendorAuth: vendorAuthReducer,
   location: locationReducer,
   car: carReducer,
 });
@@ -23,6 +27,7 @@ const persistedReducer = persistReducer(persistConfig, reducer); // create a per
 
 const store = configureStore({
   reducer: persistedReducer,
+  middleware: customMiddleware,
   // reducer: {
   //     auth : authSlice
   // }

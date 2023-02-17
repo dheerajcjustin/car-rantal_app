@@ -5,6 +5,9 @@ import authInstance from '../../../config/authInstance';
 import CheckoutForm from '../../admin/CheckoutForm';
 
 const Payment = ({ vehicle, bookingTime, selectedPickup, setPayment }) => {
+
+
+    
     const total = vehicle.price * bookingTime.rentPeriod;
     const payAmount = Math.round((total * 14) / 100 + total);
 

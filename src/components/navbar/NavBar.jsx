@@ -56,6 +56,7 @@ const Navbar = () => {
             src="/logo-navbar.png"
             alt="logo"
             className="object-fill rounded-full   "
+            onClick={() => navigate("/")}
           />
         </div>
 

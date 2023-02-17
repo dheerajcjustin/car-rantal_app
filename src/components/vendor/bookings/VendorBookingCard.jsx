@@ -1,5 +1,5 @@
 import React from 'react'
-import authInstance from '../../../config/authInstance';
+import authInstance from '../../../config/vendorAxios';
 
 const VendorBookingCard = ({ data, mutate, setLoading }) => {
     const pickupCompleted = async (order) => {
@@ -68,8 +68,6 @@ const VendorBookingCard = ({ data, mutate, setLoading }) => {
             <div className="h-full flex flex-col justify-center" >
 
                 {
-
-
 
                     (data?.myOrders?.dropOffStatus)
                         ? <button className="bg-green-400 text-xl p-5 rounded-xl ">completed</button>

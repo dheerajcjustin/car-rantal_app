@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import VendorNavbar from '../../components/navbar/VendorNavbar'
 import { useSelector } from 'react-redux'
-import { selectCurrentUser } from '../../helpers/auth/authSlice'
+import { selectCurrentUser } from '../../helpers/auth/vendorAuthSlice'
 import ImageUpload from '../../components/UI/ImageUpload'
-import authInstance from '../../config/authInstance'
+import authInstance from '../../config/vendorAxios'
 import Modal from '../../components/UI/Modal'
 import OtpVendor from '../../components/vendor/OtpVendor'
 

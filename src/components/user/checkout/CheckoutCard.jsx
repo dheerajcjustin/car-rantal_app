@@ -1,13 +1,12 @@
 import React from "react";
-import authInstance from "../../config/authInstance";
+import authInstance from "../../../config/authInstance";
 
 const CheckoutCard = ({ vehicle, bookingTime, selectedPickup, setPayment }) => {
   const total = vehicle.price * bookingTime.rentPeriod;
   const roundedTotal = Math.round((total * 14) / 100 + total);
   const bookingHandler = async () => {
-    console.log("booking cliked and selected pickup", selectedPickup);
 
-    console.log(roundedTotal, bookingTime, vehicle._id);
+    console.log(selectedPickup);
     setPayment(true)
     // const response = await authInstance.post("/booking", {
     //   carId: vehicle._id,

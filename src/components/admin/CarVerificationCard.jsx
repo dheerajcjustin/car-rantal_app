@@ -48,15 +48,17 @@ const CarVerificationCard = ({ car, modalClose }) => {
   };
 
   const [image, setImage] = useState(car.photos[0]);
+  const [bigImg, setBigImg] = useState();
   return (
-    <div className=" w-full sm:max-w-md rounded-3xl bg-[#10191F] pt-3 shadow-lg shadow-gray-500/50     ">
+    <div className=" rounded-3xl bg-[#10191F] pt-3 shadow-lg shadow-gray-500/50     ">
       <div className="flex flex-col  align-middle items-center w-full">
         <h2 className="text-xl font-semibold  text-slate-50">{car.name}</h2>
+
         <img
           src={image}
           alt="photo of amg"
           // w-[280px]  sm:[180px]  sm:w-[400px] sm:h-[250px]
-          className=" w-[90%] h-[200px] object-contain	 sm:mb-8 rounded-xl"
+          className=" w-[90vw] h-[50vh] sm:w-[50vw] sm:h-[30vh] object-contain	 sm:mb-8 rounded-xl"
         />
         <div className="flex flex-row w-full justify-between sm:px-5">
           {car?.photos?.map((photo) => (
@@ -70,6 +72,21 @@ const CarVerificationCard = ({ car, modalClose }) => {
               }}
             />
           ))}
+
+        </div>
+        <div className="flex flex-row w-full justify-between sm:px-5">
+          {car?.documents?.map((photo) => (
+            <img
+              key={photo}
+              className=" w-[25%]   sm:w-[100px] sm:h-[80px]  object-contain "
+              src={photo}
+              alt="image of cars"
+              onClick={() => {
+                setImage(photo);
+              }}
+            />
+          ))}
+
         </div>
       </div>
       <p className="text-center text-banana">
@@ -82,9 +99,15 @@ const CarVerificationCard = ({ car, modalClose }) => {
           <h6> ₹ {car?.price}</h6>
           <h6> Seats : {car?.seatNum}</h6>
         </div>
-        <div className=" text-center   text-[#FDD23F] rounded-2xl">
-          <h6> Rc:{car?.rcNumber}</h6>
-        </div>
+
+      </div>
+      <div className=" text-center   text-[#FDD23F] rounded-2xl">
+        <h6> Rc:{car?.rcNumber}</h6>
+      </div>
+      <div className=" text-center   text-[#FDD23F] rounded-2xl">
+        <h6> Name:{car?.vendor[0]?.name}</h6>
+      </div> <div className=" text-center   text-[#FDD23F] rounded-2xl">
+        <h6> phone:{car?.vendor[0]?.mobile}</h6>
       </div>
       <div className="flex w-full flex-col justify-between p-5 bg-white rounded-b-3xl sm:text-xl gap-2   ">
         <button

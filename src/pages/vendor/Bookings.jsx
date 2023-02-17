@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import VendorNavbar from "../../components/navbar/VendorNavbar";
 import useSWR from "swr";
-import { fetcher } from "../../config/authInstance";
+import { fetcher } from "../../config/vendorAxios";
 import EventList from "../../components/user/Bookings/EventList";
 import VendorBookings from "../../components/vendor/bookings/VendorBookings";
 import LoadingOverlay from 'react-loading-overlay-ts';

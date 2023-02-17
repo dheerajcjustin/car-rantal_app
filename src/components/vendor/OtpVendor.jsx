@@ -3,9 +3,9 @@ import React, { useState } from "react";
 
 import Countdown, { zeroPad } from "react-countdown";
 import OtpInput from "react18-input-otp";
-import authInstance from "../../config/authInstance";
+import authInstance from "../../config/vendorAxios";
 import { useDispatch } from "react-redux";
-import { setUserData } from "../../helpers/auth/authSlice";
+import { setUserData } from "../../helpers/auth/vendorAuthSlice";
 
 
 

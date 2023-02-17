@@ -4,7 +4,7 @@ import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { IoLocationSharp } from "react-icons/io5";
 import AddCar from "../vendor/AddCar/AddCar";
 import { useDispatch } from "react-redux";
-import { logOut } from "../../helpers/auth/authSlice";
+import { logOut } from "../../helpers/auth/vendorAuthSlice";
 
 const VendorNavbar = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,6 @@ const VendorNavbar = () => {
   };
 
   const logoutButtonHandler = () => {
-    console.log("loging out");
     dispatch(logOut());
   };
   return (
@@ -34,6 +33,7 @@ const VendorNavbar = () => {
               src="/logo-navbar.png"
               alt="logo"
               className="object-fill rounded-full   "
+              onClick={() => navigate("/vendor")}
             />
           </div>
           Vendor

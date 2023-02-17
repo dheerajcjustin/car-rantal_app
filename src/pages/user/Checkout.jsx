@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/navbar/NavBar";
-import Summary from "../../components/user/Summary";
-import CheckoutCard from "../../components/user/CheckoutCard";
+import Summary from "../../components/user/checkout/Summary";
+import CheckoutCard from "../../components/user/checkout/CheckoutCard";
 import ListMap from "../../components/admin/location/ListMap"
 import authInstance from "../../config/authInstance";
 import { Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
@@ -12,7 +12,7 @@ import {
   selectCurrentCar,
   selectCarBookingTime,
 } from "../../helpers/car/carSlice";
-import Payment from "../../components/user/payment/Payment";
+import Payment from "../../components/user/checkout/Payment";
 import Modal from "../../components/UI/Modal";
 
 
@@ -21,65 +21,56 @@ const Checkout = ({ }) => {
 
   const [payment, setPayment] = useState(false);
   const { car: carId } = useParams();
-  // console.log("car id is ", carId);
   const fetcher = (url) => authInstance.get(url).then((res) => res.data);
-  // .catch((err) => console.log(err));
   const { data, error, isLoading } = useSWR(
     `/car/${carId}`,
     fetcher
   );
 
   const car = useSelector(selectCurrentCar);
-  console.log("car redux pickup point", car.pickupPoints[0]);
-  const [selectedPickup, setSelectedPickup] = useState(car.pickupPoints[0]);
+  // console.log("car redux pickup point", car.pickupPoints[0]);
+  const [selectedPickup, setSelectedPickup] = useState("");
+
   const bookingTime = useSelector(selectCarBookingTime);
+  useEffect(() => {
+    data && setSelectedPickup(data?.car?.availableLocation?.pickupPoints[0]._id)
 
+  }, [data]);
 
-
-
-
-
-
-  // const arrya1 = car.locationData[0].pickupPoints
-  // const arrya2 = car.pickupPoints
-  // console.log("the first arrya is ", arrya1);
-  // console.log("the second arrya is ", arrya2);
-  // const newarrya = arrya1.filter(({ _id }) => arrya2.includes(_id));
   return (
     <div className="w-screen bg-[#FDD23F] h-max md:h-screen ">
       <Navbar />
       {payment &&
 
-        <Payment vehicle={car} bookingTime={bookingTime} selectedPickup={selectedPickup} setPayment={setPayment} />
+        <Payment vehicle={car} setPayment={setPayment} bookingTime={bookingTime} selectedPickup={selectedPickup} />
 
 
       }
       <div className="max-w-[90%] mx-auto mt:0 md:mt-24">
         <div className="w-full  grid md:grid-cols-3 grid-cols-1 gap-10 md:p-10 p-5">
-          {/* {data && console.log("car data from featc", data)} */}
-          {/* {error && console.log("car data from featc", error)} */}
+
           { }
           {
             isLoading &&
             <>
               <Skeleton>
 
-
-                <Summary vehicle={car} bookingTime={bookingTime} />
+                <div className="w-[50%] h-20"></div>
+                {/* <Summary vehicle={car} bookingTime={bookingTime} /> */}
 
               </Skeleton>
               <Skeleton>
+                <div className="w-[50%] h-20"></div>
 
-
-                <CheckoutCard vehicle={car} bookingTime={bookingTime} />
+                {/* <CheckoutCard vehicle={car} bookingTime={bookingTime} /> */}
               </Skeleton>
             </>
           }
           {
             data &&
             <>
-              <Summary vehicle={car} bookingTime={bookingTime} selectedPickup={selectedPickup} setSelectedPickup={setSelectedPickup} />
-              <CheckoutCard vehicle={car} bookingTime={bookingTime} selectedPickup={selectedPickup} setPayment={setPayment} />
+              <Summary vehicle={data.car} bookingTime={bookingTime} selectedPickup={selectedPickup} setSelectedPickup={setSelectedPickup} />
+              <CheckoutCard vehicle={data.car} bookingTime={bookingTime} selectedPickup={selectedPickup} setPayment={setPayment} />
             </>
 
 
@@ -89,7 +80,7 @@ const Checkout = ({ }) => {
       </div>
       <div className="m-10">
 
-        {data && <ListMap location={data.car.availableLocation} />}
+        {data && selectedPickup && <ListMap location={data.car.availableLocation} selectedPickup={selectedPickup} setSelectedPickup={setSelectedPickup} />}
       </div>
       <div className="h-[10vh]"></div>
     </div>

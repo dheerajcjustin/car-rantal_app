@@ -1,3 +1,4 @@
+import React from 'react'
 
 import { Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
 const UserBookingCardSkelton = () => {

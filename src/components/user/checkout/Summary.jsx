@@ -41,7 +41,9 @@ const Summary = ({ vehicle, bookingTime, setSelectedPickup, selectedPickup }) =>
               {/* {console.log("the data inside vihle summary", vehicle.locationData[0].pickupPoints)
               }             */}
               {
-                vehicle.locationData[0].pickupPoints.map(pickup => <option key={pickup._id} value={pickup._id}>{pickup.name}.</option>)
+                vehicle?.availableLocation?.pickupPoints &&
+
+                vehicle?.availableLocation?.pickupPoints?.map(pickup => <option key={pickup._id} value={pickup._id}>{pickup.name}.</option>)
 
               }
             </select>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../../../helpers/auth/authSlice";
+import { setCredentials } from "../../../helpers/auth/vendorAuthSlice";
 import axios from "../../../config/axios";
 
 const Login = () => {

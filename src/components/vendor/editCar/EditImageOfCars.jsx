@@ -2,9 +2,21 @@ import React, { useState, useEffect, useRef } from 'react'
 import ImageUpload from "../../UI/ImageUpload";
 import instance from "../../../config/vendorAxios";
 import { Progress, useToast } from '@chakra-ui/react'
+import { urlToFile } from "../../../utils/urlTofile"
 import axios from "axios";
-const ImageOfCars = ({ carData, onClose }) => {
+const EditImageOfCars = ({ carData, onClose }) => {
     console.log("wowo car data is inside car image cars ", carData);
+    const { documents, photos } = carData;
+
+
+
+    useEffect(() => {
+        convert();
+    }, [carData]);
+
+
+
+
     const toast = useToast()
     const reference = useRef(0);
     const [imageFront, setImageFront] = useState();
@@ -13,6 +25,14 @@ const ImageOfCars = ({ carData, onClose }) => {
     const [rcImage, setRcImage] = useState();
     const [pollutionImage, setPollutionImage] = useState();
     const [insuranceImage, setInsuranceImage] = useState();
+    const convert = async () => {
+        urlToFile(photos[0], "front", setImageFront)
+        urlToFile(photos[1], "back", setImageBack)
+        urlToFile(photos[2], "side", setImageSide)
+        urlToFile(documents[0], "rc", setRcImage)
+        urlToFile(documents[1], "pullution", setPollutionImage)
+        urlToFile(documents[2], "insurance", setInsuranceImage)
+    }
 
     const [frontErr, setFrontErr] = useState("");
     const [backErr, setBackErr] = useState("");
@@ -21,12 +41,6 @@ const ImageOfCars = ({ carData, onClose }) => {
     const [pollutionErr, setPollutionErr] = useState("");
     const [insuranceErr, setInsuranceErr] = useState("");
     const [uploadIndication, setUploadIndication] = useState(false);
-
-
-
-
-
-
     const submitHandler = () => {
         const photos = [];
         const documents = [];
@@ -42,10 +56,7 @@ const ImageOfCars = ({ carData, onClose }) => {
                     headers: { "X-Requested-With": "XMLHttpRequest" },
                     onUploadProgress: function (progressEvent) {
                         let percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
-
-
-                        if (percentCompleted === 100) reference.current++;
-                        // setProgressBar(prev => prev + 1)
+                        if (percentCompleted === 100) reference.current++;                     // setProgressBar(prev => prev + 1)
 
 
                     }
@@ -101,8 +112,8 @@ const ImageOfCars = ({ carData, onClose }) => {
         axios.all(uploader).then(async () => {
 
 
-            const response = await instance.post(
-                "/vendor/addCar",
+            const response = await instance.patch(
+                "/vendor/editCar",
                 { carData, photos, documents },
 
             );
@@ -221,20 +232,17 @@ const ImageOfCars = ({ carData, onClose }) => {
                     < Progress size='xs' isIndeterminate />
                 }
             </div>
-
-
             <div className=" w-full flex justify-center ">
-                {" "}
                 <button
                     className="object-right w-[60%] h-20 mt-10 text-3xl font-semibold border-2 border-black rounded-3xl text-center hover:scale-105 hover:bg-black hover:text-white"
                     onClick={imgUpload}
                 >
                     Submit
-                </button>{" "}
+                </button>
 
             </div>
         </>)
 
 }
 
-export default ImageOfCars
+export default EditImageOfCars

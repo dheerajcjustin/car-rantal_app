@@ -1,5 +1,5 @@
 import React from "react";
-import authInstance from "../../config/authInstance";
+import authInstance from "../../config/vendorAxios";
 import useSWR from "swr";
 import MyCarsCard from "./MyCarsCard";
 
@@ -27,6 +27,10 @@ const MyCarsList = () => {
                 seatNum={car.seatNum}
                 status={car.verified}
                 location={car.location}
+                pickupPoint={car.pickupPoints}
+                documents={car.documents}
+                fuelType={car.fuelType}
+                transmission={car.gearType}
               />
             ))}
         </div>

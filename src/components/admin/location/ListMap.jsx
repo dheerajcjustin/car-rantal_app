@@ -6,7 +6,7 @@ import ReactMapGL, {
 } from 'react-map-gl';
 
 
-const ListMap = ({ location }) => {
+const ListMap = ({ location, selectedPickup, setSelectedPickup }) => {
     // console.log("locarion is from lodffadfsdfdsafdsafdsoiuytrejkjhgf789876543456789098765432cation dara,", location);
 
     const [popupData, setPopupData] = useState(null);
@@ -26,9 +26,11 @@ const ListMap = ({ location }) => {
                 {
                     location.pickupPoints.map(point =>
                         <Marker
+                            color={`${point._id == selectedPickup ? `red` : ``}`}
                             key={point._id}
                             onClick={(e) => {
                                 e.originalEvent.stopPropagation();
+                                setSelectedPickup(point._id);
                                 setPopupData(point);
                             }}
                             latitude={point.coords.lat}

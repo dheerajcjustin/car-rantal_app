@@ -16,7 +16,8 @@ export const minPickupDate = () => {
   let pickupDate = new Date();
   const time = pickupDate.getHours();
   if (time > 16) {
-    pickupDate = pickupDate.setDate(1);
+    // pickupDate = pickupDate.setDate(1);
+    pickupDate = new Date(pickupDate.setDate(pickupDate.getDate() + 1))
   }
   return pickupDate;
 };

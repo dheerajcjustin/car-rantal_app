@@ -39,11 +39,11 @@ const VendorManagement = () => {
 
   return (
 
-    <div className="m-5 p-5">
+    <div className="mr-5 ml-5  p-5">
       {
         error && <p>error while loading</p>
       }
-      {console.log("inside page list", lists)}
+
       <TableContainer>
         <Table variant="striped" colorScheme="yellow">
           <TableCaption>The List of cars and Details</TableCaption>
