@@ -13,7 +13,7 @@ const VendorManagementPage = () => {
       <div className="w-full h-screen">
         <div className="mt-5 ml-5 mr-5 flex" >
           <h1 className={`w-full border-b-2 border-r-2 ${showAll ? `border-banana` : ``}   rounded-lg   text-2xl text-center`} onClick={() => setShowAll(true)}>VendorList</h1>
-          <h1 className={`w-full border-b-2 border-l-2 ${showAll ? `` : `border-banana`} rounded-lg  text-2xl text-center`} onClick={() => setShowAll(false)} >Vendor Reports</h1>
+          {/* <h1 className={`w-full border-b-2 border-l-2 ${showAll ? `` : `border-banana`} rounded-lg  text-2xl text-center`} onClick={() => setShowAll(false)} >Vendor Reports</h1> */}
         </div>
         {showAll ?
 
