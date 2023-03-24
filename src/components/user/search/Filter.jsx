@@ -1,8 +1,7 @@
 import { dateFormat } from "../../../utils/dateFormat";
 import React, { useState, useEffect } from "react";
 
-const Filter = ({ availableLocation, mutate }) => {
-  const [selectedPickups, setSelectedPickups] = useState("");
+const Filter = ({ availableLocation, mutate, setSelectedPickups }) => {
 
 
 
@@ -21,9 +20,8 @@ const Filter = ({ availableLocation, mutate }) => {
     }));
   };
 
-  const filterPickup = (id) => {
-    setSelectedPickups(id)
-
+  const filterPickup = (e) => {
+    setSelectedPickups(e.target.value)
   }
   return (
     <>
@@ -121,7 +119,10 @@ const Filter = ({ availableLocation, mutate }) => {
 
           <div className="w-[90%] flex flex-col my-4  " key={location._id} >
             {/* {console.log(" locarion ", index, location)} */}
-            <div className="relative">
+            <div className="relative"
+              onClick={(e) => filterPickup(e)}
+
+            >
               {/* <label
                 htmlFor={location._id}
                 className="   w-full  peer-checked:bg-blue-500 peer-checked:text-blue-500 text--400 "
@@ -129,13 +130,14 @@ const Filter = ({ availableLocation, mutate }) => {
                 {location.location}
               </label> */}
               <input
-                onClick={() => filterPickup(location._id)}
-                type="radio"
+
+
+                type="checkbox"
                 id={location._id}
                 value={location._id}
-                className="w-full h-12 peer absolute opacity-0"
+                className="w-full h-12 peer absolute opacity-0 "
               />
-              <div className=" text-[#FDD23F]  p-2 w-full min-h-12 ring-2 ring-[#FDD23F] peer-checked:bg-[#FDD23F]  peer-checked:text-[#10191F]  text--400 text-center ">
+              <div className=" text-[#FDD23F]  p-2 w-full min-h-12 ring-2 ring-[#FDD23F] text--400 text-center ">
                 <span className="text-xl ">{location.name}</span>
               </div>
             </div>

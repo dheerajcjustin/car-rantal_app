@@ -18,10 +18,7 @@ import usePagination from "../../helpers/usePagination";
 const VendorManagement = () => {
   const [pageIndex, setPageIndex] = useState(1);
   const { loading, error, lists, hasMore } = usePagination("/admin/vendors?page=", pageIndex)
-
   const observer = useRef();
-
-
   const arr = [34, 45, 7, 89]
   const lastVendorRef = useCallback(node => {
     if (loading) return;

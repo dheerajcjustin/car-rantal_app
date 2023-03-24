@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "../../config/axios";
 
-export const getLocation = createAsyncThunk("home/getLocation", async () => {
-  const response = await axios.get("/setup");
-  console.log("hoeme is location thanku", response.data.locations);
+export const getLocation = createAsyncThunk("/setup", async () => {
 
-  return response.data.locations;
+  const response = await axios.get("/setup");
+  console.log("hoeme is location thanku", response.data);
+  return response.data;
+
+
 });
 const locationSlice = createSlice({
   name: "location",

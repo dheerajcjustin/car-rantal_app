@@ -61,9 +61,11 @@ const VendorBookingCard = ({ data, mutate, setLoading }) => {
             </div>
 
             <div className="text-center  my-auto">
-                <h6 className="sm:text-xl">{!data?.myOrders?.pickupStatus ? data?.myOrders?.pickupTime + "pickup time" : data.myOrders?.dropOffTime + "dropoff time"}</h6>
-                <h6 className="sm:text-xl"> {!data?.myOrders?.pickupStatus ? data?.myOrders?.pickupDate + "pickup time" : data.myOrders?.dropOffDate + "dropoff time"} </h6>
+                <h6 className="sm:text-xl">{!data?.myOrders?.pickupStatus ? data?.myOrders?.pickupTime : data.myOrders?.dropOffTime}</h6>
+                <h6 className="sm:text-xl"> {!data?.myOrders?.pickupStatus ? data?.myOrders?.pickupDate : data.myOrders?.dropOffDate} </h6>
                 <h1 className="sm:text-xl">{data?.myOrders?.pickup?.name} </h1>
+                <h1 className="sm:text-xl">Price: {data?.myOrders?.price} </h1>
+
             </div>
             <div className="h-full flex flex-col justify-center" >
 

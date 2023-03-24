@@ -34,9 +34,10 @@ const UserBookingCard = ({ data, title }) => {
         </div>
 
         <div className="text-center  my-auto">
-          <h6 className="text-xl">{!data?.pickupStatus ? data?.pickupTime + "pickup time" : data.dropOffTime + "dropoff time"}</h6>
-          <h6 className="text-xl"> {!data?.pickupStatus ? data?.pickupDate + "pickup time" : data.dropOffDate + "dropoff time"} </h6>
+          <h6 className="text-xl">{!data?.pickupStatus ? data?.pickupTime : data.dropOffTime}</h6>
+          <h6 className="text-xl"> {!data?.pickupStatus ? data?.pickupDate : data.dropOffDate} </h6>
           <h1 className="text-xl">{data?.pickup?.name} </h1>
+          <h1 className="text-xl">Amount Paid ₹{data?.price} </h1>
         </div>
         {<div className="h-full flex flex-col justify-center" >
           {

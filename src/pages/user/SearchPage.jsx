@@ -11,26 +11,21 @@ import authInstance, { fetcher } from "../../config/authInstance";
 
 const SearchPage = () => {
   const arr = [34, 56, 76, 98];
+  const [selectPickup, setSelectPickup] = useState('');
 
   const location = useLocation();
   const [hasMore, setHasMore] = useState(false);
   const [filter, setFilter] = useState("");
   const getKey = (pageIndex, previousPageData) => {
-    // if (previousPageData && pre && !previousPageData.length) return null // reached the end
-    // if (previousPageData && !previousPageData.cars) {
-    //   console.log("inseide the null state")
-    //   return null
-    // }
-    // console.log("insidet else retuen paet")
-    return `/search${location.search}&page=${pageIndex + 1}`                    // SWR key
+    return `/search${location.search}&page=${pageIndex + 1}&filter=${selectPickup}`                    // SWR key
   }
 
   const { data, error, isLoading, isValidating, mutate, size, setSize } = useSWRInfinite(
     getKey, fetcher)
+  console.log("data inside the ", error)
   // const carDates = data ? [].concat(...data) : [];
   useEffect(() => {
     CheckHasMore();
-
   }, [data]);
   const CheckHasMore = () => {
 
@@ -44,6 +39,7 @@ const SearchPage = () => {
     return setSize(prev => prev + 1);
 
   }
+
   const isLoadingMore =
     isLoading || (size > 0 && data && typeof data[size - 1] === "undefined");
   const observer = useRef();
@@ -60,6 +56,28 @@ const SearchPage = () => {
     })
     if (node) observer.current.observe(node)
   }, [hasMore])
+  // useEffect(() => {
+
+  //   mutate();
+  //   // return () => {
+  //   //   cleanup
+  //   // };
+  // }, [selectPickup]);
+
+  const filterValueChange = (value) => {
+    setSelectPickup(prev => {
+      if (prev.includes(value)) {
+        return prev;
+      }
+
+      else {
+
+        return [...prev, value]
+      }
+
+    }
+    )
+  }
 
   return (
     <div className="bg-[#FDD23F] ">
@@ -79,7 +97,7 @@ const SearchPage = () => {
         {
           data &&
 
-          <FilterDesktop time={data[0]?.time} pickups={data[0]?.pickups} />
+          <FilterDesktop time={data[0]?.time} pickups={data[0]?.pickups} setSelectedPickups={setSelectPickup} />
         }
         {
           isLoading &&

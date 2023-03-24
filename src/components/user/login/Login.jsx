@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from "../../../helpers/auth/authSlice";
 import axios from "../../../config/axios";
 
+// import { setLoading, setLoadingDone } from "../../../helpers/loading/loadingSlice";
+
 const Login = () => {
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
@@ -21,6 +23,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     try {
+
       const response = await axios.post("/auth/loginEmail", {
         mobile: mobile,
         password: password,

@@ -3,12 +3,14 @@ import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import Otp from "../../components/user/signup/Otp";
 import SignupComponent from "../../components/user/signup/Signup";
+import LoadingOverlay from 'react-loading-overlay-ts';
 
 const Signup = () => {
   const [otpPage, setOtpPage] = useState(false);
   const [userDate, setUserDate] = useState({});
 
   return (
+
     <div className="w-full h-screen grid lg:grid-cols-3 md:grid-cols-5 ">
       {otpPage ? (
         <Otp userData={userDate} />

@@ -4,6 +4,7 @@ import authReducer from "../helpers/auth/authSlice";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 
 import { persistStore, persistReducer } from "redux-persist"; // imports from redux-persist
+import loadingReducer from "../helpers/loading/loadingSlice";
 import locationReducer from "../helpers/location/locationSlice";
 import vendorAuthReducer from "../helpers/auth/vendorAuthSlice";
 import carReducer from "../helpers/car/carSlice";
@@ -21,6 +22,7 @@ const reducer = combineReducers({
   vendorAuth: vendorAuthReducer,
   location: locationReducer,
   car: carReducer,
+  loading: loadingReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer); // create a persisted reducer

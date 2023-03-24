@@ -1,5 +1,6 @@
 import axios from "axios";
 import { logOut } from "../helpers/auth/authSlice";
+import { setLoading } from "../helpers/loading/loadingSlice";
 // import { useSelector } from "react-redux";
 // import { selectCurrentToken } from "../helpers/auth/authSlice";
 import { store } from "./store";
@@ -15,10 +16,14 @@ const authInstance = axios.create({
 authInstance.interceptors.request.use((config) => {
   const token = store.getState()?.auth?.token;
   config.headers.Authorization = `Bearer ${token}`;
+  // console.log("intereptotz")
+  store.dispatch(setLoading({ loading: true }))
   return config;
+
 });
 authInstance.interceptors.response.use(
   (response) => {
+    store.dispatch(setLoading({ loading: false }))
     return response;
   },
   (error) => {

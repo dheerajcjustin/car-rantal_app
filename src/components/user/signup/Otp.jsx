@@ -8,7 +8,7 @@ import Countdown, { zeroPad } from "react-countdown";
 
 
 
-const Otp = ({ userData }) => {
+const Otp = ({ userData, setIsLoading }) => {
   const [resend, setResend] = useState(false);
   const navigate = useNavigate();
 

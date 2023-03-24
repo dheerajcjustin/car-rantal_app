@@ -35,13 +35,13 @@ const DistrictsModal = ({ onClose }) => {
   }, [locations]);
 
   return (
-    <Modal onClose={onClose}>
+    <Modal>
       {/* <div className="  bg-gray-900 relative w-auto my-10 md:my-32 sm:my-20 lg:my-40  xl:my-50 mx-auto z-50  max-w-6xl md:p-10 rounded-2xl">
         <button onClick={closeButtonHandler}>close</button> */}
 
       <h3 className="text-center text-2xl text-emerald-400">select District</h3>
       <div className="grid grid-cols-2  gap-5 m-5 md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5  md:p-4 overflow-x-hidden overflow-y-auto ">
-        {locations.map((location) => (
+        {locations ? locations.map((location) => (
           <District_card
             // setLocation={}
             locationId={location._id}
@@ -50,7 +50,7 @@ const DistrictsModal = ({ onClose }) => {
             imgUrl={location.image}
             title={location.location}
           />
-        ))}
+        )) : <div>loading...</div>}
 
 
       </div>

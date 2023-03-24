@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { IoLocationSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
@@ -10,15 +10,22 @@ import axios from "../../config/axios";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const { title } = useSelector(selectCurrentLocation);
+  const { title, locationId } = useSelector(selectCurrentLocation);
   const currentUser = useSelector(selectCurrentUser);
   const userType = useSelector(selectCurrentUserType);
+
   const navigate = useNavigate();
   const [nav, setNav] = useState("nav");
   const [modal, setModal] = useState(false);
   if (userType !== "user") {
     dispatch(logOut());
   }
+  useEffect(() => {
+    if (!locationId) {
+      setModal(true)
+    }
+    ;
+  }, []);
   // const [location, setLocation] = useState("");
   const handleNav = () => {
     setNav(!nav);

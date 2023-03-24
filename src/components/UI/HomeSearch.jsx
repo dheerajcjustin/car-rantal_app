@@ -88,7 +88,7 @@ const HomeSearch = () => {
         <h2 className="text-4xl text-white text-center font-bold mb-7">
           search
         </h2>
-        <h3 className="text-xl text-white my-5">pickup</h3>
+        <h3 className="text-xl text-white my-5">Pickup</h3>
         <div className="flex  max-w-[500px]  gap-9 ">
           <div className=" text-gray-100 ">
             <div className="inline-block">
