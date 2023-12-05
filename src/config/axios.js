@@ -5,24 +5,18 @@ import axios from "axios";
 import { setLoading } from "../helpers/loading/loadingSlice";
 import { store } from "./store";
 
-
-
 // const token = useSelector(selectCurrentToken);
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-  },
+      baseURL: import.meta.env.VITE_BASE_URL,
+      headers: {
+            "Access-Control-Allow-Origin": "*",
+      },
 });
 
-
-
-
 instance.interceptors.request.use((config) => {
-  store.dispatch(setLoading(true))
-  console.log("the interceptotrs")
-  return config;
-
+      store.dispatch(setLoading(true));
+      console.log("the interceptotrs");
+      return config;
 });
 // instance.interceptors.response.use(
 //   (response) => {

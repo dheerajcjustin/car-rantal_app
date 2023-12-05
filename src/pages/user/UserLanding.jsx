@@ -6,24 +6,24 @@ import HomeSearch from "../../components/UI/HomeSearch";
 // import Modal from "../components/Districts_modal";
 import Navbar from "../../components/navbar/NavBar";
 import {
-  getLocation,
-  selectLocation,
+      getLocation,
+      selectLocation,
 } from "../../helpers/location/locationSlice";
 
 const UserLanding = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getLocation());
-  }, []);
+      const dispatch = useDispatch();
+      useEffect(() => {
+            dispatch(getLocation());
+      }, []);
 
-  return (
-    <div className=" bg-[url('/banner.jpg')] bg-cover bg-center">
-      <Navbar />
-      {/* <Modal /> */}
-      <Banner />
-      <HomeSearch />
-    </div>
-  );
+      return (
+            <div className=" bg-[url('/banner.jpg')] bg-cover bg-center">
+                  <Navbar />
+                  {/* <Modal /> */}
+                  <Banner />
+                  <HomeSearch />
+            </div>
+      );
 };
 
 export default UserLanding;

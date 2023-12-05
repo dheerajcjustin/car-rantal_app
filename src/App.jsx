@@ -28,58 +28,75 @@ import ProfilePage from "./pages/user/ProfilePage";
 import VendorProfile from "./pages/vendor/VendorProfile";
 
 export default function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<UserLanding />} />
-        <Route element={<NoAuth />}>
-          <Route path="signup" element={<Signup />} />
-          <Route path="login" element={<Login />} />
-          <Route path="forgotPassword" element={<ForgotPassword />} />
-          <Route
-            path="/ForgotPasswordOtp/:mobile"
-            element={<ForgotPasswordOtp />}
-          />
+      return (
+            <Routes>
+                  <Route path="/" element={<Layout />}>
+                        <Route index element={<UserLanding />} />
+                        <Route element={<NoAuth />}>
+                              <Route path="signup" element={<Signup />} />
+                              <Route path="login" element={<Login />} />
+                              <Route
+                                    path="forgotPassword"
+                                    element={<ForgotPassword />}
+                              />
+                              <Route
+                                    path="/ForgotPasswordOtp/:mobile"
+                                    element={<ForgotPasswordOtp />}
+                              />
 
-          <Route
-            path="ChangePassword/:userId/:token"
-            element={<ChangePassword />}
-          />
-        </Route>
-        <Route element={<RequireAuth />}>
-          <Route path="profile" element={<ProfilePage />} />
-          <Route path="search" element={<SearchPage />} />
-          <Route path="checkout/:car" element={<Checkout />} />
-          <Route path="bookings" element={<MyBookings />} />
-        </Route>
-      </Route>
-      <Route path="/admin" element={<Layout />}>
-        <Route index element={<AdminLanding />} />
-        <Route path="location" element={<LocationManagement />} />
-        <Route path="cars" element={<VerifyCars />} />
-        <Route path="vendors" element={<VendorManagementPage />} />
+                              <Route
+                                    path="ChangePassword/:userId/:token"
+                                    element={<ChangePassword />}
+                              />
+                        </Route>
+                        <Route element={<RequireAuth />}>
+                              <Route path="profile" element={<ProfilePage />} />
+                              <Route path="search" element={<SearchPage />} />
+                              <Route
+                                    path="checkout/:car"
+                                    element={<Checkout />}
+                              />
+                              <Route path="bookings" element={<MyBookings />} />
+                        </Route>
+                  </Route>
+                  <Route path="/admin" element={<Layout />}>
+                        <Route index element={<AdminLanding />} />
+                        <Route
+                              path="location"
+                              element={<LocationManagement />}
+                        />
+                        <Route path="cars" element={<VerifyCars />} />
+                        <Route
+                              path="vendors"
+                              element={<VendorManagementPage />}
+                        />
+                  </Route>
+                  <Route path="/vendor" element={<Layout />}>
+                        <Route path="login" element={<LoginVendor />} />
 
-      </Route>
-      <Route path="/vendor" element={<Layout />}>
-        <Route path="login" element={<LoginVendor />} />
+                        <Route
+                              path="forgotPassword"
+                              element={<VendorForgotPassword />}
+                        />
+                        <Route
+                              path="ChangePassword/:userId/:token"
+                              element={<VendorChangePassword />}
+                        />
+                        <Route
+                              path="forgotPasswordOtp/:mobile"
+                              element={<VendorForgotPasswordOtp />}
+                        />
 
-        <Route path="forgotPassword" element={<VendorForgotPassword />} />
-        <Route
-          path="ChangePassword/:userId/:token"
-          element={<VendorChangePassword />}
-        />
-        <Route
-          path="forgotPasswordOtp/:mobile"
-          element={<VendorForgotPasswordOtp />}
-        />
-
-        <Route element={<VendorAuth />}>
-          <Route index element={<LandingPage />} />
-          <Route path="bookings" element={<Bookings />} />
-          <Route path="myCars" element={<MyCars />} />
-          <Route path="profile" element={<VendorProfile />} />
-        </Route>
-      </Route>
-    </Routes>
-  );
+                        <Route element={<VendorAuth />}>
+                              <Route index element={<LandingPage />} />
+                              <Route path="bookings" element={<Bookings />} />
+                              <Route path="myCars" element={<MyCars />} />
+                              <Route
+                                    path="profile"
+                                    element={<VendorProfile />}
+                              />
+                        </Route>
+                  </Route>
+            </Routes>
+      );
 }

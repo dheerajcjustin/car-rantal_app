@@ -7,12 +7,12 @@ import MyCarsList from "../../components/vendor/MyCarsList";
 import authInstance from "../../config/authInstance";
 
 const MyCars = () => {
-  return (
-    <div className=" bg-[url('/banner.jpg')] bg-cover bg-center ">
-      <VendorNavbar />
-      <MyCarsList />
-    </div>
-  );
+      return (
+            <div className=" bg-[url('/banner.jpg')] bg-cover bg-center ">
+                  <VendorNavbar />
+                  <MyCarsList />
+            </div>
+      );
 };
 
 export default MyCars;

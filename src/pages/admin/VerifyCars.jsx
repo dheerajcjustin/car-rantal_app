@@ -5,14 +5,14 @@ import CarsManagement from "../../components/admin/CarsManagement";
 import authInstance from "../../config/authInstance";
 
 const VerifyCars = () => {
-  return (
-    <div className="flex">
-      <Sidebar type="car" />
-      <div className="w-full h-screen">
-        <CarsManagement />
-      </div>
-    </div>
-  );
+      return (
+            <div className="flex">
+                  <Sidebar type="car" />
+                  <div className="w-full h-screen">
+                        <CarsManagement />
+                  </div>
+            </div>
+      );
 };
 
 export default VerifyCars;
