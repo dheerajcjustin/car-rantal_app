@@ -40,7 +40,7 @@ const Login = () => {
                               user,
                               accessToken,
                               userType: response.data.userType,
-                        }),
+                        })
                   );
                   navigate("/search");
             } catch (err) {
@@ -53,25 +53,18 @@ const Login = () => {
       const forgotPasswordHandler = () => {
             navigate("/ForgotPassword");
       };
-
       const mobileChangeHandle = (value) => {
-            // const expr = /^(91)?[0-9]{10}$/;
-            const expr = /\b([0-9]|10)\b /;
-
-            console.log(value);
-            if (value.match(expr)) {
-                  console.log("hai inside the ");
-                  setMobile(value);
-            }
-            console.log("else in the ");
+            const expr = /^[0-9]/;
+            if (value && !value.match(expr)) return;
+            setMobile(value);
       };
+
       return (
             <div className="md:col-span-2 lg:col-span-1 flex flex-col min-h-screen items-center justify-center bg-[#FDD23F]">
                   <h1 className="font-Viaoda text-7xl mb-10">Login</h1>
                   <input
                         onChange={(e) => {
                               mobileChangeHandle(e.target.value);
-                              // setMobile(e.target.value);
                         }}
                         value={mobile}
                         type="text"
