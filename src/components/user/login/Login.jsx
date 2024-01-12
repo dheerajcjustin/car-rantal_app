@@ -11,6 +11,7 @@ const Login = () => {
       const [mobile, setMobile] = useState("");
       const [password, setPassword] = useState("");
       const [errMsg, setErrMsg] = useState("");
+      const [loading, setLoading] = useState(false);
       // const [error, setError] = useState(false);
       const navigate = useNavigate();
       const signupHandle = () => {
@@ -23,6 +24,7 @@ const Login = () => {
 
       const handleSubmit = async (e) => {
             try {
+                  setLoading(true);
                   const response = await axios.post("/auth/loginEmail", {
                         mobile: mobile,
                         password: password,
@@ -48,6 +50,8 @@ const Login = () => {
                   if (err?.response?.status === 400)
                         setErrMsg("invalid userName or password");
                   else setErrMsg("server down");
+            } finally {
+                  setLoading(false);
             }
       };
       const forgotPasswordHandler = () => {
@@ -94,7 +98,7 @@ const Login = () => {
                         className="w-[60%] h-20 mt-10 text-3xl font-semibold border-2 border-black rounded-3xl text-center hover:scale-105 hover:bg-black hover:text-white"
                         onClick={handleSubmit}
                   >
-                        Login
+                        {loading ? "loading...." : "Login"}
                   </button>
                   <p className="mt-5">
                         Register using{" "}
