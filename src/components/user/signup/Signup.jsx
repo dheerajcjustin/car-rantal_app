@@ -217,7 +217,7 @@ const Signup = ({ setOtpPage, setUserDate }) => {
                         onClick={signupButtonHandle}
                         className="w-[60%] h-20 mt-10 text-3xl font-semibold border-2 border-black rounded-3xl text-center hover:scale-105 hover:bg-black hover:text-white"
                   >
-                        {loading ? "Sign Up" : "loading..."}
+                        {loading ? "Loading..." : "Sign Up"}
                   </button>
                   <p className="mt-5">
                         Already a member?
