@@ -5,9 +5,7 @@ const loadingSlice = createSlice({
       initialState: { loading: false },
       reducers: {
             setLoading: (state, action) => {
-                  console.log("hai inside the state a", state);
                   const { loading } = action.payload;
-                  console.log("hai inside the state a", loading);
 
                   state.loading = loading;
             },

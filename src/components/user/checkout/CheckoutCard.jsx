@@ -5,14 +5,12 @@ const CheckoutCard = ({ vehicle, bookingTime, selectedPickup, setPayment }) => {
       const total = vehicle.price * bookingTime.rentPeriod;
       const roundedTotal = Math.round((total * 14) / 100 + total);
       const bookingHandler = async () => {
-            console.log(selectedPickup);
             setPayment(true);
             // const response = await authInstance.post("/booking", {
             //   carId: vehicle._id,
             //   roundedTotal,
             //   bookingTime,
             // });
-            // console.log(response);
       };
       return (
             <div className="bg-gray-50 rounded-xl shadow-md h-fit">

@@ -9,28 +9,36 @@ import {
       selectLocation,
 } from "../../../helpers/location/locationSlice";
 import ImageOfCars from "./ImageOfCars";
-// import { selectCurrentToken } from "../../../helpers/auth/authSlice";
-// import instance from "../../../config/axios";
-// import axios from "axios";
 
-const AddCar = ({ onClose }) => {
+const defaultCarData = {
+      modelName: "",
+      price: "",
+      seatNum: "",
+      transmission: "manual",
+      fuelType: "petrol",
+      rcNumber: "",
+      location: "",
+      pickupPoints: [],
+};
+
+const AddCarCompound = ({ onClose }) => {
       const dispatch = useDispatch();
       useEffect(() => {
             dispatch(getLocation());
       }, []);
 
+      const [errMeg, setErrMeg] = useState("");
+
       const [imageUpload, setImageUpload] = useState(false);
 
-      const [carData, setCarData] = useState({
-            modelName: "",
-            price: "",
-            seatNum: "",
-            transmission: "manual",
-            fuelType: "petrol",
-            rcNumber: "",
-            location: "",
-            pickupPoints: [],
-      });
+      const [carData, setCarData] = useState(defaultCarData);
+      const [selectedPickup, setSelectedPickup] = useState([]);
+
+      const resetCarData = () => {
+            setCarData(defaultCarData);
+            setSelectedPickup([]);
+      };
+
       const valueSetting = (e) => {
             setCarData((prevState) => ({
                   ...prevState,
@@ -38,33 +46,51 @@ const AddCar = ({ onClose }) => {
             }));
       };
 
-      // setErrMeg("Every Files are required");
+      const sumbmitCheck = () => {
+            if (
+                  !carData.modelName ||
+                  !carData.price ||
+                  !carData.location ||
+                  !carData.rcNumber ||
+                  !carData.pickupPoints.length
+            ) {
+                  console.log({ carData });
+                  setErrMeg("All the filed is required");
+                  return false;
+            } else {
+                  setErrMeg("");
+                  return true;
+            }
+      };
 
       return (
-            <Modal onClose={onClose}>
-                  <div className="   bg-[#FDD23F]  p-5  rounded-2xl">
-                        <button onClick={() => onClose()}>close</button>
-                        <h1 className="text-center text-4xl  text-gray-900">
-                              Add car{" "}
-                        </h1>
-                        <div className="">
-                              {imageUpload ? (
-                                    <ImageOfCars
-                                          carData={carData}
-                                          onClose={onClose}
-                                    />
-                              ) : (
-                                    <AddCarFields
-                                          valueSetting={valueSetting}
-                                          carData={carData}
-                                          setCarData={setCarData}
-                                          setImageUpload={setImageUpload}
-                                    />
-                              )}
+            <div className="rounded-2xl">
+                  <h1 className="text-center text-4xl  text-gray-900">
+                        Add car
+                  </h1>
+                  <div className="flex flex-wrap justify-center gap-14">
+                        <div className="  ">
+                              <AddCarFields
+                                    valueSetting={valueSetting}
+                                    carData={carData}
+                                    setCarData={setCarData}
+                                    errMeg={errMeg}
+                                    setErrMeg={setErrMeg}
+                                    setImageUpload={setImageUpload}
+                                    selectedPickup={selectedPickup}
+                                    setSelectedPickup={setSelectedPickup}
+                              />
+                        </div>
+                        <div className="bg-gray-200  p-4">
+                              <ImageOfCars
+                                    filedCheck={sumbmitCheck}
+                                    carData={carData}
+                                    onComplete={resetCarData}
+                              />
                         </div>
                   </div>
-            </Modal>
+            </div>
       );
 };
 
-export default AddCar;
+export default AddCarCompound;

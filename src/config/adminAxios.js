@@ -26,14 +26,13 @@ vendorAxios.interceptors.response.use(
                   error?.response?.status === 403 ||
                   error?.response?.status === 401
             ) {
-                  console.log("invlaid token loging out");
                   vendorAuth.dispatch(logOut());
             } else {
                   return Promise.reject(error);
             }
             // Any status codes that falls outside the range of 2xx cause this function to trigger
             // Do something with response error
-      },
+      }
 );
 export default vendorAxios;
 export const fetcher = (url) => vendorAxios.get(url).then((res) => res.data);

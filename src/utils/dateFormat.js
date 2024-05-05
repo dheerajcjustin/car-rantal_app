@@ -23,7 +23,6 @@ export const minPickupDate = () => {
 };
 
 export const MinDropOffDate = (pickupDate, pickupTime) => {
-      console.log("wwwowwowowowowwowoowwowowo is tme indide mindropodddate");
       if (pickupDate && pickupTime) {
             const timeArray = [
                   "10.00 AM",
@@ -36,26 +35,16 @@ export const MinDropOffDate = (pickupDate, pickupTime) => {
                   "05.00 PM ",
             ];
             pickupDate = new Date(pickupDate);
-            console.log(pickupDate, pickupTime);
             if (timeArray.indexOf(pickupTime) > 6) {
                   const wowoww = new Date(
-                        pickupDate.setDate(pickupDate.getDate() + 1),
-                  );
-                  console.log(
-                        "@@@@@@@@@@@@@@@@@@@@@@@@@@@22222222@@@@@@222inside if wowow index ",
-                        wowoww,
+                        pickupDate.setDate(pickupDate.getDate() + 1)
                   );
 
                   return wowoww;
             }
 
-            console.log(
-                  "@@@@@@@@@@@@@@@@@@@@@@@@@@@22222222@@@@@@222inside if wowow index ",
-                  pickupDate,
-            );
             return pickupDate;
       } else {
-            console.log("retrning nothing");
             return;
       }
 };
@@ -85,7 +74,6 @@ export const pickupTimeList = (pickupDate) => {
             skip = time - 10 + 1;
       }
       timeArray.splice(0, skip);
-      console.log(timeArray);
       return timeArray;
 };
 

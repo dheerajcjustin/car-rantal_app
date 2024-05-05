@@ -7,11 +7,9 @@ import ReactMapGL, {
 } from "react-map-gl";
 
 const ListMap = ({ location, selectedPickup, setSelectedPickup }) => {
-      // console.log("locarion is from lodffadfsdfdsafdsafdsoiuytrejkjhgf789876543456789098765432cation dara,", location);
-
       const [popupData, setPopupData] = useState(null);
       return (
-            <div className="h-[50vh] ">
+            <div className="h-[50vh]  bg-banana">
                   ListMap
                   <ReactMapGL
                         mapboxAccessToken={import.meta.env.VITE_MAPBOX}
@@ -44,7 +42,7 @@ const ListMap = ({ location, selectedPickup, setSelectedPickup }) => {
                               <>
                                     {console.log(
                                           "wowo lan and dar for popup",
-                                          popupData,
+                                          popupData
                                     )}
                                     <Popup
                                           longitude={popupData.coords.lng}

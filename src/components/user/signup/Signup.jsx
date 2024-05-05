@@ -46,7 +46,6 @@ const Signup = ({ setOtpPage, setUserDate }) => {
                               message: "name must be more than 3 character",
                         },
                   }));
-                  // console.log("name false");
 
                   return false;
             } else {
@@ -71,7 +70,6 @@ const Signup = ({ setOtpPage, setUserDate }) => {
                               message: "is this really your phone ?",
                         },
                   }));
-                  // console.log("phone false");
 
                   return false;
             } else {
@@ -94,7 +92,6 @@ const Signup = ({ setOtpPage, setUserDate }) => {
                               message: "password  must be more than 8 character",
                         },
                   }));
-                  // console.log("password false");
                   return false;
             } else {
                   setValidation((prevState) => ({
@@ -112,9 +109,8 @@ const Signup = ({ setOtpPage, setUserDate }) => {
                   try {
                         const response = await axios.post(
                               "/auth/signupEmail",
-                              userData,
+                              userData
                         );
-                        console.log("it is working");
                         console.log(response.status);
                         console.log(response.data);
                         setUserDate(userData);

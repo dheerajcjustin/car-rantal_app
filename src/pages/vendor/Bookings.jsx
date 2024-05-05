@@ -10,9 +10,8 @@ const Bookings = () => {
       const [loading, setLoading] = useState(false);
       const { data, isLoading, error, mutate } = useSWR(
             `/vendor/bookings`,
-            fetcher,
+            fetcher
       );
-      // console.log(data);
       const [completedList, setCompletedList] = useState([]);
       const [upComingList, setUpComingList] = useState([]);
       useEffect(() => {
@@ -46,7 +45,7 @@ const Bookings = () => {
                                                       }   p-4`}
                                                       onClick={() =>
                                                             setShowCompleted(
-                                                                  false,
+                                                                  false
                                                             )
                                                       }
                                                 >
@@ -60,7 +59,7 @@ const Bookings = () => {
                                                       }  p-4`}
                                                       onClick={() =>
                                                             setShowCompleted(
-                                                                  true,
+                                                                  true
                                                             )
                                                       }
                                                 >

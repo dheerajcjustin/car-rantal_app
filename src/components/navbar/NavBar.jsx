@@ -43,13 +43,13 @@ const Navbar = () => {
       const modalOpen = () => {
             setModal(true);
       };
-      // console.log(onClose);
       const LoginButtonHandler = () => {
             navigate("/login");
       };
       const signupButtonHandler = () => {
             navigate("/signup");
       };
+
       const logoutButtonHandler = () => {
             console.log("loging out");
             dispatch(logOut());
@@ -134,6 +134,14 @@ const Navbar = () => {
                                           </button>
                                     )}
                               </li>
+                              {!currentUser && (
+                                    <button
+                                          onClick={() => navigate("/vendor")}
+                                          className="bg-[#10191F]  border-4 rounded-3xl  text-gray-100 text-2xl  px-7 py-2 hover:bg-yellow-200  hover:border-yellow-200  transition-all ease-in-out duration-500 "
+                                    >
+                                          Be come A vendor
+                                    </button>
+                              )}
                         </ul>
                         <div className="block md:hidden" onClick={handleNav}>
                               {!nav ? (
@@ -157,18 +165,61 @@ const Navbar = () => {
                                     />
                               </div>
                               <ul className="p-4 uppercase">
-                                    <li className="p-4 border-b border-gray-600 font-bold">
-                                          ABOUT
-                                    </li>
-                                    <li className="p-4 border-b border-gray-600 font-bold">
-                                          HOME
-                                    </li>
-                                    <li className="p-4 border-b border-gray-600 font-bold">
-                                          SERVICES
-                                    </li>
-                                    <li className="p-4 border-b border-gray-600 font-bold">
-                                          LOGIN
-                                    </li>
+                                    {!currentUser ? (
+                                          <>
+                                                <li className="p-4 border-b border-gray-600 font-bold">
+                                                      <button
+                                                            onClick={
+                                                                  signupButtonHandler
+                                                            }
+                                                            className="bg-[#10191F]  border-4 rounded-3xl  text-gray-100 text-2xl  px-7 py-2 hover:bg-yellow-200  hover:border-yellow-200  hover:bg-gray-300 transition-all ease-in-out duration-500 "
+                                                      >
+                                                            Sign up
+                                                      </button>
+                                                </li>
+                                                <li className="p-4 border-b border-gray-600 font-bold">
+                                                      <button
+                                                            className="border-[#10191F]  border-2 rounded-3xl  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500 "
+                                                            onClick={
+                                                                  LoginButtonHandler
+                                                            }
+                                                      >
+                                                            Login
+                                                      </button>
+                                                </li>
+                                                <li>
+                                                      <button
+                                                            onClick={() =>
+                                                                  navigate(
+                                                                        "/vendor"
+                                                                  )
+                                                            }
+                                                            className="bg-[#10191F]  border-4 rounded-3xl  text-gray-100 text-2xl  px-7 py-2 hover:bg-yellow-200  hover:border-yellow-200  transition-all ease-in-out duration-500 "
+                                                      >
+                                                            Be come A vendor
+                                                      </button>
+                                                </li>
+                                          </>
+                                    ) : (
+                                          <>
+                                                <button
+                                                      className="      text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all  ease-in-out duration-500 w-full"
+                                                      onClick={bookingHandler}
+                                                >
+                                                      Bookings
+                                                </button>
+                                                <hr className="h-1 border-gray-900" />
+                                                <hr className="h-1 border-gray-900" />
+                                                <button
+                                                      className="    text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all  ease-in-out duration-500 w-full"
+                                                      onClick={
+                                                            logoutButtonHandler
+                                                      }
+                                                >
+                                                      logout
+                                                </button>
+                                          </>
+                                    )}
                               </ul>
                         </div>
                   </div>

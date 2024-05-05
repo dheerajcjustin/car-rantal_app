@@ -29,12 +29,12 @@ const Checkout = ({}) => {
       useEffect(() => {
             data &&
                   setSelectedPickup(
-                        data?.car?.availableLocation?.pickupPoints[0]._id,
+                        data?.car?.availableLocation?.pickupPoints[0]._id
                   );
       }, [data]);
 
       return (
-            <div className="w-screen bg-[#FDD23F] h-max md:h-screen ">
+            <div className="w-screen bg-[#FDD23F]  ">
                   <Navbar />
                   {payment && (
                         <Payment

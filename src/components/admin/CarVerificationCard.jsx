@@ -8,10 +8,9 @@ const CarVerificationCard = ({ car, modalClose }) => {
       const [loading, setLoading] = useState(false);
       const update = async (car, status) => {
             try {
-                  console.log("car Id is ", car);
                   const response = await authInstance.patch(
                         `/admin/car/${car}`,
-                        status,
+                        status
                   );
                   modalClose();
                   toast({
@@ -41,7 +40,6 @@ const CarVerificationCard = ({ car, modalClose }) => {
             update(car, status);
       };
       const rejectButtonHandler = async (car) => {
-            console.log("caris in by ", car);
             const status = {
                   status: "rejected",
             };

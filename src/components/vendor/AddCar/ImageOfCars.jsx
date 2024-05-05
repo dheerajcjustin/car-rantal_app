@@ -3,8 +3,7 @@ import ImageUpload from "../../UI/ImageUpload";
 import instance from "../../../config/vendorAxios";
 import { Progress, useToast } from "@chakra-ui/react";
 import axios from "axios";
-const ImageOfCars = ({ carData, onClose }) => {
-      console.log("wowo car data is inside car image cars ", carData);
+const ImageOfCars = ({ carData, filedCheck, onComplete }) => {
       const toast = useToast();
       const reference = useRef(0);
       const [imageFront, setImageFront] = useState();
@@ -21,6 +20,15 @@ const ImageOfCars = ({ carData, onClose }) => {
       const [pollutionErr, setPollutionErr] = useState("");
       const [insuranceErr, setInsuranceErr] = useState("");
       const [uploadIndication, setUploadIndication] = useState(false);
+
+      const resetImages = () => {
+            setImageFront();
+            setImageBack();
+            setImageSide();
+            setRcImage();
+            setPollutionImage();
+            setInsuranceImage();
+      };
 
       const submitHandler = () => {
             const photos = [];
@@ -43,14 +51,14 @@ const ImageOfCars = ({ carData, onClose }) => {
                                     onUploadProgress: function (progressEvent) {
                                           let percentCompleted = Math.round(
                                                 (progressEvent.loaded * 100) /
-                                                      progressEvent.total,
+                                                      progressEvent.total
                                           );
 
                                           if (percentCompleted === 100)
                                                 reference.current++;
                                           // setProgressBar(prev => prev + 1)
                                     },
-                              },
+                              }
                         )
                         .then((response) => {
                               const data = response.data;
@@ -76,7 +84,7 @@ const ImageOfCars = ({ carData, onClose }) => {
                                     onUploadProgress: function (progressEvent) {
                                           let percentCompleted = Math.round(
                                                 (progressEvent.loaded * 100) /
-                                                      progressEvent.total,
+                                                      progressEvent.total
                                           );
                                           if (percentCompleted === 100) {
                                                 reference.current++;
@@ -86,7 +94,7 @@ const ImageOfCars = ({ carData, onClose }) => {
                                           // console.log(progress);
                                           // progress++;
                                     },
-                              },
+                              }
                         )
                         .then((response) => {
                               const data = response.data;
@@ -122,7 +130,8 @@ const ImageOfCars = ({ carData, onClose }) => {
                               isClosable: true,
                         });
                         setUploadIndication(false);
-                        onClose();
+                        resetImages();
+                        onComplete();
                   })
                   .catch((err) => {
                         console.log(err);
@@ -135,7 +144,6 @@ const ImageOfCars = ({ carData, onClose }) => {
                               duration: 9000,
                               isClosable: true,
                         });
-                        onClose();
                   });
       };
 
@@ -155,6 +163,8 @@ const ImageOfCars = ({ carData, onClose }) => {
             insuranceImage,
       ]);
       const imgUpload = () => {
+            if (!filedCheck()) return;
+
             if (!imageFront) return setFrontErr("invalid");
             if (!imageBack) return setBackErr("invalid");
             if (!imageSide) return setSideErr("invalid");
@@ -165,13 +175,12 @@ const ImageOfCars = ({ carData, onClose }) => {
             submitHandler();
       };
       return (
-            <>
-                  <h2>Phots</h2>
+            <div className="w-full">
                   <div className=" grid gap-5 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full  ">
                         <div
                               className={`${
                                     frontErr &&
-                                    "border-red-600 rounded-2xl border-2"
+                                    "border-red-600 w-full rounded-2xl border-2"
                               } `}
                         >
                               <ImageUpload
@@ -251,7 +260,7 @@ const ImageOfCars = ({ carData, onClose }) => {
                         )}
                   </div>
 
-                  <div className=" w-full flex justify-center ">
+                  <div className="  flex justify-center ">
                         {" "}
                         <button
                               className="object-right w-[60%] h-20 mt-10 text-3xl font-semibold border-2 border-black rounded-3xl text-center hover:scale-105 hover:bg-black hover:text-white"
@@ -260,7 +269,7 @@ const ImageOfCars = ({ carData, onClose }) => {
                               Submit
                         </button>{" "}
                   </div>
-            </>
+            </div>
       );
 };
 

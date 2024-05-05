@@ -24,7 +24,6 @@ const SearchPage = () => {
 
       const { data, error, isLoading, isValidating, mutate, size, setSize } =
             useSWRInfinite(getKey, fetcher);
-      console.log("data inside the ", error);
       // const carDates = data ? [].concat(...data) : [];
       useEffect(() => {
             CheckHasMore();
@@ -34,7 +33,6 @@ const SearchPage = () => {
             return data && data[data.length - 1]?.cars?.length == 3;
       };
       const loadMore = () => {
-            console.log("hasmore", CheckHasMore());
             if (!CheckHasMore()) return;
             return setSize((prev) => prev + 1);
       };
@@ -56,7 +54,7 @@ const SearchPage = () => {
                   });
                   if (node) observer.current.observe(node);
             },
-            [hasMore],
+            [hasMore]
       );
       // useEffect(() => {
 
@@ -130,8 +128,8 @@ const SearchPage = () => {
                                                                               // photos={car.phots}
                                                                         />
                                                                   </>
-                                                            ),
-                                                      ),
+                                                            )
+                                                      )
                                           )}
                                     {isLoadingMore && <p>Loading More</p>}
 

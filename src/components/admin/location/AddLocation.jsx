@@ -31,32 +31,27 @@ const AddLocation = ({ onClose, mutate }) => {
       }, [image]);
       const formSubmit = async () => {
             try {
-                  console.log("ready to submit");
                   const data = new FormData();
                   data.append("file", image);
                   data.append("upload_preset", cloudinaryFolder);
                   data.append("cloud_name", cloudinaryName);
-                  console.log("The image is going sent ", image);
-                  console.log("The data is going sent ", data);
 
                   fetch(
                         " https://api.cloudinary.com/v1_1/ducziw6jk/image/upload",
                         {
                               method: "post",
                               body: data,
-                        },
+                        }
                   )
                         .then((res) => res.json())
                         .then((data) => {
                               const url = data.url;
-                              console.log(url);
                               axios.post("/admin/location", {
                                     location,
                                     description,
                                     image: url,
                                     coords: { lng: lng, lat: lat },
                               }).then((result) => {
-                                    console.log("result from sending ", result);
                                     mutate();
                                     onClose();
                                     toast({
@@ -85,17 +80,12 @@ const AddLocation = ({ onClose, mutate }) => {
       };
 
       const submitHandler = () => {
-            console.log("wowo lat , lang", lat, lng);
-            // console.log("image", image);
-            // console.log("description", description);
-            // console.log("location", location);
             let flag = 45;
             if (!image) {
                   setImgErr("image is required");
                   flag = 12;
             }
             if (!location) {
-                  // console.log("hai");
                   setLocationErr("location is required");
                   flag = 12;
             }
@@ -145,7 +135,7 @@ const AddLocation = ({ onClose, mutate }) => {
                                                 value={location}
                                                 onChange={(e) => {
                                                       setLocation(
-                                                            e.target.value,
+                                                            e.target.value
                                                       );
                                                 }}
                                                 type="text"
@@ -169,7 +159,7 @@ const AddLocation = ({ onClose, mutate }) => {
                                                 value={description}
                                                 onChange={(e) => {
                                                       setDescription(
-                                                            e.target.value,
+                                                            e.target.value
                                                       );
                                                 }}
                                                 type="text"

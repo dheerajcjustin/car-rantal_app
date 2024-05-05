@@ -6,7 +6,6 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const ChangePasswordComponent = () => {
       const { userId, token } = useParams();
-      console.log(userId, token);
 
       const navigate = useNavigate();
       const [password, setPassword] = useState("");
@@ -17,8 +16,6 @@ const ChangePasswordComponent = () => {
             setErrMsg("");
       }, [password]);
       const handleSubmit = async () => {
-            console.log("sumbit working");
-
             if (password.length < 8) {
                   setErrMsg("password must greater 8 character ");
                   return;
@@ -29,7 +26,6 @@ const ChangePasswordComponent = () => {
                         passwordToken: token,
                         password,
                   });
-                  console.log(response);
                   navigate("/login");
             } catch (error) {
                   console.log(error);

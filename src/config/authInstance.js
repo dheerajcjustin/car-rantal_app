@@ -16,7 +16,6 @@ const authInstance = axios.create({
 authInstance.interceptors.request.use((config) => {
       const token = store.getState()?.auth?.token;
       config.headers.Authorization = `Bearer ${token}`;
-      // console.log("intereptotz")
       store.dispatch(setLoading({ loading: true }));
       return config;
 });
@@ -36,7 +35,7 @@ authInstance.interceptors.response.use(
             }
             // Any status codes that falls outside the range of 2xx cause this function to trigger
             // Do something with response error
-      },
+      }
 );
 export default authInstance;
 export const fetcher = (url) => authInstance.get(url).then((res) => res.data);

@@ -26,6 +26,8 @@ import MyBookings from "./pages/user/Mybookings";
 import VendorManagementPage from "./pages/admin/VendorManagementPage";
 import ProfilePage from "./pages/user/ProfilePage";
 import VendorProfile from "./pages/vendor/VendorProfile";
+import SingUpVendor from "./pages/vendor/SignupVendor";
+import AddCar from "./pages/vendor/AddCar";
 
 export default function App() {
       return (
@@ -73,6 +75,7 @@ export default function App() {
                   </Route>
                   <Route path="/vendor" element={<Layout />}>
                         <Route path="login" element={<LoginVendor />} />
+                        <Route path="signup" element={<SingUpVendor />} />
 
                         <Route
                               path="forgotPassword"
@@ -87,8 +90,9 @@ export default function App() {
                               element={<VendorForgotPasswordOtp />}
                         />
 
+                        <Route index element={<LandingPage />} />
                         <Route element={<VendorAuth />}>
-                              <Route index element={<LandingPage />} />
+                              <Route path="addCar" element={<AddCar />} />
                               <Route path="bookings" element={<Bookings />} />
                               <Route path="myCars" element={<MyCars />} />
                               <Route

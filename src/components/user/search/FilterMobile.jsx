@@ -16,7 +16,6 @@ const FilterMobile = ({ pickups }) => {
       };
       const sortBackdropHandler = (e) => {
             if (e.target.id === "SortBackdrop") {
-                  console.log("clicked");
                   setSortMobile(!sortMobile);
             }
       };

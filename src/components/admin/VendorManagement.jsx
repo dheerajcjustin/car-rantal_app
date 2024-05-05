@@ -19,7 +19,7 @@ const VendorManagement = () => {
       const [pageIndex, setPageIndex] = useState(1);
       const { loading, error, lists, hasMore } = usePagination(
             "/admin/vendors?page=",
-            pageIndex,
+            pageIndex
       );
       const observer = useRef();
       const arr = [34, 45, 7, 89];
@@ -29,14 +29,12 @@ const VendorManagement = () => {
                   if (observer.current) observer.current.disconnect();
                   observer.current = new IntersectionObserver((entires) => {
                         if (entires[0].isIntersecting && hasMore) {
-                              console.log("visible");
                               setPageIndex((prevIndex) => prevIndex + 1);
                         }
                   });
                   if (node) observer.current.observe(node);
-                  console.log(node);
             },
-            [hasMore],
+            [hasMore]
       );
 
       return (
@@ -89,7 +87,7 @@ const VendorManagement = () => {
                                                             </button>
                                                       </Td>
                                                 </Tr>
-                                          ),
+                                          )
                                     )}
                                     {loading &&
                                           arr.map((loca, index) => (

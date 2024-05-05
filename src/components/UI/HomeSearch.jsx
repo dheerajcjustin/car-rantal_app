@@ -64,7 +64,6 @@ const HomeSearch = () => {
       }, [dropOffDate]);
 
       const searchSubmit = async (e) => {
-            console.log("afdfdfdfdfddfsadsfdsdfsfdfsdaf    Search");
             if (
                   pickupDateValidation() &&
                   pickupTimeValidation() &&
@@ -74,16 +73,15 @@ const HomeSearch = () => {
                         setDropOffTimeErr("drop Off Time is must");
                   } else {
                         navigate(
-                              `/search?pickupDate=${pickupDate}&pickupTime=${pickupTime}&dropOffDate=${dropOffDate}&dropOffTime=${dropOffTime} &locationId=${locationId}`,
+                              `/search?pickupDate=${pickupDate}&pickupTime=${pickupTime}&dropOffDate=${dropOffDate}&dropOffTime=${dropOffTime} &locationId=${locationId}`
                         );
                   }
             } else {
-                  console.log("values are not valid");
             }
       };
       const minimumDate = useMemo(
             () => MinDropOffDate(pickupDate, pickupTime),
-            [pickupDate, pickupTime],
+            [pickupDate, pickupTime]
       );
       return (
             <>
@@ -100,7 +98,7 @@ const HomeSearch = () => {
                                                       minDate={minPickupDate()}
                                                       render={(
                                                             stringDate,
-                                                            openCalendar,
+                                                            openCalendar
                                                       ) => {
                                                             return (
                                                                   <button
@@ -128,12 +126,10 @@ const HomeSearch = () => {
                                                             setDropOffDate("");
                                                             setPickupDate(date);
 
-                                                            // console.log(date);
-                                                            // console.log("pickup time", pickupTimeList(date));
                                                             setPickupTimes(
                                                                   pickupTimeList(
-                                                                        date,
-                                                                  ),
+                                                                        date
+                                                                  )
                                                             );
                                                       }}
                                                 />
@@ -151,8 +147,7 @@ const HomeSearch = () => {
                                                       onChange={(e) => {
                                                             setDropOffDate("");
                                                             setPickupTime(
-                                                                  e.target
-                                                                        .value,
+                                                                  e.target.value
                                                             );
                                                       }}
                                                       value={pickupTime}
@@ -183,7 +178,7 @@ const HomeSearch = () => {
                                                                   >
                                                                         {time}
                                                                   </option>
-                                                            ),
+                                                            )
                                                       )}
                                                 </select>
                                           </div>
@@ -197,12 +192,12 @@ const HomeSearch = () => {
                                           <DatePicker
                                                 currentDate={MinDropOffDate(
                                                       pickupDate,
-                                                      pickupTime,
+                                                      pickupTime
                                                 )}
                                                 minDate={minimumDate}
                                                 render={(
                                                       stringDate,
-                                                      openCalendar,
+                                                      openCalendar
                                                 ) => {
                                                       return (
                                                             <button
@@ -214,7 +209,7 @@ const HomeSearch = () => {
                                                                   onClick={() => {
                                                                         console.log(
                                                                               "wowo piduptime validation ",
-                                                                              pickupTimeValidation(),
+                                                                              pickupTimeValidation()
                                                                         );
                                                                         if (
                                                                               pickupTimeValidation()
@@ -237,8 +232,8 @@ const HomeSearch = () => {
                                                             dropOffTimeList(
                                                                   pickupDate,
                                                                   pickupTime,
-                                                                  date,
-                                                            ),
+                                                                  date
+                                                            )
                                                       );
                                                 }}
                                           />
@@ -254,8 +249,7 @@ const HomeSearch = () => {
                                                       value={dropOffTime}
                                                       onChange={(e) =>
                                                             setDropOffTime(
-                                                                  e.target
-                                                                        .value,
+                                                                  e.target.value
                                                             )
                                                       }
                                                       name="dropOffTime"
@@ -286,7 +280,7 @@ const HomeSearch = () => {
                                                                   >
                                                                         {time}
                                                                   </option>
-                                                            ),
+                                                            )
                                                       )}
                                                 </select>
                                           </div>

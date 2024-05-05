@@ -60,7 +60,6 @@ const EventManagersTable = ({ data, change, load }) => {
 
                   axios.post("/admin/blockManagers", value).then((response) => {
                         if (response.status === 200) {
-                              console.log(response);
                               load == false ? change(true) : change(false);
                         } else {
                               alert("SOMETHING WRONG!!!!!!!!!!!!!");
@@ -87,7 +86,7 @@ const EventManagersTable = ({ data, change, load }) => {
                               } else {
                                     alert("SOMETHING WRONG!!!!!!!!!!!!!");
                               }
-                        },
+                        }
                   );
             } catch (error) {
                   console.log(error);
@@ -134,7 +133,7 @@ const EventManagersTable = ({ data, change, load }) => {
       const filteredItems = data.filter(
             (item) =>
                   item.email &&
-                  item.email.toLowerCase().includes(filterText.toLowerCase()),
+                  item.email.toLowerCase().includes(filterText.toLowerCase())
       );
 
       const subHeaderComponentMemo = useMemo(() => {

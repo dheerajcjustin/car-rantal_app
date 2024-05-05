@@ -52,14 +52,11 @@ const Summary = ({
                                           id="pickupPoint"
                                           value={selectedPickup}
                                           onChange={(e) => {
-                                                console.log(e.target.value);
                                                 setSelectedPickup(
-                                                      e.target.value,
+                                                      e.target.value
                                                 );
                                           }}
                                     >
-                                          {/* {console.log("the data inside vihle summary", vehicle.locationData[0].pickupPoints)
-              }             */}
                                           {vehicle?.availableLocation
                                                 ?.pickupPoints &&
                                                 vehicle?.availableLocation?.pickupPoints?.map(
@@ -74,7 +71,7 @@ const Summary = ({
                                                             >
                                                                   {pickup.name}.
                                                             </option>
-                                                      ),
+                                                      )
                                                 )}
                                     </select>
                               </div>

@@ -24,7 +24,6 @@ const CarsManagement = () => {
       // .catch((err) => console.log(err));
       const { data, error, isLoading } = useSWR(`/admin/carsList`, fetcher);
       const rowClickHandler = (car) => {
-            console.log("cliked id is ", car);
             setCar(car);
             setModalShow(true);
       };

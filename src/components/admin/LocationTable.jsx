@@ -27,11 +27,9 @@ const LocationTable = ({
       const toast = useToast();
       const deleteButtonHandler = async (id) => {
             try {
-                  console.log(id);
                   const response = await authInstance.delete(
-                        `/admin/location/${id}`,
+                        `/admin/location/${id}`
                   );
-                  console.log(response);
                   toast({
                         position: "top",
                         title: "Location Failled.",
@@ -53,7 +51,6 @@ const LocationTable = ({
             }
       };
       const pickupButtonHandler = (location) => {
-            console.log("id is cliked is ", location);
             setPickup(location);
             setShowLocation(false);
       };
@@ -93,7 +90,7 @@ const LocationTable = ({
                                                       <Td
                                                             onClick={() =>
                                                                   pickupButtonHandler(
-                                                                        loca,
+                                                                        loca
                                                                   )
                                                             }
                                                       >
@@ -106,7 +103,7 @@ const LocationTable = ({
                                                                   className="bg-yellow-400 p-3 rounded-lg"
                                                                   onClick={() =>
                                                                         deleteButtonHandler(
-                                                                              loca._id,
+                                                                              loca._id
                                                                         )
                                                                   }
                                                             >
