@@ -4,13 +4,12 @@ import { setCurrentLocation } from "../../helpers/location/locationSlice";
 
 const District_card = ({ imgUrl, title, onClose, locationId }) => {
       const dispatch = useDispatch();
-      // console.log(imgUrl);
       return (
             <>
                   <div
                         onClick={() => {
                               dispatch(
-                                    setCurrentLocation({ locationId, title }),
+                                    setCurrentLocation({ locationId, title })
                               );
                               onClose(title);
                         }}

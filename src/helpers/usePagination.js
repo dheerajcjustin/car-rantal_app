@@ -20,7 +20,7 @@ const usePagination = (endPoint, pageIndex) => {
                   .then((res) => {
                         console.log(
                               "the result from the admin /vendor",
-                              res.data,
+                              res.data
                         );
                         setLists((prevList) => {
                               return [...prevList, ...res.data.map((b) => b)];

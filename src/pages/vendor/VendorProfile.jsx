@@ -19,7 +19,6 @@ const VendorProfile = () => {
                   name,
                   mobile,
             });
-            console.log(res);
             setOtpModal(true);
       };
       const modalClose = () => {

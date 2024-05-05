@@ -9,7 +9,7 @@ import ListMap from "./ListMap";
 const PickupPoints = ({ pickup, backButton }) => {
       const { data, error, isLoading, mutate } = useSWR(
             `/admin/location/${pickup._id}`,
-            fetcher,
+            fetcher
       );
 
       const [lng, setLng] = useState(pickup.coords.lng);
@@ -44,7 +44,6 @@ const PickupPoints = ({ pickup, backButton }) => {
                         </Modal>
                   ) : (
                         <div>
-                              {console.log("data form pickusps", data)}
                               {error && <p>errore loading</p>}
 
                               {data && <ListMap location={data} />}

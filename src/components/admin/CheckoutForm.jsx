@@ -58,12 +58,6 @@ const CheckoutForm = ({
                   setMessage(error.message);
             } else if (paymentIntent && paymentIntent.status === "succeeded") {
                   try {
-                        console.log("car data when sumbiting, ", car);
-                        console.log(
-                              "booking time when sumbitting",
-                              bookingTime,
-                        );
-                        console.log("selected pickup is ", selectedPickup);
                         authInstance
                               .post(`/payment/paymentDone/`, {
                                     carId: car._id,

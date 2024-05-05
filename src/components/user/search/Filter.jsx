@@ -120,7 +120,6 @@ const Filter = ({ availableLocation, mutate, setSelectedPickups }) => {
                                           className="w-[90%] flex flex-col my-4  "
                                           key={location._id}
                                     >
-                                          {/* {console.log(" locarion ", index, location)} */}
                                           <div
                                                 className="relative"
                                                 onClick={(e) => filterPickup(e)}

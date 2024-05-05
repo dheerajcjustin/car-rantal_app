@@ -6,7 +6,6 @@ import OtpInput from "react18-input-otp";
 
 const Otp = () => {
       const { mobile } = useParams();
-      console.log("the parm mobile is ", mobile);
       const navigate = useNavigate();
       const [otp, setOtp] = useState("");
       const [errMsg, setErrMsg] = useState("");
@@ -16,7 +15,6 @@ const Otp = () => {
 
       const handleSubmit = async () => {
             if (otp.length < 4) {
-                  console.log("invalid otp");
                   errMsg("Invalid Otp");
             } else {
                   const data = { mobile: mobile, otp: otp };
@@ -24,17 +22,10 @@ const Otp = () => {
                         ("inside the password change auth");
                         const response = await axios.post(
                               "/auth/ChangePasswordOtp",
-                              data,
+                              data
                         );
-                        console.log("it is working with otp", response);
 
                         if (response.status === 201) {
-                              console.log("response data ", response.data);
-                              console.log(
-                                    "response password token ",
-                                    response.data.passwordToken,
-                              );
-
                               const token = response.data.passwordToken;
                               const userId = response.data.userId;
                               navigate(`/ChangePassword/${userId}/${token}`);

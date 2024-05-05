@@ -9,12 +9,10 @@ const ImageUpload = ({ image, SetImage, placeholder }) => {
       };
       const onDropRejected = (fileRejections) => {
             console.log(fileRejections);
-            // console.log("file is rejected");
       };
       const onDrop = useCallback((acceptedFiles) => {
             console.log(acceptedFiles);
             const preview = acceptedFiles[0];
-            // console.log("preview", preview);
             SetImage(preview);
       }, []);
       const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -24,13 +22,13 @@ const ImageUpload = ({ image, SetImage, placeholder }) => {
             multiple: false,
       });
       return (
-            <div className=" w-[90%]    h-[200px] flex  rounded-2xl items-center justify-center">
+            <div className="   flex-grow h-[200px] flex  rounded-2xl items-center justify-center">
                   {image ? (
                         <div
-                              className={` w-[300px] h-[200px] bg-cover  bg-center bg-no-repeat  `}
+                              className={`w-[300px] h-[200px] bg-cover  bg-center bg-no-repeat  `}
                               style={{
                                     backgroundImage: `url(${URL.createObjectURL(
-                                          image,
+                                          image
                                     )})`,
                               }}
                         >
@@ -38,7 +36,7 @@ const ImageUpload = ({ image, SetImage, placeholder }) => {
                         </div>
                   ) : (
                         <div {...getRootProps()} className="  w-fit">
-                              <div className="w-[300px]  h-[200px] flex flex-col bg-[#f6f6f6]  rounded-2xl items-center justify-center">
+                              <div className="w-[300px] h-[200px] flex flex-col bg-[#f6f6f6]  rounded-2xl items-center justify-center">
                                     <BsImages className="text-[30px]" />
                                     <h1>
                                           {placeholder

@@ -113,7 +113,7 @@ const Signup = ({ setOtpPage, setUserDate }) => {
                   try {
                         const response = await axios.post(
                               "/vendor/signup",
-                              userData,
+                              userData
                         );
                         console.log("it is working");
                         console.log(response.status);

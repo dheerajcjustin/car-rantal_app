@@ -18,11 +18,7 @@ const AddPickup = ({ locationId, coords, updatePickup }) => {
       }, [pickupPoint]);
 
       const submitHandler = async () => {
-            console.log("location id ", locationId);
-            console.log("pickupPoint", pickupPoint);
             if (pickupPoint) {
-                  console.log("the cooreds are ", coords);
-                  console.log("wowo the ");
                   try {
                         const response = await instance.post(
                               "/admin/pickupPoint",
@@ -30,11 +26,11 @@ const AddPickup = ({ locationId, coords, updatePickup }) => {
                                     locationId,
                                     coords,
                                     pickupPoint,
-                              },
+                              }
                         );
                         console.log(
                               "response from adding pickup point",
-                              response,
+                              response
                         );
                         updatePickup();
                         toast({
@@ -49,7 +45,7 @@ const AddPickup = ({ locationId, coords, updatePickup }) => {
                   } catch (error) {
                         console.log(
                               "error while adding pickup point ",
-                              error.response,
+                              error.response
                         );
                   }
             } else {

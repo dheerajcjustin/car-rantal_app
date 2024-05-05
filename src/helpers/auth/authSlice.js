@@ -19,7 +19,6 @@ const authSlice = createSlice({
                   state.user = null;
                   state.token = null;
                   state.type = null;
-                  console.log("wow the logout is working froem the redux");
                   localStorage.removeItem("token");
                   localStorage.removeItem("user");
             },

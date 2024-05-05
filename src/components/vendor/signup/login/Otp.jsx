@@ -23,7 +23,7 @@ const Otp = () => {
                   try {
                         const response = await axios.post(
                               "/vendor/ChangePasswordOtp",
-                              data,
+                              data
                         );
                         console.log("it is working with otp", response);
 
@@ -31,13 +31,13 @@ const Otp = () => {
                               console.log("response data ", response.data);
                               console.log(
                                     "response password token ",
-                                    response.data.passwordToken,
+                                    response.data.passwordToken
                               );
 
                               const token = response.data.passwordToken;
                               const userId = response.data.userId;
                               navigate(
-                                    `/vendor/ChangePassword/${userId}/${token}`,
+                                    `/vendor/ChangePassword/${userId}/${token}`
                               );
                         } else {
                               setErrMsg("what is happening ");
@@ -56,7 +56,6 @@ const Otp = () => {
             }
       };
       const otpResendHandler = () => {
-            console.log(otp);
             // setChangeMobile(true);
       };
       const handleChange = (enteredOtp) => {

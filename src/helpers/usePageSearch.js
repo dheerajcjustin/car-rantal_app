@@ -24,7 +24,7 @@ const usePageSearch = (endPoint, pageIndex) => {
                   .then((res) => {
                         console.log(
                               "the result from the search",
-                              res.data.cars,
+                              res.data.cars
                         );
                         setLists((prevList) => {
                               return [
@@ -32,8 +32,7 @@ const usePageSearch = (endPoint, pageIndex) => {
                                     ...res.data.cars.map((b) => b),
                               ];
                         });
-                        console.log("time", res.data.time);
-                        console.log("pickups", res.data.pickups);
+
                         time = res.data.time;
                         pickups = res.data.pickups;
                         setHasMore(res.data.length > 0);

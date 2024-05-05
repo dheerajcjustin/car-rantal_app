@@ -6,7 +6,6 @@ import { useEffect } from "react";
 
 const Layout = () => {
       const { loading } = useSelector(selectLoadingState);
-      console.log("loadingSate", loading);
 
       useEffect(() => {
             console.log("state valude changed", loading);

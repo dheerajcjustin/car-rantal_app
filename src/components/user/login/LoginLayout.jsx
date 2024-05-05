@@ -6,7 +6,6 @@ export const LoginLayout = ({ children }) => {
                   {" "}
                   <div className="w-full  grid lg:grid-cols-3 md:grid-cols-5 bg-white">
                         {children}
-
                         <div className="bg-[#F1F1F1] hidden md:flex  relative flex-col  md:col-span-3 lg:col-span-2">
                               <img
                                     src="login.gif"

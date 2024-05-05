@@ -12,25 +12,46 @@ const AddCarFields = ({
       carData,
       setImageUpload,
       setCarData,
+      errMeg,
+      setErrMeg,
+      selectedPickup,
+      setSelectedPickup,
 }) => {
-      const [selectedPickup, setSelectedPickup] = useState([]);
-      const [services, setServices] = useState([]);
+      // const [services, setServices] = useState([]);
       const [pickupPointList, setPickupPointList] = useState([]);
       const pickupMin = dateFormat();
       const dispatch = useDispatch();
-      const [errMeg, setErrMeg] = useState("");
+      // const [errMeg, setErrMeg] = useState("");
       const locations = useSelector(selectLocation);
       useEffect(() => {
             if (locations.length < 1) {
                   dispatch(getLocation());
             }
       }, []);
+
+      const addPickUpPoints = (e) => {
+            const { name, _id } = pickupPointList.filter(
+                  (pickup) => pickup._id == e.target.value
+            )[0];
+
+            setSelectedPickup((prev) => Array.from(new Set([...prev, name])));
+
+            setCarData((prevState) => {
+                  const { pickupPoints: prevpickupPoints, ...rest } = prevState;
+
+                  const pickupPoints = Array.from(
+                        new Set([...prevpickupPoints, _id])
+                  );
+                  const result = {
+                        ...rest,
+                        pickupPoints,
+                  };
+                  return result;
+            });
+      };
       const nextHandler = () => {
-            console.log("selected pickups", services);
             if (services.length < 1) {
-                  console.log("is is empty array");
             } else {
-                  console.log("inside the elese");
                   setCarData((prevState) => ({
                         ...prevState,
                         pickupPoints: services,
@@ -52,7 +73,7 @@ const AddCarFields = ({
 
       const selectService = (e) => {
             const selected = pickupPointList.filter(
-                  (pickup) => pickup._id == e.target.value,
+                  (pickup) => pickup._id == e.target.value
             )[0];
 
             if (services.includes(e.target.value)) {
@@ -62,109 +83,138 @@ const AddCarFields = ({
 
                   setSelectedPickup((prev) => [...prev]);
             } else {
-                  setServices((prevState) => [...prevState, e.target.value]);
+                  setCarData((prevState) => ({
+                        ...prevState,
+                        pickupPoints: [
+                              ...prevState.pickupPoints,
+                              e.target.value,
+                        ],
+                  }));
                   setSelectedPickup((prev) => [...prev, selected.name]);
 
                   // setSelectedPickup(prev => [...prev, e.target.options[selectedIndex].text])
             }
       };
       const backService = () => {
-            setServices(services.slice(0, -1));
-            setSelectedPickup(selectedPickup.slice(0, -1));
+            setCarData((prevState) => {
+                  const { pickupPoints: prevpickupPoints, ...rest } = prevState;
+
+                  return {
+                        ...rest,
+                        pickupPoints: prevpickupPoints.slice(0, -1),
+                  };
+            });
+
+            setSelectedPickup((prev) => prev.slice(0, -1));
             // servicesCheck()
       };
       // flex w-full min-h-[100%]   flex-col items-center justify-center
       return (
-            <div className="grid sm:grid-cols-2  grid-cols-1  gap-5   bg-[#FDD23F]">
-                  <div className="w-full ml-6 relative">
-                        <input
-                              id="modelName"
-                              onChange={valueSetting}
-                              value={carData.modelName}
-                              type="text"
-                              name="modelName"
-                              className="w-[90%] h-16 text-3xl border-2 border-black rounded-3xl text-center peer "
-                        />
+            <form className="max-w-md mx-auto  bg-gray-200 h-full p-5 rounded-lg">
+                  <div className="grid md:grid-cols-2 md:gap-6">
+                        <div className="relative z-0 w-full mb-5 group">
+                              <label
+                                    htmlFor="modelName"
+                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                              >
+                                    Model Name
+                              </label>
+                              <input
+                                    type="text"
+                                    name="modelName"
+                                    id="modelName"
+                                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                                    placeholder=" "
+                                    required
+                                    onChange={valueSetting}
+                                    value={carData.modelName}
+                              />
+                        </div>
+                        <div className="relative z-0 w-full mb-5 group">
+                              <label
+                                    htmlFor="price"
+                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                              >
+                                    Price
+                              </label>
+                              <input
+                                    onChange={valueSetting}
+                                    value={carData.price}
+                                    type="number"
+                                    name="price"
+                                    id="price"
+                                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                                    placeholder=" "
+                                    required
+                              />
+                        </div>
+                  </div>
+                  <div className="grid md:grid-cols-2 md:gap-6">
+                        <div className="relative z-0 w-full mb-5 group">
+                              <label
+                                    htmlFor="rcNumber"
+                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                              >
+                                    rcNumber
+                              </label>
+                              <input
+                                    onChange={valueSetting}
+                                    value={carData.rcNumber}
+                                    type="number"
+                                    name="rcNumber"
+                                    id="rcNumber"
+                                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                                    placeholder=" "
+                                    required
+                              />
+                        </div>
 
+                        <div className="relative z-0 w-full mb-5 group">
+                              <label
+                                    htmlFor="seatNum"
+                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                              >
+                                    Select Number of seats
+                              </label>
+
+                              <select
+                                    id="seatNum"
+                                    name="seatNum"
+                                    onChange={valueSetting}
+                                    value={carData.seatNum}
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                              >
+                                    <option value="">Select Seat Number</option>
+                                    <option value="2">2</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                              </select>
+                        </div>
+                  </div>
+
+                  <div className="relative z-0 w-full mb-5 group">
                         <label
-                              htmlFor="modelName"
-                              className={`absolute left-32 top-[30%] peer-focus:left-16 peer-focus:top-[-10%] bg-white peer-focus:bg-[#FDD23F]  peer-focus:opacity-100  peer-focus:text-sm  rounded-lg px-2 ${
-                                    carData.modelName
-                                          ? "opacity-0"
-                                          : "opacity-50"
-                              }  text-3xl transition-all duration-200 `}
+                              htmlFor="location"
+                              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                         >
-                              Model Name
+                              Select Location
                         </label>
-                  </div>
-                  <div className="w-full ml-6 relative">
-                        <input
-                              onChange={valueSetting}
-                              value={carData.price}
-                              type="number"
-                              name="price"
-                              id="price"
-                              className="w-[90%] h-16 text-3xl border-2 border-black rounded-3xl text-center peer "
-                        />
-                        <label
-                              htmlFor="price"
-                              className={`absolute left-32 top-[30%] peer-focus:left-16 peer-focus:top-[-10%] bg-white peer-focus:bg-[#FDD23F] peer-focus:opacity-100  peer-focus:text-sm  rounded-lg px-2  text-3xl transition-all duration-200 ${
-                                    carData.price ? "opacity-0" : "opacity-50"
-                              }`}
-                        >
-                              Price
-                        </label>
-                  </div>
-                  <div className="w-full ml-6 relative">
-                        <input
-                              onChange={valueSetting}
-                              value={carData.rcNumber}
-                              type="number"
-                              name="rcNumber"
-                              id="rcNumber"
-                              className="w-[90%] h-16 text-3xl border-2 border-black rounded-3xl text-center peer "
-                        />
-                        <label
-                              htmlFor="rcNumber"
-                              className={`absolute left-32 top-[30%] peer-focus:left-16 peer-focus:top-[-10%] bg-white peer-focus:bg-[#FDD23F] peer-focus:opacity-100  peer-focus:text-sm  rounded-lg px-2   text-3xl transition-all duration-200  ${
-                                    carData.rcNumber
-                                          ? "opacity-0"
-                                          : "opacity-50"
-                              }`}
-                        >
-                              Rc Number
-                        </label>
-                  </div>
-                  <div className="w-full ml-6 relative">
-                        <select
-                              name="seatNum"
-                              onChange={valueSetting}
-                              value={carData.seatNum}
-                              className="w-[90%] h-16  text-3xl border-2 border-black rounded-3xl text-center"
-                        >
-                              <option value="">Select Seat Number</option>
-                              <option value="2">2</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                              <option value="7">7</option>
-                              <option value="8">8</option>
-                        </select>
-                  </div>
-                  <div className="w-full ml-6 relative">
                         <select
                               name="location"
                               onChange={(e) => {
                                     valueSetting(e);
                                     const value = e.target.value;
                                     const data = locations.filter(
-                                          (location) => location._id == value,
+                                          (location) => location._id == value
                                     );
                                     console.log(data[0]?.pickupPoints);
                                     setPickupPointList(data[0]?.pickupPoints);
                               }}
                               value={carData.location}
-                              className="w-[90%] h-16  text-3xl border-2 border-black rounded-3xl text-center"
+                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         >
                               <option value="">Select Location </option>
                               {locations.map((location) => (
@@ -178,76 +228,96 @@ const AddCarFields = ({
                         </select>
                   </div>
 
-                  <div className="w-full ml-6 ">
-                        <div
-                              onChange={valueSetting}
-                              className="w-[90%] h-16 mt-10 text-3xl rounded-3xl text-center  "
+                  <div className="relative z-0 w-full mb-5 group">
+                        <div className="flex justify-between">
+                              <label>Select Transmission:</label>
+                              <div
+                                    onChange={valueSetting}
+                                    className="w-1/2 flex gap-5"
+                              >
+                                    <label
+                                          htmlFor="manual"
+                                          className="flex gap-2 items-center "
+                                    >
+                                          Manual
+                                          <input
+                                                className=" h-7  w-7 "
+                                                defaultChecked
+                                                type="radio"
+                                                name="gearType"
+                                                id="manual"
+                                                value="manual"
+                                          />
+                                    </label>
+                                    <label
+                                          htmlFor="auto"
+                                          className="flex gap-2 items-center"
+                                    >
+                                          Auto
+                                          <input
+                                                className=" h-7 w-7"
+                                                type="radio"
+                                                name="gearType"
+                                                id="auto"
+                                                value="auto"
+                                          />
+                                    </label>
+                              </div>
+                        </div>
+                  </div>
+                  <div className="relative z-0 w-full mb-5 group">
+                        <div className="flex justify-between">
+                              <label>Select Transmission:</label>
+                              <div
+                                    onChange={valueSetting}
+                                    className="w-1/2 flex gap-5"
+                              >
+                                    <label
+                                          htmlFor="petrol"
+                                          className="flex gap-2 items-center w-20"
+                                    >
+                                          Petrol
+                                          <input
+                                                className=" h-7 w-7"
+                                                defaultChecked
+                                                type="radio"
+                                                name="fuelType"
+                                                id="petrol"
+                                                value="petrol"
+                                          />
+                                    </label>
+                                    <label
+                                          htmlFor="diesel"
+                                          className="flex gap-2 items-center w-20"
+                                    >
+                                          Diesel
+                                          <input
+                                                className=" h-7 w-7"
+                                                type="radio"
+                                                name="fuelType"
+                                                id="diesel"
+                                                value="diesel"
+                                          />
+                                    </label>
+                              </div>
+                        </div>
+                  </div>
+                  <div className="relative z-0 w-full mb-5 group">
+                        <label
+                              htmlFor="location"
+                              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                         >
-                              <label htmlFor="manual" className="mr-12">
-                                    <input
-                                          className=" h-7  w-7 "
-                                          defaultChecked
-                                          type="radio"
-                                          name="gearType"
-                                          id="manual"
-                                          value="manual"
-                                    />
-                                    Manual
-                              </label>
-                              <label htmlFor="auto">
-                                    <input
-                                          className=" h-7 w-7"
-                                          type="radio"
-                                          name="gearType"
-                                          id="auto"
-                                          value="auto"
-                                    />
-                                    Auto
-                              </label>
-                        </div>
-                  </div>
+                              Select Location
+                        </label>
 
-                  <div
-                        onChange={valueSetting}
-                        className="w-[90%] h-20 text-3xl rounded-3xl text-center  "
-                  >
-                        <label htmlFor="petrol" className="mr-12">
-                              Petrol
-                              <input
-                                    className=" h-7 w-7"
-                                    defaultChecked
-                                    type="radio"
-                                    name="fuelType"
-                                    id="petrol"
-                                    value="petrol"
-                              />
-                        </label>
-                        <label htmlFor="diesel">
-                              Diesel
-                              <input
-                                    className=" h-7 w-7"
-                                    type="radio"
-                                    name="fuelType"
-                                    id="diesel"
-                                    value="diesel"
-                              />
-                        </label>
-                  </div>
-                  <div className="w-[90%]  border-2 border-black rounded-3xl text-center flex flex-col items-center justify-center break-words">
-                        <div className=" break-words">
-                              {selectedPickup.join(" , ")}
-                        </div>
-                        <MdBackspace
-                              onClick={backService}
-                              className="self-end mr-2"
-                        />
                         <select
                               name="services"
                               value=""
                               onChange={(e) => {
-                                    selectService(e);
+                                    addPickUpPoints(e);
+                                    // selectService(e);
                               }}
-                              className="h-12s bottom-0 border-none  w-full text-center rounded-3xl"
+                              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         >
                               <option value="#">Select Pickup</option>\
                               {
@@ -263,19 +333,30 @@ const AddCarFields = ({
                                           ))
                               }
                         </select>
+                        <div className="flex justify-between">
+                              <div className="break-words">
+                                    {selectedPickup?.join(" , ")}
+                              </div>
+                              {selectedPickup.length ? (
+                                    <MdBackspace
+                                          onClick={backService}
+                                          className=" mr-2"
+                                    />
+                              ) : null}
+                        </div>
                   </div>
 
                   {<p>{errMeg}</p>}
                   <div className="w-full"></div>
-                  <div className="w-full">
+                  {/* <div className="w-full">
                         <button
                               className="w-[60%] float-right  h-20 text-3xl font-semibold border-2 border-black rounded-3xl text-center hover:scale-105 hover:bg-black hover:text-white"
                               onClick={nextHandler}
                         >
                               Next
                         </button>
-                  </div>
-            </div>
+                  </div> */}
+            </form>
       );
 };
 

@@ -5,7 +5,6 @@ import MyCarsCard from "./MyCarsCard";
 
 const MyCarsList = () => {
       const fetcher = (url) => authInstance.get(url).then((res) => res.data);
-      // .catch((err) => console.log(err));
       const { data, error, isLoading } = useSWR(`/vendor/myCars`, fetcher);
       return (
             <div className="p-5 bg-[#FFC53E]">

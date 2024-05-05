@@ -11,7 +11,6 @@ import District_card from "./District_card";
 
 // const Backdrop = ({ onClose }) => {
 //   const closeButtonHandler = () => {
-//     console.log(onClose);
 //     onClose();
 //   };
 //   return (

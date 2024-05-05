@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { IoLocationSharp } from "react-icons/io5";
 import AddCar from "../vendor/AddCar/AddCar";
-import { useDispatch } from "react-redux";
-import { logOut } from "../../helpers/auth/vendorAuthSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { isVendorLogedIn, logOut } from "../../helpers/auth/vendorAuthSlice";
 
 const VendorNavbar = () => {
       const dispatch = useDispatch();
@@ -24,6 +24,8 @@ const VendorNavbar = () => {
       const logoutButtonHandler = () => {
             dispatch(logOut());
       };
+
+      const isVendor = useSelector(isVendorLogedIn);
       return (
             <>
                   <div className="h-20 px-8   bg-gradient-to-r from-[#FEC63E] to-banana   top-0 sticky  ">
@@ -39,53 +41,85 @@ const VendorNavbar = () => {
                               Vendor
                               <ul className="hidden  md:flex gap-12">
                                     <li className="font-bold ">
-                                          <button
-                                                className="border-[#10191F]  border-4 rounded-3xl  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500 "
-                                                onClick={modalOpen}
-                                          >
-                                                Add Car
-                                          </button>
+                                          {isVendor ? (
+                                                <button
+                                                      className="border-[#10191F]  border-4 rounded-3xl  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500 "
+                                                      onClick={modalOpen}
+                                                >
+                                                      {} Add Car
+                                                </button>
+                                          ) : (
+                                                <button
+                                                      className="border-[#10191F]  border-4 rounded-3xl  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500 "
+                                                      onClick={() =>
+                                                            navigate(
+                                                                  "/vendor/login"
+                                                            )
+                                                      }
+                                                >
+                                                      {} Login
+                                                </button>
+                                          )}
                                     </li>
                                     {addCarModal && (
                                           <AddCar onClose={onClose} />
                                     )}
-                                    <li className="font-bold">
-                                          <button
-                                                className="border-[#10191F]  border-4 rounded-3xl  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500 "
-                                                onClick={() => {
-                                                      navigate(
-                                                            "/vendor/bookings",
-                                                      );
-                                                }}
-                                          >
-                                                Bookings
-                                          </button>
-                                    </li>
-                                    <li className="font-bold">
-                                          <div className="relative">
-                                                <button
-                                                      className="border-[#10191F]  border-4 rounded-3xl  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500 peer none"
-                                                      onClick={() => {
-                                                            navigate(
-                                                                  "/vendor/profile",
-                                                            );
-                                                      }}
-                                                >
-                                                      Profile
-                                                </button>
-
-                                                <div className="px-1 py-2  absolute bg-banana border-gray-900  hidden hover:block peer-hover:block w-fit h-fit">
+                                    {isVendor ? (
+                                          <>
+                                                <li className="font-bold">
                                                       <button
-                                                            className="   border-[#10191F]  border-4 rounded-3xl  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500 "
-                                                            onClick={
-                                                                  logoutButtonHandler
-                                                            }
+                                                            className="border-[#10191F]  border-4 rounded-3xl  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500 "
+                                                            onClick={() => {
+                                                                  navigate(
+                                                                        "/vendor/bookings"
+                                                                  );
+                                                            }}
                                                       >
-                                                            logout
+                                                            Bookings
                                                       </button>
-                                                </div>
-                                          </div>
-                                    </li>
+                                                </li>
+                                                <li className="font-bold">
+                                                      <div className="relative">
+                                                            <button
+                                                                  className="border-[#10191F]  border-4 rounded-3xl  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500 peer none"
+                                                                  onClick={() => {
+                                                                        navigate(
+                                                                              "/vendor/profile"
+                                                                        );
+                                                                  }}
+                                                            >
+                                                                  Profile
+                                                            </button>
+
+                                                            <div className="px-1 py-2  absolute bg-banana border-gray-900  hidden hover:block peer-hover:block w-fit h-fit">
+                                                                  <button
+                                                                        className="   border-[#10191F]  border-4 rounded-3xl  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500 "
+                                                                        onClick={
+                                                                              logoutButtonHandler
+                                                                        }
+                                                                  >
+                                                                        logout
+                                                                  </button>
+                                                            </div>
+                                                      </div>
+                                                </li>
+                                          </>
+                                    ) : (
+                                          <>
+                                                <li className="font-bold">
+                                                      <button
+                                                            className="border-[#10191F]  border-4 rounded-3xl  text-2xl  text-[#10191F]  px-7 py-2 hover:bg-amber-200 transition-all hover:text-gray-100 ease-in-out duration-500 "
+                                                            onClick={() => {
+                                                                  navigate(
+                                                                        "/vendor/signup"
+                                                                  );
+                                                            }}
+                                                      >
+                                                            Signup
+                                                      </button>
+                                                </li>
+                                          </>
+                                    )}
                               </ul>
                               <div
                                     className="block md:hidden"
@@ -112,33 +146,66 @@ const VendorNavbar = () => {
                                           />
                                     </div>
                                     <ul className="p-4 uppercase">
-                                          <li>
-                                                <button
-                                                      className="p-4 border-b border-gray-600 font-bold"
-                                                      onClick={modalOpen}
-                                                >
-                                                      Add cars
-                                                </button>
-                                          </li>
+                                          {isVendor ? (
+                                                <>
+                                                      <li>
+                                                            <button
+                                                                  className="p-4 border-b border-gray-600 font-bold"
+                                                                  onClick={() =>
+                                                                        navigate(
+                                                                              "/vendor/addCar"
+                                                                        )
+                                                                  }
+                                                            >
+                                                                  Add cars
+                                                            </button>
+                                                      </li>
 
-                                          <li
-                                                className="p-4 border-b border-gray-600 font-bold"
-                                                onClick={() =>
-                                                      navigate("/vendor/myCars")
-                                                }
-                                          >
-                                                My Cars
-                                          </li>
-                                          <li
-                                                className="p-4 border-b border-gray-600 font-bold"
-                                                onClick={() =>
-                                                      navigate(
-                                                            "/vendor/profile",
-                                                      )
-                                                }
-                                          >
-                                                Profile
-                                          </li>
+                                                      <li
+                                                            className="p-4 border-b border-gray-600 font-bold"
+                                                            onClick={() =>
+                                                                  navigate(
+                                                                        "/vendor/myCars"
+                                                                  )
+                                                            }
+                                                      >
+                                                            My Cars
+                                                      </li>
+                                                      <li
+                                                            className="p-4 border-b border-gray-600 font-bold"
+                                                            onClick={() =>
+                                                                  navigate(
+                                                                        "/vendor/profile"
+                                                                  )
+                                                            }
+                                                      >
+                                                            Profile
+                                                      </li>
+                                                </>
+                                          ) : (
+                                                <>
+                                                      <li
+                                                            className="p-4 border-b border-gray-600 font-bold"
+                                                            onClick={() => {
+                                                                  navigate(
+                                                                        "/vendor/signup"
+                                                                  );
+                                                            }}
+                                                      >
+                                                            Signup
+                                                      </li>
+                                                      <li
+                                                            className="p-4 border-b border-gray-600 font-bold"
+                                                            onClick={() => {
+                                                                  navigate(
+                                                                        "/vendor/login"
+                                                                  );
+                                                            }}
+                                                      >
+                                                            Login
+                                                      </li>
+                                                </>
+                                          )}
                                     </ul>
                               </div>
                         </div>

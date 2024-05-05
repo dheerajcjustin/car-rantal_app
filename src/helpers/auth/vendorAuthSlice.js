@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import userRoles from "../UserTypes";
 
 const vendorAuthSlice = createSlice({
       name: "vendorAuth",
@@ -24,6 +25,11 @@ const vendorAuthSlice = createSlice({
 export const { setCredentials, logOut, setUserData } = vendorAuthSlice.actions;
 
 export default vendorAuthSlice.reducer;
+export const isVendorLogedIn = (state) => {
+      return (
+            state.vendorAuth.token && state.vendorAuth.type === userRoles.vendor
+      );
+};
 export const selectCurrentUserType = (state) => state.vendorAuth.type;
 export const selectCurrentUser = (state) => state.vendorAuth.user;
 export const selectCurrentToken = (state) => state.vendorAuth.token;
