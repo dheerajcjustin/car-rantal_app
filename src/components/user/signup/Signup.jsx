@@ -14,6 +14,8 @@ const Signup = ({ setOtpPage, setUserDate }) => {
             mobile: "",
             password: "",
       });
+
+      const [loading, setLoading] = useState(false);
       const [passwordVisible, setPasswordVisible] = useState(false);
       const [passwordType, setPasswordType] = useState("password");
       const [validation, setValidation] = useState({
@@ -107,6 +109,7 @@ const Signup = ({ setOtpPage, setUserDate }) => {
       const signupButtonHandle = async () => {
             if (nameCheck() && passwordCheck() && PhoneCheck()) {
                   try {
+                        setLoading(true);
                         const response = await axios.post(
                               "/auth/signupEmail",
                               userData
@@ -134,6 +137,8 @@ const Signup = ({ setOtpPage, setUserDate }) => {
                                     },
                               }));
                         }
+                  } finally {
+                        setLoading(false);
                   }
             }
       };
@@ -212,7 +217,7 @@ const Signup = ({ setOtpPage, setUserDate }) => {
                         onClick={signupButtonHandle}
                         className="w-[60%] h-20 mt-10 text-3xl font-semibold border-2 border-black rounded-3xl text-center hover:scale-105 hover:bg-black hover:text-white"
                   >
-                        Sign up
+                        {loading ? "Sign Up" : "loading..."}
                   </button>
                   <p className="mt-5">
                         Already a member?

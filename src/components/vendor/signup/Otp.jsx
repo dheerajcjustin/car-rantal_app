@@ -21,18 +21,20 @@ const Otp = ({ userData }) => {
       const [otp, setOtp] = useState("");
 
       const [error, setError] = useState(false);
+      const [loading, setLoading] = useState(false);
 
       const otpSentButtonHandler = async () => {
             if (otp.length < 4) {
                   console.log("invalid otp");
-                  setError(true);
             } else {
                   setError(false);
                   const data = { mobile: userData.mobile, otp: otp };
                   try {
+                        setLoading(true);
+
                         const response = await axios.post(
                               "/vendor/otpVerify",
-                              data,
+                              data
                         );
                         console.log("it is working with otp", response);
                         if (response.status === 201) {
@@ -43,6 +45,8 @@ const Otp = ({ userData }) => {
                               setError(true);
                         }
                         console.log(error);
+                  } finally {
+                        setLoading(false);
                   }
 
                   // navigate(-1);
@@ -110,7 +114,7 @@ const Otp = ({ userData }) => {
                         onClick={otpSentButtonHandler}
                         className="w-[60%] h-20 mt-10 text-3xl font-semibold border-2 border-black rounded-3xl text-center hover:scale-105 hover:bg-black hover:text-white"
                   >
-                        Sent Otp
+                        {loading ? "Loading..." : " Submit Otp"}
                   </button>
 
                   {/* <button className="w-[60%] h-20 mt-10 flex flex-row items-center pl-3 text-2xl font-medium border-2 border-black rounded-3xl text-center">
