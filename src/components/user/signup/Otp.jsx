@@ -6,25 +6,27 @@ import ChangeMobile from "./ChangeMobile";
 import axios from "../../../config/axios";
 import Countdown, { zeroPad } from "react-countdown";
 
-const Otp = ({ userData, setIsLoading }) => {
+const Otp = ({ userData }) => {
       const [resend, setResend] = useState(false);
       const navigate = useNavigate();
 
       const [otp, setOtp] = useState("");
 
       const [error, setError] = useState(false);
+      const [isLoading, setIsLoading] = useState(false);
 
       const otpSentButtonHandler = async () => {
             if (otp.length < 4) {
                   console.log("invalid otp");
                   setError(true);
             } else {
+                  setIsLoading(true);
                   setError(false);
                   const data = { mobile: userData.mobile, otp: otp };
                   try {
                         const response = await axios.post(
                               "/auth/otpVerify",
-                              data,
+                              data
                         );
                         console.log("it is working with otp", response);
                         if (response.status === 201) {
@@ -35,6 +37,8 @@ const Otp = ({ userData, setIsLoading }) => {
                         if (error?.response?.status === 400) {
                               setError(true);
                         }
+                  } finally {
+                        setIsLoading(false);
                   }
             }
       };
@@ -102,7 +106,7 @@ const Otp = ({ userData, setIsLoading }) => {
                         onClick={otpSentButtonHandler}
                         className="w-[60%] h-20 mt-10 text-3xl font-semibold border-2 border-black rounded-3xl text-center hover:scale-105 hover:bg-black hover:text-white"
                   >
-                        Sent Otp
+                        {isLoading ? "Loading..." : "Submit OTP"}
                   </button>
 
                   {/* <button className="w-[60%] h-20 mt-10 flex flex-row items-center pl-3 text-2xl font-medium border-2 border-black rounded-3xl text-center">
