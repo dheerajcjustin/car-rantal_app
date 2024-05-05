@@ -165,7 +165,7 @@ const Navbar = () => {
                                     />
                               </div>
                               <ul className="p-4 uppercase">
-                                    {currentUser ? (
+                                    {!currentUser ? (
                                           <>
                                                 <li className="p-4 border-b border-gray-600 font-bold">
                                                       <button
