@@ -59,10 +59,12 @@ const Login = () => {
                   <div className="flex w-full rounded-lg min-h-[90%] m-11  flex-col items-center justify-center  bg-[#FDD23F]">
                         <h1 className="font-Viaoda text-7xl mb-10">Login</h1>
                         <div>
-                              Otp not Currently working due to payment issue.
+                              OTP functionality is currently not working due to
+                              a payment issue.
                         </div>
                         <div>
-                              For testing you can use demo account to login{" "}
+                              For testing purpose,you can use demo account to
+                              log in.
                         </div>
                         <div> mobile :9876543210 </div>
                         <div> password :plmqaz123 </div>
