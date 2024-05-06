@@ -154,7 +154,7 @@ const Signup = ({ setOtpPage, setUserDate }) => {
       };
       return (
             <div className="md:col-span-2 lg:col-span-1 flex flex-col items-center justify-center bg-[#FDD23F] ">
-                  <div>Otp not Currently working due payment issue.</div>
+                  <div>Otp not Currently working due to payment issue.</div>
                   <div>For testing you can use demo account to login </div>
                   <div> mobile :9876543210 </div>
                   <div> password :plmqaz123 </div>
