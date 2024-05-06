@@ -58,7 +58,9 @@ const Login = () => {
             <div className=" w-96 min-h-[90%]">
                   <div className="flex w-full rounded-lg min-h-[90%] m-11  flex-col items-center justify-center  bg-[#FDD23F]">
                         <h1 className="font-Viaoda text-7xl mb-10">Login</h1>
-                        <div>Otp not Currently working due payment issue.</div>
+                        <div>
+                              Otp not Currently working due to payment issue.
+                        </div>
                         <div>
                               For testing you can use demo account to login{" "}
                         </div>
