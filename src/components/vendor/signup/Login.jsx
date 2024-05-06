@@ -38,7 +38,7 @@ const Login = () => {
                               user,
                               accessToken,
                               userType: response.data.userType,
-                        }),
+                        })
                   );
                   navigate("/vendor");
             } catch (err) {
@@ -58,6 +58,12 @@ const Login = () => {
             <div className=" w-96 min-h-[90%]">
                   <div className="flex w-full rounded-lg min-h-[90%] m-11  flex-col items-center justify-center  bg-[#FDD23F]">
                         <h1 className="font-Viaoda text-7xl mb-10">Login</h1>
+                        <div>Otp not Currently working due payment issue.</div>
+                        <div>
+                              For testing you can use demo account to login{" "}
+                        </div>
+                        <div> mobile :9876543210 </div>
+                        <div> password :plmqaz123 </div>
                         <input
                               onChange={(e) => {
                                     setMobile(e.target.value);
